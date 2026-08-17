@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no, email=no, address=no" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="supported-color-schemes" content="dark" />
+    <title>Ajith Ramesh | Project Status Update</title>
+    <!--[if mso]>
+    <noscript>
+        <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+    </noscript>
+    <style>
+        table {border-collapse:collapse;}
+        td,th,div,p,a,h1,h2,h3 {font-family: Arial, Helvetica, sans-serif !important;}
+    </style>
+    <![endif]-->
+    <style>
+        html,
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            background: #000000 !important;
+        }
+        
+        * {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            outline: none;
+            text-decoration: none;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .ExternalClass {
+            width: 100%;
+        }
+        
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+        
+        body,
+        table,
+        td,
+        p,
+        a {
+            font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .responsive-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                border-radius: 0 !important;
+            }
+            .inner-padding {
+                padding: 20px !important;
+            }
+            .icon-dock td {
+                padding: 8px 9px !important;
+            }
+            .icon-img {
+                width: 20px !important;
+                height: auto !important;
+            }
+            .name-title {
+                font-size: 22px !important;
+                letter-spacing: 0.5px !important;
+            }
+            .hero-title {
+                font-size: 24px !important;
+            }
+            .kicker {
+                font-size: 10px !important;
+            }
+            .stage-label {
+                font-size: 9px !important;
+            }
+            .data-table td {
+                font-size: 12px !important;
+                padding: 8px 6px !important;
+            }
+            .cta-btn {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+            }
+            .contact-row td {
+                display: block !important;
+                width: 100% !important;
+                padding: 6px 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0; background:#000000; font-family:'Segoe UI', Helvetica, Arial, sans-serif;">
+    <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#000000; opacity:0;">
+        Project status update: your Power BI analytics submission is under review — estimated completion 3 business days.
+    </div>
+
+    <table role="presentation" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding:40px 16px;">
+
+                <!--[if mso]>
+                <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr><td>
+                <![endif]-->
+
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px; border:1px solid #241111;" width="600">
+
+                    <!-- TOP ACCENT BAR -->
+                    <tr>
+                        <td style="height:4px; line-height:4px; font-size:0; background-color:#ef4444; background-image:linear-gradient(90deg,#7f1d1d,#ef4444,#f87171); border-radius:28px 28px 0 0;">&nbsp;</td>
+                    </tr>
+
+                    <!-- =============== HEADER CONTAINER =============== -->
+                    <tr>
+                        <td align="center" bgcolor="#000000" style="padding:20px;">
+
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="760" style="
+    width:760px;
+    max-width:760px;
+    background:#000000;
+    border-radius:12px;
+    background-image:linear-gradient(135deg,#000000,#b42222,#000000dc);
+    border:2px solid #dc2828;
+">
+
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="padding:36px 32px 28px 32px;">
+
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+
+                                                <!-- Profile Image -->
+                                                <td align="left" valign="middle" width="130">
+
+                                                    <img src="https://cdn.corenexis.com/f/zBU5DCBWk01.png" width="110" alt="Ajith Ramesh" style="display:block;width:100px;height:120px;border:0;">
+                                                </td>
+
+                                                <!-- Employee Details -->
+                                                <td align="left" valign="middle" style="padding-left:10px;">
+
+                                                    <div style="
+                                    font-size:11px;
+                                    letter-spacing:2px;
+                                    color:#ef4444;
+                                    text-transform:uppercase;
+                                    font-weight:700;
+                                    font-family:Arial,Helvetica,sans-serif;">
+                                                        Ajith's
+
+
+                                                    </div>
+
+                                                    <div style="
+                                    margin-top:8px;
+                                    font-size:26px;
+                                    line-height:30px;
+                                    font-weight:800;
+                                    color:#ffffff;
+                                    font-family:Arial,Helvetica,sans-serif;">
+
+                                                        Project Status Update
+
+                                                    </div>
+
+                                                    <div style="margin-top:8px; color:#f2b4b4; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
+                                                        Cloud Infrastructure Services
+                                                    </div>
+                                                    <div style="margin-top:4px; color:#b7b0b0; font-size:13px; font-family:Arial,Helvetica,sans-serif;">
+                                                        Associate Trainee
+                                                    </div>
+
+                                                </td>
+
+                                                <!-- Company Logos -->
+                                                <td align="right" valign="top" width="170">
+
+                                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="170" height="150">
+
+                                                        <tr>
+                                                            <td align="right" valign="top">
+                                                                <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
+                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" alt="L&T Group" width="140" style="display:block;width:160px;height:auto;border:0;">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td height="10" style="font-size:0;line-height:30px;">
+                                                                &nbsp;
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td align="right" valign="bottom">
+                                                                <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
+                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTM" width="90" style="display:block;width:111px;height:auto;border:0;">
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+
+                                                </td>
+
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:20px 32px 28px 32px; background-color:#0c0808;">
+
+
+                            <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
+                                <strong>
+        <span style="color:#ffffff;">Dear</span>
+        <span style="color:#ef4444;"> {{recipient_name}}</span>,
+    </strong>
+                            </p>
+
+
+
+                            <!-- Paragraph -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding:4px 0 0 0;">
+                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
+                                            [Paragraph text. Standard body copy for explanations, context, or narrative content goes here. Keep it concise and scannable.]
+                                        </p>
+                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
+                                            [Paragraph text. Standard body copy for explanations, context, or narrative content goes here. Keep it concise and scannable.]
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Rich Text (mixed inline formatting) -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding:16px 0 0 0;">
+                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
+                                            [Rich text example: this line has a <strong style="color:#e5e0e0;">bold phrase</strong>, an
+                                            <em style="color:#e5e0e0;">italic phrase</em>, a
+                                            <span style="color:#ef4444; font-weight:600;">highlighted phrase</span>, and an
+                                            <a href="[link URL]" style="color:#f87171; border-bottom:1px dotted #f87171;">inline link</a> mixed into one paragraph.]
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Small Text -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding:12px 0 0 0;">
+                                        <p style="font-size:11.5px; line-height:1.5; color:#726c6c;">[Small text — fine print, disclaimers, or secondary detail.]</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+
+                            <!-- ---------- DIVIDER ---------- -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:26px;">
+                                <tr>
+                                    <td style="border-top:1px solid #221010; font-size:0; line-height:0;">&nbsp;</td>
+                                </tr>
+                            </table>
+                            <!-- Redesigned compact two-column footer -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+                                <tr>
+                                    <td width="55%" valign="top" style="padding-right:18px;">
+                                        <div style="font-size:14px;color:#b8b1b1;">Warm regards,</div>
+                                        <div style="margin-top:6px;font-size:20px;font-weight:bold;color:#fff;">Ajith R</div>
+                                        <img src="https://cdn.corenexis.com/f/9fVc1nuTCwI.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                        <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
+                                            Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
+                                            <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer" style="color:red;text-decoration:none;">LTM</a> •
+                                            <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">L&amp;T Group Company</a>
+                                        </div>
+                                        <div style="margin-top:14px;border-top:1px solid #221717;padding-top:12px;">
+
+                                            <table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                                <tr class="icon-dock">
+                                                    <td style="padding:10px 13px;">
+                                                        <a href="https://www.linkedin.com/in/ajith-ramesh-data-analyst/">
+                                                            <img alt="LinkedIn" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding:20px 13px;">
+                                                        <a href="https://ajith-data-analyst.github.io/Portfolio/home.html">
+                                                            <img alt="Portfolio" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/128/351/351456.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding:10px 13px;">
+                                                        <a href="https://github.com/Ajith-data-analyst">
+                                                            <img alt="GitHub" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/128/3291/3291667.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding:10px 13px;">
+                                                        <a href="mailto:ajithramesh2020@gmail.com">
+                                                            <img alt="Email" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/512/732/732200.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding:10px 13px;">
+                                                        <a href="tel:+919345264522">
+                                                            <img alt="Phone" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/128/9639/9639598.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="padding:10px 13px;">
+                                                        <a href="https://wa.me/919345264522">
+                                                            <img alt="WhatsApp" class="icon-img" height="22" width="22" src="https://cdn-icons-png.flaticon.com/512/733/733585.png" style="display:block; width:22px; height:22px;" />
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                    </td>
+                                    <td width="45%" valign="top" style="border-left:1px solid #221717;padding-left:18px;">
+
+                                        <div style="font-size:10px;color:#8d8484;text-transform:uppercase;margin:10px 0 6px;text-align:center;">
+                                            Confidentiality Notice
+                                        </div>
+
+                                        <div style="font-size:10px;line-height:16px;color:#666060;text-align:justify;">
+                                            The contents of this e-mail and any attachment(s) may contain confidential or privileged information for the intended recipient(s). Unintended recipients are prohibited from taking action on the basis of information in this e-mail and using or disseminating
+                                            the information, and must notify the sender and delete it from their system. LTM will not accept responsibility or liability for the accuracy or completeness of, or the presence of any virus or disabling code
+                                            in this e-mail.
+                                        </div>
+                                        <div style="margin-top:14px;padding-top:0.1px;"></div>
+                                        <!-- Copyright -->
+                                        <div style="margin-top:14px;
+            border-top:1px solid #221717;
+            padding-top:12px;
+            text-align:center;">
+
+                                            <div style="margin-top:14px;padding-top:0.1px;"></div>
+                                            <div style="font-size:11px;color:#6f6767;">
+                                                &copy; 2026
+                                                <a href="https://github.com/Ajith-data-analyst/Portfolio/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style="color:#6f6767;text-decoration:none;">
+        Ajith Ramesh
+    </a> • All Rights Reserved
+                                            </div>
+
+                                            <div style="margin-top:5px;font-size:10px;color:#4d4848;">
+                                                You received this email as part of a project review process.
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+
+                            </table>
+
+
+                            <!-- ---------- SOCIAL LINKS ---------- -->
+
+                            <!--[if mso]>
+                </td></tr>
+                </table>
+                <![endif]-->
+
+                        </td>
+                    </tr>
+                </table>
+</body>
+
+</html>

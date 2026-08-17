@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Body Snippet Library</title>
+    <style>
+         :root {
+            --bg: #090909;
+            --panel: #111111;
+            --panel2: #151515;
+            --border: #292929;
+            --text: #f4f4f4;
+            --muted: #969696;
+            --accent: #ef4444;
+            --accent2: #7f1d1d;
+            --code: #0b0b0b;
+            --success: #4ade80;
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, Segoe UI, Arial, sans-serif
+        }
+        
+        body {
+            padding: 28px
+        }
+        
+        .header {
+            max-width: 1500px;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+        
+        .title-wrap h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: -.5px
+        }
+        
+        .title-wrap p {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+        
+        .badge {
+            border: 1px solid #3b1717;
+            background: #170c0c;
+            color: #fca5a5;
+            border-radius: 999px;
+            padding: 9px 13px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .toolbar {
+            max-width: 1500px;
+            margin: 0 auto 22px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .search {
+            flex: 1;
+            background: #0b0b0b;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 10px;
+            padding: 11px 13px;
+            outline: none;
+            font-size: 13px;
+        }
+        
+        .search:focus {
+            border-color: #7f1d1d
+        }
+        
+        .count {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 0 8px
+        }
+        
+        .grid {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: grid;
+            gap: 18px
+        }
+        
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .18);
+        }
+        
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, #151515, #111);
+        }
+        
+        .identity {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            min-width: 0
+        }
+        
+        .serial {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            display: grid;
+            place-items: center;
+            background: #241010;
+            border: 1px solid #4b1818;
+            color: #f87171;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        
+        .name {
+            font-size: 15px;
+            font-weight: 750;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+        
+        .actions {
+            display: flex;
+            gap: 8px
+        }
+        
+        button {
+            border: 1px solid var(--border);
+            background: #1a1a1a;
+            color: #ddd;
+            border-radius: 9px;
+            padding: 9px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            border-color: #5b2525;
+            background: #211313
+        }
+        
+        .copy-btn.copied {
+            color: #86efac;
+            border-color: #245c35;
+            background: #102016
+        }
+        
+        .columns {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            min-height: 300px;
+        }
+        
+        .pane {
+            min-width: 0
+        }
+        
+        .pane+.pane {
+            border-left: 1px solid var(--border)
+        }
+        
+        .pane-title {
+            height: 38px;
+            padding: 11px 14px;
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: #858585;
+            border-bottom: 1px solid #222;
+        }
+        
+        .code {
+            margin: 0;
+            padding: 16px;
+            min-height: 260px;
+            max-height: 520px;
+            overflow: auto;
+            background: var(--code);
+            color: #d4d4d4;
+            font: 12px/1.6 "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .preview {
+            background: #000;
+            min-height: 260px;
+            padding: 20px;
+            overflow: auto;
+        }
+        
+        .preview-frame {
+            background: #0c0808;
+            border: 1px solid #241111;
+            border-radius: 14px;
+            min-height: 220px;
+            padding: 20px;
+            overflow: auto;
+        }
+        
+        .preview-frame table {
+            max-width: 100%!important
+        }
+        
+        .preview-frame img {
+            max-width: 100%;
+            height: auto
+        }
+        
+        .empty {
+            max-width: 1500px;
+            margin: 40px auto;
+            text-align: center;
+            color: var(--muted);
+            padding: 50px;
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+        }
+        
+        @media(max-width:900px) {
+            body {
+                padding: 14px
+            }
+            .header {
+                align-items: flex-start;
+                flex-direction: column
+            }
+            .columns {
+                grid-template-columns: 1fr
+            }
+            .pane+.pane {
+                border-left: 0;
+                border-top: 1px solid var(--border)
+            }
+            .code {
+                max-height: 400px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="title-wrap">
+            <h1>Email Body Snippet Library</h1>
+            <p>Reusable HTML body components — code on the left, live rendered result on the right.</p>
+        </div>
+        <button class="badge" id="totalBadge" onclick="window.location.href='/email/home.html'">
+  home
+</button>
+
+    </header>
+
+    <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="Search snippets by number or name...">
+        <span id="count" class="count"></span>
+    </div>
+
+    <main id="grid" class="grid"></main>
+    <div id="empty" class="empty" hidden>No snippets match your search.</div>
+
+    <script>
+        const snippets = [{
+            "number": 1,
+            "name": "H1",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:8px 0 0 0;\">\n                                        <h1 class=\"h1-text\" style=\"font-size:28px; font-weight:800; color:#ffffff; line-height:1.25; letter-spacing:0.2px;\">[Heading — H1]</h1>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 2,
+            "name": "H2",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:10px 0 0 0;\">\n                                        <h2 class=\"h2-text\" style=\"font-size:20px; font-weight:700; color:#f2ecec; line-height:1.3;\">[Sub Heading — H2]</h2>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 3,
+            "name": "H3",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:22px 0 10px 0;\">\n                                        <h3 style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase;\">[Section Heading — H3]</h3>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 4,
+            "name": "Paragraph",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:4px 0 0 0;\">\n                                        <p style=\"font-size:14.5px; line-height:1.65; color:#a39d9d;\">\n                                            [Paragraph text. Standard body copy for explanations, context, or narrative content goes here. Keep it concise and scannable.]\n                                        </p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 5,
+            "name": "Rich Text",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:16px 0 0 0;\">\n                                        <p style=\"font-size:14.5px; line-height:1.65; color:#a39d9d;\">\n                                            [Rich text example: this line has a <strong style=\"color:#e5e0e0;\">bold phrase</strong>, an\n                                            <em style=\"color:#e5e0e0;\">italic phrase</em>, a\n                                            <span style=\"color:#ef4444; font-weight:600;\">highlighted phrase</span>, and an\n                                            <a href=\"[link URL]\" style=\"color:#f87171; border-bottom:1px dotted #f87171;\">inline link</a> mixed into one paragraph.]\n                                        </p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 6,
+            "name": "Small Text",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"padding:12px 0 0 0;\">\n                                        <p style=\"font-size:11.5px; line-height:1.5; color:#726c6c;\">[Small text — fine print, disclaimers, or secondary detail.]</p>\n                                    </td>\n                                </tr>\n                            </table>\n<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td style=\"border-top:1px solid #221010; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 7,
+            "name": "Bullet List",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Bullet List</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444;\">&#9679;</span>&nbsp;&nbsp;[Bullet item one]\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"height:8px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444;\">&#9679;</span>&nbsp;&nbsp;[Bullet item two]\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"height:8px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444;\">&#9679;</span>&nbsp;&nbsp;[Bullet item three]\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 8,
+            "name": "Numbered List",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Numbered List</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444; font-weight:700;\">01</span>&nbsp;&nbsp;[Step or item one]\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"height:8px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444; font-weight:700;\">02</span>&nbsp;&nbsp;[Step or item two]\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"height:8px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#ef4444; font-weight:700;\">03</span>&nbsp;&nbsp;[Step or item three]\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 9,
+            "name": "Checklist",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Checklist</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">\n                                        <span style=\"color:#4ade80; font-weight:700;\">&#10003;</span>&nbsp;&nbsp;[Completed checklist item]\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"height:8px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px; font-size:13.5px; color:#726c6c; line-height:1.5;\">\n                                        <span style=\"color:#4a4444; font-weight:700;\">&#9634;</span>&nbsp;&nbsp;[Pending checklist item]\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 10,
+            "name": "Text Link",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:14px; color:#a39d9d;\">\n                                        [Sentence containing a] <a href=\"[link URL]\" style=\"color:#f87171; border-bottom:1px dotted #f87171;\">[text link]</a> [within a line of text.]\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 11,
+            "name": "Button",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!--[if mso]>\n                                        <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\" href=\"[Button URL]\" style=\"height:46px;v-text-anchor:middle;width:220px;\" arcsize=\"18%\" strokecolor=\"#ef4444\" fillcolor=\"#ef4444\">\n                                        <w:anchorlock/>\n                                        <center style=\"color:#ffffff;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;\">[Button Text]</center>\n                                        </v:roundrect>\n                                        <![endif]-->\n                                        <!--[if !mso]><!-- -->\n                                        <a href=\"[Button URL]\" class=\"cta-btn\" style=\"background-color:#ef4444; color:#ffffff; font-size:14px; font-weight:700; padding:14px 32px; border-radius:10px; display:inline-block;\">[Button Text]</a>\n                                        <!--<![endif]-->\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 12,
+            "name": "Multiple Buttons",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:16px;\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\">\n                                            <tr>\n                                                <td class=\"multi-btn-td\" style=\"padding-right:8px;\">\n                                                    <!--[if mso]>\n                                                    <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\" href=\"[Primary Button URL]\" style=\"height:42px;v-text-anchor:middle;width:150px;\" arcsize=\"18%\" strokecolor=\"#ef4444\" fillcolor=\"#ef4444\">\n                                                    <w:anchorlock/>\n                                                    <center style=\"color:#ffffff;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;\">[Primary]</center>\n                                                    </v:roundrect>\n                                                    <![endif]-->\n                                                    <!--[if !mso]><!-- -->\n                                                    <a href=\"[Primary Button URL]\" style=\"background-color:#ef4444; color:#ffffff; font-size:13px; font-weight:700; padding:12px 24px; border-radius:10px; display:inline-block;\">[Primary Action]</a>\n                                                    <!--<![endif]-->\n                                                </td>\n                                                <td class=\"multi-btn-td\" style=\"padding-left:8px;\">\n                                                    <!--[if mso]>\n                                                    <v:roundrect xmlns:v=\"urn:schemas-microsoft-com:vml\" href=\"[Secondary Button URL]\" style=\"height:42px;v-text-anchor:middle;width:150px;\" arcsize=\"18%\" strokecolor=\"#3a1616\" fillcolor=\"#120d0d\">\n                                                    <w:anchorlock/>\n                                                    <center style=\"color:#e5e0e0;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;\">[Secondary]</center>\n                                                    </v:roundrect>\n                                                    <![endif]-->\n                                                    <!--[if !mso]><!-- -->\n                                                    <a href=\"[Secondary Button URL]\" style=\"background-color:#120d0d; color:#e5e0e0; font-size:13px; font-weight:700; padding:12px 24px; border-radius:10px; display:inline-block; border:1px solid #3a1616;\">[Secondary Action]</a>\n                                                    <!--<![endif]-->\n                                                </td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 13,
+            "name": "Banner Image",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:28px;\">\n                                <tr>\n                                    <td style=\"border-radius:16px; overflow:hidden;\">\n                                        <img src=\"[BANNER_IMAGE_URL]\" width=\"536\" alt=\"[Banner description]\" style=\"display:block; width:100%; max-width:536px; border-radius:16px;\" />\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 14,
+            "name": "Image",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:22px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Image</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"border:1px solid #241212; border-radius:14px; padding:6px; background:#120d0d;\">\n                                        <img src=\"[IMAGE_URL]\" width=\"200\" alt=\"[Image description]\" style=\"display:block; width:200px; max-width:100%; margin:0 auto;\" />\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 15,
+            "name": "Image + Caption",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:22px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Image + Caption</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"border:1px solid #241212; border-radius:14px; padding:6px; background:#120d0d;\">\n                                        <img src=\"[IMAGE_URL]\" width=\"200\" alt=\"[Image description]\" style=\"display:block; width:200px; max-width:100%; margin:0 auto;\" />\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td style=\"font-size:12px; color:#726c6c; text-align:center; padding-top:8px;\">[Caption text describing the image]</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 16,
+            "name": "Information Box",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#0d1622\" style=\"background:#0d1622; border:1px solid #17324f; border-radius:14px; margin-top:26px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:14px 16px;\">\n                                        <span style=\"font-size:11px; letter-spacing:1px; color:#7fb0ff; font-weight:700; text-transform:uppercase;\">Info</span>\n                                        <p style=\"font-size:13.5px; color:#c3d3ea; margin:6px 0 0 0; line-height:1.5;\">[Informational message — neutral, FYI-style content.]</p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 17,
+            "name": "Warning Box",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#1e1608\" style=\"background:#1e1608; border:1px solid #4a3a10; border-radius:14px; margin-top:12px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:14px 16px;\">\n                                        <span style=\"font-size:11px; letter-spacing:1px; color:#f5a623; font-weight:700; text-transform:uppercase;\">Warning</span>\n                                        <p style=\"font-size:13.5px; color:#f0dcb0; margin:6px 0 0 0; line-height:1.5;\">[Warning message — something the recipient should be cautious about.]</p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 18,
+            "name": "Success Box",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#0c1a10\" style=\"background:#0c1a10; border:1px solid #1c3d24; border-radius:14px; margin-top:12px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:14px 16px;\">\n                                        <span style=\"font-size:11px; letter-spacing:1px; color:#4ade80; font-weight:700; text-transform:uppercase;\">Success</span>\n                                        <p style=\"font-size:13.5px; color:#bfe8cc; margin:6px 0 0 0; line-height:1.5;\">[Success message — confirmation something completed correctly.]</p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 19,
+            "name": "Error Box",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#1a0d0d\" style=\"background:#1a0d0d; border:1px solid #3a1616; border-radius:14px; margin-top:12px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:14px 16px;\">\n                                        <span style=\"font-size:11px; letter-spacing:1px; color:#ef4444; font-weight:700; text-transform:uppercase;\">Error</span>\n                                        <p style=\"font-size:13.5px; color:#f3a9a9; margin:6px 0 0 0; line-height:1.5;\">[Error message — something that failed or needs correction.]</p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 20,
+            "name": "Note Box",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px dashed #3a2f2f; border-radius:14px; margin-top:12px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:14px 16px;\">\n                                        <span style=\"font-size:11px; letter-spacing:1px; color:#a39d9d; font-weight:700; text-transform:uppercase;\">Note</span>\n                                        <p style=\"font-size:13.5px; color:#c9c3c3; margin:6px 0 0 0; line-height:1.5; font-style:italic;\">[Side note or additional remark, secondary to the main content.]</p>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 21,
+            "name": "Table",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Table</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" class=\"data-table\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border:1px solid #241212; border-radius:14px; overflow:hidden;\">\n                                <tr bgcolor=\"#1a0d0d\">\n                                    <td style=\"background:#1a0d0d; padding:12px 14px; font-size:12px; color:#f3a9a9; font-weight:700; border-bottom:1px solid #241212;\">[Column 1]</td>\n                                    <td style=\"background:#1a0d0d; padding:12px 14px; font-size:12px; color:#f3a9a9; font-weight:700; border-bottom:1px solid #241212;\" align=\"center\">[Column 2]</td>\n                                    <td style=\"background:#1a0d0d; padding:12px 14px; font-size:12px; color:#f3a9a9; font-weight:700; border-bottom:1px solid #241212;\" align=\"right\">[Column 3]</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"padding:12px 14px; font-size:13px; color:#c9c3c3; border-bottom:1px solid #1c1010;\">[Row 1, Col 1]</td>\n                                    <td style=\"padding:12px 14px; font-size:13px; color:#c9c3c3; border-bottom:1px solid #1c1010;\" align=\"center\">[Row 1, Col 2]</td>\n                                    <td style=\"padding:12px 14px; font-size:12px; color:#ef4444; font-weight:600; border-bottom:1px solid #1c1010;\" align=\"right\">[Row 1, Col 3]</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"padding:12px 14px; font-size:13px; color:#c9c3c3;\">[Row 2, Col 1]</td>\n                                    <td style=\"padding:12px 14px; font-size:13px; color:#c9c3c3;\" align=\"center\">[Row 2, Col 2]</td>\n                                    <td style=\"padding:12px 14px; font-size:12px; color:#ef4444; font-weight:600;\" align=\"right\">[Row 2, Col 3]</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 22,
+            "name": "Key-Value List",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Key-Value List</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px;\" width=\"100%\">\n                                <tr>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#726c6c; border-bottom:1px solid #1c1010;\" width=\"40%\">[Key one]</td>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#e5e0e0; font-weight:600; border-bottom:1px solid #1c1010;\">[Value one]</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#726c6c; border-bottom:1px solid #1c1010;\">[Key two]</td>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#e5e0e0; font-weight:600; border-bottom:1px solid #1c1010;\">[Value two]</td>\n                                </tr>\n                                <tr>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#726c6c;\">[Key three]</td>\n                                    <td style=\"padding:12px 16px; font-size:13px; color:#e5e0e0; font-weight:600;\">[Value three]</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 23,
+            "name": "Timeline",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:14px;\">Timeline</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td width=\"20\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"10\" height=\"10\">\n                                            <tr>\n                                                <td bgcolor=\"#ef4444\" width=\"10\" height=\"10\" style=\"background:#ef4444; border-radius:50%; font-size:0; line-height:0;\">&nbsp;</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px; padding-bottom:18px;\">\n                                        <div style=\"font-size:11px; color:#726c6c; text-transform:uppercase; letter-spacing:0.5px;\">[Date / Stage 1]</div>\n                                        <div style=\"font-size:13.5px; color:#e5e0e0; font-weight:600; margin-top:3px;\">[Timeline event one]</div>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td width=\"20\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"10\" height=\"10\">\n                                            <tr>\n                                                <td bgcolor=\"#3a1616\" width=\"10\" height=\"10\" style=\"background:#3a1616; border-radius:50%; font-size:0; line-height:0;\">&nbsp;</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px; padding-bottom:18px;\">\n                                        <div style=\"font-size:11px; color:#726c6c; text-transform:uppercase; letter-spacing:0.5px;\">[Date / Stage 2]</div>\n                                        <div style=\"font-size:13.5px; color:#c9c3c3; font-weight:600; margin-top:3px;\">[Timeline event two]</div>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td width=\"20\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"10\" height=\"10\">\n                                            <tr>\n                                                <td bgcolor=\"#3a1616\" width=\"10\" height=\"10\" style=\"background:#3a1616; border-radius:50%; font-size:0; line-height:0;\">&nbsp;</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px;\">\n                                        <div style=\"font-size:11px; color:#726c6c; text-transform:uppercase; letter-spacing:0.5px;\">[Date / Stage 3]</div>\n                                        <div style=\"font-size:13.5px; color:#c9c3c3; font-weight:600; margin-top:3px;\">[Timeline event three]</div>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 24,
+            "name": "Steps",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Steps</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td width=\"34\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"26\" height=\"26\">\n                                            <tr>\n                                                <td bgcolor=\"#ef4444\" width=\"26\" height=\"26\" style=\"background:#ef4444; border-radius:50%; color:#ffffff; font-size:12px; font-weight:700; text-align:center;\">1</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px; padding-bottom:16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">[Step one description]</td>\n                                </tr>\n                                <tr>\n                                    <td width=\"34\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"26\" height=\"26\">\n                                            <tr>\n                                                <td bgcolor=\"#2a1414\" width=\"26\" height=\"26\" style=\"background:#2a1414; border-radius:50%; color:#ef4444; font-size:12px; font-weight:700; text-align:center;\">2</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px; padding-bottom:16px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">[Step two description]</td>\n                                </tr>\n                                <tr>\n                                    <td width=\"34\" valign=\"top\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"26\" height=\"26\">\n                                            <tr>\n                                                <td bgcolor=\"#2a1414\" width=\"26\" height=\"26\" style=\"background:#2a1414; border-radius:50%; color:#ef4444; font-size:12px; font-weight:700; text-align:center;\">3</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                    <td style=\"padding-left:10px; font-size:13.5px; color:#c9c3c3; line-height:1.5;\">[Step three description]</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 25,
+            "name": "Attachment",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Attachment</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td bgcolor=\"#120d0d\" style=\"background:#120d0d; border:1px solid #241212; border-radius:14px; padding:14px 16px;\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                            <tr>\n                                                <td width=\"36\" valign=\"middle\">\n                                                    <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"32\" height=\"32\">\n                                                        <tr>\n                                                            <td bgcolor=\"#1a0d0d\" width=\"32\" height=\"32\" style=\"background:#1a0d0d; border:1px solid #3a1616; border-radius:8px; font-size:11px; color:#ef4444; text-align:center; font-weight:700;\">[EXT]</td>\n                                                        </tr>\n                                                    </table>\n                                                </td>\n                                                <td valign=\"middle\" style=\"padding-left:12px;\">\n                                                    <div style=\"font-size:13.5px; color:#e5e0e0; font-weight:600;\">[Attachment_File_Name.ext]</div>\n                                                    <div style=\"font-size:11.5px; color:#726c6c; margin-top:2px;\">[File size] &nbsp;&middot;&nbsp; [Attachment note]</div>\n                                                </td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 26,
+            "name": "Download Link",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:14px;\">\n                                <tr>\n                                    <td bgcolor=\"#0d1622\" style=\"background:#0d1622; border:1px solid #17324f; border-radius:14px; padding:14px 16px;\">\n                                        <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                            <tr>\n                                                <td valign=\"middle\" style=\"font-size:13.5px; color:#c3d3ea;\">[File or resource name]</td>\n                                                <td valign=\"middle\" align=\"right\">\n                                                    <a href=\"[Download URL]\" style=\"color:#7fb0ff; font-size:13px; font-weight:700; border-bottom:1px solid #7fb0ff;\">Download &#8594;</a>\n                                                </td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 27,
+            "name": "Divider",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:28px;\">\n                                <tr>\n                                    <td style=\"border-top:1px solid #221010; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 28,
+            "name": "Spacer",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td style=\"height:32px; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 29,
+            "name": "Container",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td bgcolor=\"#100b0b\" style=\"background:#100b0b; border:1px solid #221010; border-radius:18px; padding:22px 24px;\">\n                                        <div style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; margin-bottom:10px;\">[Container Label]</div>\n                                        <p style=\"font-size:13.5px; color:#a39d9d; margin:0; line-height:1.6;\">[Grouped content lives inside this container — combine text, a list, or any other block here as needed.]</p>\n                                    </td>\n                                </tr>\n                            </table>\n<!-- Divider -->\n                            <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:28px;\">\n                                <tr>\n                                    <td style=\"border-top:1px solid #221010; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 30,
+            "name": "Contact Details",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:24px;\">\n                                <tr>\n                                    <td style=\"font-size:11px; letter-spacing:1.5px; color:#ef4444; font-weight:700; text-transform:uppercase; padding-bottom:12px;\">Contact Details</td>\n                                </tr>\n                            </table>\n                            <table role=\"presentation\" class=\"contact-row\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                                <tr>\n                                    <td width=\"33%\" valign=\"top\" style=\"font-size:13px; color:#c9c3c3; padding-right:6px;\">\n                                        <div style=\"font-size:11px; color:#726c6c;\">Email</div>\n                                        <a href=\"mailto:[email@example.com]\" style=\"color:#e5e0e0; font-size:13px;\">[email@example.com]</a>\n                                    </td>\n                                    <td width=\"33%\" valign=\"top\" style=\"font-size:13px; color:#c9c3c3; padding:0 6px;\">\n                                        <div style=\"font-size:11px; color:#726c6c;\">Phone</div>\n                                        <a href=\"tel:[+00 00000 00000]\" style=\"color:#e5e0e0; font-size:13px;\">[+00 00000 00000]</a>\n                                    </td>\n                                    <td width=\"34%\" valign=\"top\" style=\"font-size:13px; color:#c9c3c3; padding-left:6px;\">\n                                        <div style=\"font-size:11px; color:#726c6c;\">Organization</div>\n                                        <span style=\"color:#e5e0e0; font-size:13px;\">[Organization Name]</span>\n                                    </td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 31,
+            "name": "Social Links",
+            "code": "<table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <table align=\"center\" role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#161010\" style=\"background:#161010; border-radius:56px; border:1px solid #2e1616; margin:0 auto;\">\n                                            <tr class=\"icon-dock\">\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"[LinkedIn URL]\">\n                                                        <img alt=\"LinkedIn\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/174/174857.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"[Portfolio / Website URL]\">\n                                                        <img alt=\"Portfolio\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/1055/1055687.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"[GitHub URL]\">\n                                                        <img alt=\"GitHub\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/733/733553.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"mailto:[email@example.com]\">\n                                                        <img alt=\"Email\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/732/732200.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"tel:[+00 00000 00000]\">\n                                                        <img alt=\"Phone\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/597/597177.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                                <td style=\"padding:10px 13px;\">\n                                                    <a href=\"[WhatsApp URL]\">\n                                                        <img alt=\"WhatsApp\" class=\"icon-img\" height=\"22\" width=\"22\" src=\"https://cdn-icons-png.flaticon.com/512/733/733585.png\" style=\"display:block; width:22px; height:22px;\" />\n                                                    </a>\n                                                </td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n<!-- Divider -->\n                            <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-top:26px;\">\n                                <tr>\n                                    <td style=\"border-top:1px solid #221010; font-size:0; line-height:0;\">&nbsp;</td>\n                                </tr>\n                            </table>"
+        }, {
+            "number": 32,
+            "name": "Signature",
+            "code": "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"margin-top:20px;\">\n                                <tr>\n                                    <td style=\"font-size:14px; color:#9c9696;\">\n                                        Best regards,<br/>\n                                        <strong style=\"font-size:16px; color:#ffffff; display:inline-block; margin-top:4px;\">\n                                            <a href=\"[Sender profile / portfolio URL]\" style=\"color:#ffffff; text-decoration:none; border-bottom:1px dotted #ef4444;\">[Sender Name]</a>\n                                        </strong><br/>\n                                        <span style=\"font-size:12px; color:#726c6c;\">\n                                            [Sender Title] @\n                                            <a href=\"[Company URL]\" style=\"color:#726c6c; text-decoration:none; border-bottom:1px dotted #3a3232;\" target=\"_blank\">[Company Name]</a>\n                                        </span>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n<tr>\n                        <td style=\"padding:0 32px 28px 32px; background-color:#0c0808;\">"
+        }];
+
+        const grid = document.getElementById("grid");
+        const empty = document.getElementById("empty");
+        const count = document.getElementById("count");
+        const search = document.getElementById("search");
+
+        function escapeHtml(value) {
+            return value.replace(/[&<>"']/g, ch => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            }[ch]));
+        }
+
+        function makePreview(code) {
+            // Render the snippet as an email-style fragment while keeping it isolated.
+            // Conditional Outlook comments are harmless in a normal browser.
+            return `
+    <div class="preview-frame">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+        <tr><td>${code}</td></tr>
+      </table>
+    </div>`;
+        }
+
+        function render(filter = "") {
+            const q = filter.trim().toLowerCase();
+            const filtered = snippets.filter(s =>
+                !q || String(s.number).includes(q) || s.name.toLowerCase().includes(q)
+            );
+
+            grid.innerHTML = filtered.map(s => `
+    <article class="card">
+      <div class="card-head">
+        <div class="identity">
+          <div class="serial">${String(s.number).padStart(2,"0")}</div>
+          <div class="name">${escapeHtml(s.name)}</div>
+        </div>
+        <div class="actions">
+          <button class="copy-btn" data-number="${s.number}">Copy HTML</button>
+        </div>
+      </div>
+      <div class="columns">
+        <section class="pane">
+          <div class="pane-title">HTML Code Snippet</div>
+          <pre class="code">${escapeHtml(s.code)}</pre>
+        </section>
+        <section class="pane">
+          <div class="pane-title">Snippet Result</div>
+          <div class="preview">${makePreview(s.code)}</div>
+        </section>
+      </div>
+    </article>
+  `).join("");
+
+            count.textContent = `${filtered.length} of ${snippets.length}`;
+            empty.hidden = filtered.length !== 0;
+
+            document.querySelectorAll(".copy-btn").forEach(btn => {
+                btn.addEventListener("click", async() => {
+                    const item = snippets.find(s => String(s.number) === btn.dataset.number);
+                    try {
+                        await navigator.clipboard.writeText(item.code);
+                        btn.textContent = "Copied ✓";
+                        btn.classList.add("copied");
+                        setTimeout(() => {
+                            btn.textContent = "Copy HTML";
+                            btn.classList.remove("copied");
+                        }, 1400);
+                    } catch (e) {
+                        // Clipboard fallback for file:// contexts where Clipboard API may be blocked.
+                        const ta = document.createElement("textarea");
+                        ta.value = item.code;
+                        ta.style.position = "fixed";
+                        ta.style.opacity = "0";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand("copy");
+                        ta.remove();
+                        btn.textContent = "Copied ✓";
+                        btn.classList.add("copied");
+                        setTimeout(() => {
+                            btn.textContent = "Copy HTML";
+                            btn.classList.remove("copied");
+                        }, 1400);
+                    }
+                });
+            });
+        }
+
+        search.addEventListener("input", e => render(e.target.value));
+        render();
+    </script>
+</body>
+
+</html>

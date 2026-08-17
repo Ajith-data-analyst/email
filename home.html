@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Template Library</title>
+
+    <style>
+        /* =========================================================
+   GLOBAL
+========================================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            color: #e5e7eb;
+            background: radial-gradient(circle at 10% 10%, rgba(56, 189, 248, .14), transparent 30%), radial-gradient(circle at 90% 90%, rgba(99, 102, 241, .14), transparent 30%), #0f172a;
+        }
+        
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+        /* =========================================================
+   NAVIGATION
+========================================================= */
+        
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(15, 23, 42, .82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        
+        .nav-container {
+            width: 100%;
+            max-width: 1400px;
+            min-height: 70px;
+            margin: auto;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .logo {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+        
+        .logo span {
+            color: #38bdf8;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            border: 1px solid transparent;
+            background: transparent;
+            color: #cbd5e1;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+        
+        .nav-button:hover,
+        .nav-button.active {
+            color: #fff;
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .1);
+        }
+        /* =========================================================
+   PAGE SYSTEM
+========================================================= */
+        
+        .page {
+            display: none;
+            min-height: calc(100vh - 70px);
+        }
+        
+        .page.active {
+            display: block;
+        }
+        /* =========================================================
+   HOME
+========================================================= */
+        
+        .home-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+        
+        .hero {
+            max-width: 850px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 7px 14px;
+            margin-bottom: 18px;
+            border-radius: 999px;
+            color: #7dd3fc;
+            background: rgba(56, 189, 248, .1);
+            border: 1px solid rgba(56, 189, 248, .25);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+        
+        .hero h1 {
+            color: #fff;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 span {
+            color: #38bdf8;
+        }
+        
+        .hero p {
+            color: #94a3b8;
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        /* =========================================================
+   HOME TEMPLATE CARDS
+========================================================= */
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+        
+        .template-card {
+            padding: 26px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+            transition: .3s ease;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, .35);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, .35);
+        }
+        
+        .template-number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 13px;
+            color: #7dd3fc;
+            background: rgba(56, 189, 248, .12);
+            font-weight: 800;
+        }
+        
+        .template-card h2 {
+            color: #fff;
+            font-size: 22px;
+            margin-bottom: 9px;
+        }
+        
+        .template-card p {
+            color: #94a3b8;
+            line-height: 1.65;
+            margin-bottom: 22px;
+        }
+        
+        .open-template {
+            width: 100%;
+            border: 0;
+            padding: 13px 18px;
+            border-radius: 12px;
+            color: #082f49;
+            background: #38bdf8;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+        
+        .open-template:hover {
+            background: #67d3ff;
+            transform: translateY(-2px);
+        }
+        /* =========================================================
+   EDITOR PAGE
+========================================================= */
+        
+        .editor-container {
+            width: 100%;
+            max-width: 1450px;
+            margin: auto;
+            padding: 40px 25px;
+        }
+        
+        .editor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .page-title h1 {
+            color: #fff;
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 8px;
+        }
+        
+        .page-title p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .07);
+            color: #e2e8f0;
+            padding: 11px 16px;
+            border-radius: 11px;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, .12);
+            transform: translateX(-2px);
+        }
+        /* =========================================================
+   EDITOR CARD
+========================================================= */
+        
+        .editor-card {
+            width: 100%;
+            padding: 26px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(255, 255, 255, .07);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .3);
+        }
+        
+        .note {
+            padding: 15px 17px;
+            margin-bottom: 23px;
+            border-left: 4px solid #38bdf8;
+            border-radius: 12px;
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, .06);
+            line-height: 1.6;
+        }
+        /* =========================================================
+   EDITOR / PREVIEW
+========================================================= */
+        
+        .editor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+        
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            min-width: 0;
+        }
+        
+        .panel-label {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        /* =========================================================
+   CODE AREA
+========================================================= */
+        
+        .code-area {
+            position: relative;
+            width: 100%;
+        }
+        
+        .code-editor {
+            width: 100%;
+            height: 520px;
+            resize: vertical;
+            padding: 18px;
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 17px;
+            background: rgba(2, 6, 23, .75);
+            color: #e2e8f0;
+            font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.65;
+            tab-size: 4;
+        }
+        
+        .code-editor:focus {
+            border-color: rgba(56, 189, 248, .5);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, .1);
+        }
+        
+        .code-editor::selection {
+            background: #2563eb;
+            color: #fff;
+        }
+        /* =========================================================
+   VSCODE-LIKE FIND BAR
+========================================================= */
+        
+        .find-bar {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 20;
+            width: min(470px, calc(100% - 24px));
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 7px;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 10px;
+            background: rgba(15, 23, 42, .97);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .5);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        
+        .find-bar.open {
+            display: flex;
+        }
+        
+        .find-input {
+            min-width: 0;
+            flex: 1;
+            height: 34px;
+            padding: 0 10px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 6px;
+            outline: none;
+            color: #e2e8f0;
+            background: #020617;
+            font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+            font-size: 13px;
+        }
+        
+        .find-input:focus {
+            border-color: rgba(56, 189, 248, .55);
+        }
+        
+        .find-input::placeholder {
+            color: #64748b;
+        }
+        
+        .find-count {
+            min-width: 65px;
+            color: #94a3b8;
+            font-family: Consolas, monospace;
+            font-size: 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .find-button {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border: 0;
+            border-radius: 6px;
+            color: #cbd5e1;
+            background: transparent;
+            cursor: pointer;
+            transition: .2s;
+        }
+        
+        .find-button:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, .1);
+        }
+        /* =========================================================
+   COPY
+========================================================= */
+        
+        .copy-button {
+            align-self: flex-start;
+            border: 0;
+            padding: 13px 22px;
+            border-radius: 12px;
+            color: #082f49;
+            background: #38bdf8;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+        
+        .copy-button:hover {
+            background: #67d3ff;
+            transform: translateY(-2px);
+        }
+        
+        .copy-button.copied {
+            color: #052e16;
+            background: #34d399;
+        }
+        /* =========================================================
+   PREVIEW
+========================================================= */
+        
+        .preview-container {
+            height: 520px;
+            overflow: hidden;
+            border-radius: 17px;
+            background: #fff;
+            border: 1px solid rgba(255, 255, 255, .12);
+        }
+        
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: 0;
+            background: #fff;
+        }
+        /* =========================================================
+   LOADING / ERROR
+========================================================= */
+        
+        .editor-status {
+            display: none;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            color: #fbbf24;
+            background: rgba(245, 158, 11, .08);
+            border: 1px solid rgba(245, 158, 11, .18);
+            font-size: 13px;
+        }
+        
+        .editor-status.show {
+            display: block;
+        }
+        
+        .editor-status.error {
+            color: #fca5a5;
+            background: rgba(239, 68, 68, .08);
+            border-color: rgba(239, 68, 68, .2);
+        }
+        /* =========================================================
+   RESPONSIVE
+========================================================= */
+        
+        @media(max-width:900px) {
+            .template-grid,
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+            .code-editor,
+            .preview-container {
+                height: 380px;
+            }
+        }
+        
+        @media(max-width:600px) {
+            .nav-container {
+                padding: 10px 16px;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .nav-button {
+                flex-shrink: 0;
+            }
+            .home-container,
+            .editor-container {
+                padding: 40px 16px;
+            }
+            .editor-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .editor-card {
+                padding: 18px;
+                border-radius: 19px;
+            }
+            .code-editor,
+            .preview-container {
+                height: 320px;
+            }
+            .copy-button {
+                width: 100%;
+            }
+            .find-bar {
+                width: calc(100% - 16px);
+                top: 8px;
+                right: 8px;
+            }
+            .find-count {
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+     NAVIGATION
+========================================================= -->
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div id="emailStudioLogo" class="logo" style="cursor:pointer; position:relative; user-select:none;">
+                Email <span>Studio</span>
+
+                <div id="emailStudioPopup" style="
+        display:none;
+        position:fixed;
+        z-index:999999;
+        background:#1e1e1e;
+        color:white;
+        border:1px solid #555;
+        border-radius:12px;
+        padding:6px;
+        width:210px;
+        box-shadow:0 10px 30px rgba(0,0,0,.5);
+        font-family:Arial,sans-serif;
+    ">
+                    <button type="button" id="copyTempBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
+            Copy
+        </button>
+
+                    <button type="button" id="shareTempBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
+            Share
+        </button>
+
+                    <button type="button" id="sameTabBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
+            Open 
+        </button>
+
+                    <button type="button" id="newTabBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
+            ↗ Open 
+        </button>
+                </div>
+            </div>
+
+            <script>
+                (function() {
+                    const logo = document.getElementById("emailStudioLogo");
+                    const popup = document.getElementById("emailStudioPopup");
+
+                    if (!logo || !popup) return;
+
+                    const tempURL = new URL("./Temp.html", window.location.href).href;
+
+                    let lastTap = 0;
+
+                    function showPopup(x, y) {
+                        popup.style.display = "block";
+
+                        let left = x;
+                        let top = y;
+
+                        if (left + 210 > window.innerWidth) {
+                            left = window.innerWidth - 220;
+                        }
+
+                        if (top + 190 > window.innerHeight) {
+                            top = window.innerHeight - 200;
+                        }
+
+                        popup.style.left = Math.max(10, left) + "px";
+                        popup.style.top = Math.max(10, top) + "px";
+                    }
+
+                    function hidePopup() {
+                        popup.style.display = "none";
+                    }
+
+                    function doubleTap(x, y) {
+                        showPopup(x, y);
+                    }
+
+                    /* DESKTOP DOUBLE CLICK */
+                    logo.addEventListener("dblclick", function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        doubleTap(event.clientX, event.clientY);
+                    });
+
+                    /* MOBILE DOUBLE TAP */
+                    logo.addEventListener("touchend", function(event) {
+                        event.preventDefault();
+
+                        const now = Date.now();
+
+                        if (now - lastTap < 500) {
+                            const touch = event.changedTouches[0];
+                            doubleTap(touch.clientX, touch.clientY);
+                            lastTap = 0;
+                        } else {
+                            lastTap = now;
+                        }
+                    }, {
+                        passive: false
+                    });
+
+                    /* COPY */
+                    document.getElementById("copyTempBtn").addEventListener("click", async function() {
+                        try {
+                            await navigator.clipboard.writeText(tempURL);
+                        } catch (e) {
+                            const textarea = document.createElement("textarea");
+                            textarea.value = tempURL;
+                            document.body.appendChild(textarea);
+                            textarea.select();
+                            document.execCommand("copy");
+                            textarea.remove();
+                        }
+
+                        hidePopup();
+                    });
+
+                    /* SHARE */
+                    document.getElementById("shareTempBtn").addEventListener("click", async function() {
+                        if (navigator.share) {
+                            try {
+                                await navigator.share({
+                                    title: "EMAIL Studio",
+                                    url: tempURL
+                                });
+                            } catch (e) {}
+                        } else {
+                            try {
+                                await navigator.clipboard.writeText(tempURL);
+                                alert("Link copied!");
+                            } catch (e) {
+                                alert(tempURL);
+                            }
+                        }
+
+                        hidePopup();
+                    });
+
+                    /* SAME TAB */
+                    document.getElementById("sameTabBtn").addEventListener("click", function() {
+                        window.location.href = tempURL;
+                    });
+
+                    /* NEW TAB */
+                    document.getElementById("newTabBtn").addEventListener("click", function() {
+                        window.open(tempURL, "_blank");
+                        hidePopup();
+                    });
+
+                    /* CLOSE WHEN CLICKING OUTSIDE */
+                    document.addEventListener("click", function(event) {
+                        if (!popup.contains(event.target) && !logo.contains(event.target)) {
+                            hidePopup();
+                        }
+                    });
+
+                    /* CLOSE WITH ESC */
+                    document.addEventListener("keydown", function(event) {
+                        if (event.key === "Escape") {
+                            hidePopup();
+                        }
+                    });
+                })();
+            </script>
+            <div class="nav-links">
+
+                <button class="nav-button active" data-page="home">
+                Home
+            </button>
+
+                <button class="nav-button" data-page="template1">
+               BLANK
+            </button>
+
+                <button class="nav-button" data-page="template2">
+                CURRENT
+            </button>
+
+                <button class="nav-button" data-page="template3">
+                CURRENT WITH FOOTER
+            </button>
+
+                <button class="nav-button" data-page="template4">
+                FULL
+            </button>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+     HOME PAGE
+========================================================= -->
+    <section id="home" class="page active">
+
+        <main class="home-container">
+
+            <div class="hero">
+
+                <div class="hero-badge">
+                    HTML TEMPLATE LIBRARY
+                </div>
+
+                <h1>
+                    Your HTML Templates,
+                    <span>Organized.</span>
+                </h1>
+
+                <p>
+                    Select a template to open its dedicated editor. Each template is stored as a separate code snippet while the complete application remains in this file.
+                </p>
+
+            </div>
+
+
+            <div class="template-grid">
+
+                <!-- TEMPLATE 1 -->
+                <article class="template-card">
+
+                    <div class="template-number">
+                        01
+                    </div>
+
+                    <h2>
+                        BLANK
+                    </h2>
+
+                    <p>
+                        Open and edit your BLANK HTML template.
+                    </p>
+
+                    <button class="open-template" data-page="template1">
+                    Open Template
+                </button>
+
+                </article>
+
+
+                <!-- TEMPLATE 2 -->
+                <article class="template-card">
+
+                    <div class="template-number">
+                        02
+                    </div>
+
+                    <h2>
+                        CURRENT
+                    </h2>
+
+                    <p>
+                        Open and edit your CURRENT standalone HTML template.
+                    </p>
+
+                    <button class="open-template" data-page="template2">
+                    Open Template
+                </button>
+
+                </article>
+
+
+                <!-- TEMPLATE 3 -->
+                <article class="template-card">
+
+                    <div class="template-number">
+                        03
+                    </div>
+
+                    <h2>
+                        CURRENT WITH FOOTER
+                    </h2>
+
+                    <p>
+                        Open and edit your CURRENT WITH FOOTER standalone HTML template.
+                    </p>
+
+                    <button class="open-template" data-page="template3">
+                    Open Template
+                </button>
+
+                </article>
+
+
+                <!-- TEMPLATE 4 -->
+                <article class="template-card">
+
+                    <div class="template-number">
+                        04
+                    </div>
+
+                    <h2>
+                        FULL
+                    </h2>
+
+                    <p>
+                        Open and edit your FULL standalone HTML template.
+                    </p>
+
+                    <button class="open-template" data-page="template4">
+                    Open Template
+                </button>
+
+                </article>
+
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================================================
+     TEMPLATE 1 PAGE
+
+     IMPORTANT:
+     The actual code is NOT stored here.
+
+     It is loaded from:
+     codebase/template1.txt
+========================================================= -->
+    <section id="template1" class="page">
+
+        <main class="editor-container">
+
+            <div class="editor-header">
+
+                <div class="page-title">
+
+                    <h1>
+                        BLANK
+                    </h1>
+
+                    <p>
+                        Complete standalone HTML/CSS/JavaScript template.
+                    </p>
+
+                </div>
+
+                <button class="back-button" data-page="home">
+                ← Back to Home
+            </button>
+
+            </div>
+
+
+            <div class="editor-card">
+
+                <div class="note">
+                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                </div>
+
+                <div class="editor-status" data-status="template1">
+                    Loading template...
+                </div>
+
+
+                <div class="editor-grid">
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Input Editor
+                        </div>
+
+
+                        <div class="code-area">
+
+                            <div class="find-bar">
+
+                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+
+                                <span class="find-count">
+                                0/0
+                            </span>
+
+                                <button type="button" class="find-button find-prev" title="Previous match">
+                                ↑
+                            </button>
+
+                                <button type="button" class="find-button find-next" title="Next match">
+                                ↓
+                            </button>
+
+                                <button type="button" class="find-button find-close" title="Close">
+                                ×
+                            </button>
+
+                            </div>
+
+
+                            <textarea class="code-editor" data-template="codebase/template1.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
+
+                        </div>
+
+
+                        <button class="copy-button">
+                        Copy HTML
+                    </button>
+
+                    </div>
+
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Output Viewer
+                        </div>
+
+                        <div class="preview-container">
+
+                            <iframe class="preview-frame" title="Template 1 Preview">
+                        </iframe>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================================================
+     TEMPLATE 2 PAGE
+========================================================= -->
+    <section id="template2" class="page">
+
+        <main class="editor-container">
+
+            <div class="editor-header">
+
+                <div class="page-title">
+
+                    <h1>
+                        CURRENT
+                    </h1>
+
+                    <p>
+                        Complete standalone HTML/CSS/JavaScript template.
+                    </p>
+
+                </div>
+
+                <button class="back-button" data-page="home">
+                ← Back to Home
+            </button>
+
+            </div>
+
+
+            <div class="editor-card">
+
+                <div class="note">
+                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                </div>
+
+                <div class="editor-status" data-status="template2">
+                    Loading template...
+                </div>
+
+
+                <div class="editor-grid">
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Input Editor
+                        </div>
+
+                        <div class="code-area">
+
+                            <div class="find-bar">
+
+                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+
+                                <span class="find-count">
+                                0/0
+                            </span>
+
+                                <button type="button" class="find-button find-prev" title="Previous match">
+                                ↑
+                            </button>
+
+                                <button type="button" class="find-button find-next" title="Next match">
+                                ↓
+                            </button>
+
+                                <button type="button" class="find-button find-close" title="Close">
+                                ×
+                            </button>
+
+                            </div>
+
+                            <textarea class="code-editor" data-template=" CURENT.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
+
+                        </div>
+
+                        <button class="copy-button">
+                        Copy HTML
+                    </button>
+
+                    </div>
+
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Output Viewer
+                        </div>
+
+                        <div class="preview-container">
+
+                            <iframe class="preview-frame" title="Template 2 Preview">
+                        </iframe>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================================================
+     TEMPLATE 3 PAGE
+========================================================= -->
+    <section id="template3" class="page">
+
+        <main class="editor-container">
+
+            <div class="editor-header">
+
+                <div class="page-title">
+
+                    <h1>
+                        CURRENT WITH FOOTER
+                    </h1>
+
+                    <p>
+                        Complete standalone HTML/CSS/JavaScript template.
+                    </p>
+
+                </div>
+
+                <button class="back-button" data-page="home">
+                ← Back to Home
+            </button>
+
+            </div>
+
+
+            <div class="editor-card">
+
+                <div class="note">
+                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                </div>
+
+                <div class="editor-status" data-status="template3">
+                    Loading template...
+                </div>
+
+
+                <div class="editor-grid">
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Input Editor
+                        </div>
+
+                        <div class="code-area">
+
+                            <div class="find-bar">
+
+                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+
+                                <span class="find-count">
+                                0/0
+                            </span>
+
+                                <button type="button" class="find-button find-prev" title="Previous match">
+                                ↑
+                            </button>
+
+                                <button type="button" class="find-button find-next" title="Next match">
+                                ↓
+                            </button>
+
+                                <button type="button" class="find-button find-close" title="Close">
+                                ×
+                            </button>
+
+                            </div>
+
+                            <textarea class="code-editor" data-template="cur with fot.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
+
+                        </div>
+
+                        <button class="copy-button">
+                        Copy HTML
+                    </button>
+
+                    </div>
+
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Output Viewer
+                        </div>
+
+                        <div class="preview-container">
+
+                            <iframe class="preview-frame" title="Template 3 Preview">
+                        </iframe>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =========================================================
+     TEMPLATE 4 PAGE
+========================================================= -->
+    <section id="template4" class="page">
+
+        <main class="editor-container">
+
+            <div class="editor-header">
+
+                <div class="page-title">
+
+                    <h1>
+                        FULL
+                    </h1>
+
+                    <p>
+                        Complete standalone HTML/CSS/JavaScript template.
+                    </p>
+
+                </div>
+
+                <button class="back-button" data-page="home">
+                ← Back to Home
+            </button>
+
+            </div>
+
+
+            <div class="editor-card">
+
+                <div class="note">
+                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                </div>
+
+                <div class="editor-status" data-status="template4">
+                    Loading template...
+                </div>
+
+
+                <div class="editor-grid">
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Input Editor
+                        </div>
+
+                        <div class="code-area">
+
+                            <div class="find-bar">
+
+                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+
+                                <span class="find-count">
+                                0/0
+                            </span>
+
+                                <button type="button" class="find-button find-prev" title="Previous match">
+                                ↑
+                            </button>
+
+                                <button type="button" class="find-button find-next" title="Next match">
+                                ↓
+                            </button>
+
+                                <button type="button" class="find-button find-close" title="Close">
+                                ×
+                            </button>
+
+                            </div>
+
+                            <textarea class="code-editor" data-template="full.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
+
+                        </div>
+
+                        <button class="copy-button">
+                        Copy HTML
+                    </button>
+
+                    </div>
+
+
+                    <div class="editor-panel">
+
+                        <div class="panel-label">
+                            HTML Output Viewer
+                        </div>
+
+                        <div class="preview-container">
+
+                            <iframe class="preview-frame" title="Template 4 Preview">
+                        </iframe>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <script>
+        /* =========================================================
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   PAGE NAVIGATION
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ========================================================= */
+
+        const pages =
+            document.querySelectorAll(".page");
+
+
+        function showPage(pageName, updateHistory = true) {
+
+            pages.forEach(page => {
+
+                page.classList.toggle(
+                    "active",
+                    page.id === pageName
+                );
+
+            });
+
+
+            document
+                .querySelectorAll(".nav-button")
+                .forEach(button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.page === pageName
+                    );
+
+                });
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+
+            if (updateHistory) {
+
+                history.pushState({
+                        page: pageName
+                    },
+                    "",
+                    "#" + pageName
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           PAGE BUTTONS
+        ========================================================= */
+
+        document.addEventListener(
+            "click",
+            event => {
+
+                const button =
+                    event.target.closest("[data-page]");
+
+                if (!button) {
+                    return;
+                }
+
+                showPage(
+                    button.dataset.page
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           BROWSER BACK / FORWARD
+        ========================================================= */
+
+        window.addEventListener(
+            "popstate",
+            () => {
+
+                const pageName =
+                    location.hash.substring(1) || "home";
+
+                showPage(
+                    document.getElementById(pageName) ?
+                    pageName :
+                    "home",
+                    false
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           TEMPLATE EDITORS
+        ========================================================= */
+
+        document
+            .querySelectorAll(".code-editor")
+            .forEach(editor => {
+
+                const filePath =
+                    editor.dataset.template;
+
+
+                const editorCard =
+                    editor.closest(".editor-card");
+
+
+                const preview =
+                    editorCard.querySelector(
+                        ".preview-frame"
+                    );
+
+
+                const copyButton =
+                    editorCard.querySelector(
+                        ".copy-button"
+                    );
+
+
+                const status =
+                    editorCard.querySelector(
+                        ".editor-status"
+                    );
+
+
+                /* =====================================================
+                   LOAD EXTERNAL CODE SNIPPET
+
+                   IMPORTANT:
+                   This loads ONLY the template code.
+
+                   The main application remains in index.html.
+                ===================================================== */
+
+                async function loadTemplate() {
+
+                    try {
+
+                        status.classList.add("show");
+
+                        status.classList.remove("error");
+
+                        status.textContent =
+                            "Loading template...";
+
+
+                        const response =
+                            await fetch(filePath);
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                `HTTP ${response.status}`
+                            );
+
+                        }
+
+
+                        const code =
+                            await response.text();
+
+
+                        editor.value =
+                            code;
+
+
+                        status.classList.remove(
+                            "show"
+                        );
+
+
+                        updatePreview();
+
+
+                    } catch (error) {
+
+                        status.classList.add(
+                            "show"
+                        );
+
+                        status.classList.add(
+                            "error"
+                        );
+
+                        status.textContent =
+                            `Unable to load ${filePath}. ` +
+                            `Make sure the file exists and run this project through a local server.`;
+
+                    }
+
+                }
+
+
+                /* =====================================================
+                   LIVE PREVIEW
+                ===================================================== */
+
+                function updatePreview() {
+
+                    preview.srcdoc =
+                        editor.value;
+
+                }
+
+
+                editor.addEventListener(
+                    "input",
+                    updatePreview
+                );
+
+
+                /* =====================================================
+                   COPY COMPLETE TEMPLATE
+                ===================================================== */
+
+                copyButton.addEventListener(
+                    "click",
+                    async() => {
+
+                        try {
+
+                            await navigator.clipboard.writeText(
+                                editor.value
+                            );
+
+
+                            copyButton.textContent =
+                                "Copied!";
+
+
+                            copyButton.classList.add(
+                                "copied"
+                            );
+
+
+                            setTimeout(() => {
+
+                                copyButton.textContent =
+                                    "Copy HTML";
+
+                                copyButton.classList.remove(
+                                    "copied"
+                                );
+
+                            }, 2000);
+
+
+                        } catch (error) {
+
+                            copyButton.textContent =
+                                "Copy Failed";
+
+
+                            setTimeout(() => {
+
+                                copyButton.textContent =
+                                    "Copy HTML";
+
+                            }, 2000);
+
+                        }
+
+                    }
+                );
+
+
+                /* =====================================================
+                   VSCODE-LIKE FIND
+
+                   Ctrl + F
+                   Enter       = Next
+                   Shift+Enter = Previous
+                   Escape      = Close
+                ===================================================== */
+
+                const codeArea =
+                    editor.closest(".code-area");
+
+
+                const findBar =
+                    codeArea.querySelector(
+                        ".find-bar"
+                    );
+
+
+                const findInput =
+                    findBar.querySelector(
+                        ".find-input"
+                    );
+
+
+                const findCount =
+                    findBar.querySelector(
+                        ".find-count"
+                    );
+
+
+                const previousButton =
+                    findBar.querySelector(
+                        ".find-prev"
+                    );
+
+
+                const nextButton =
+                    findBar.querySelector(
+                        ".find-next"
+                    );
+
+
+                const closeButton =
+                    findBar.querySelector(
+                        ".find-close"
+                    );
+
+
+                let matches = [];
+
+                let currentMatch = -1;
+
+
+                function findAllMatches(query) {
+
+                    matches = [];
+
+                    currentMatch = -1;
+
+
+                    if (!query) {
+
+                        findCount.textContent =
+                            "0/0";
+
+                        return;
+
+                    }
+
+
+                    const source =
+                        editor.value.toLowerCase();
+
+
+                    const search =
+                        query.toLowerCase();
+
+
+                    let position = 0;
+
+
+                    while (true) {
+
+                        const index =
+                            source.indexOf(
+                                search,
+                                position
+                            );
+
+
+                        if (index === -1) {
+                            break;
+                        }
+
+
+                        matches.push({
+                            start: index,
+                            end: index + search.length
+                        });
+
+
+                        position =
+                            index +
+                            Math.max(search.length, 1);
+
+                    }
+
+
+                    if (matches.length) {
+
+                        currentMatch = 0;
+
+                        selectCurrentMatch();
+
+                    } else {
+
+                        findCount.textContent =
+                            "0/0";
+
+                    }
+
+                }
+
+
+                function selectCurrentMatch() {
+
+                    if (!matches.length) {
+
+                        findCount.textContent =
+                            "0/0";
+
+                        return;
+
+                    }
+
+
+                    const match =
+                        matches[currentMatch];
+
+
+                    editor.focus();
+
+
+                    editor.setSelectionRange(
+                        match.start,
+                        match.end
+                    );
+
+
+                    findCount.textContent =
+                        `${currentMatch + 1}/${matches.length}`;
+
+
+                    /*
+                     * Scroll the textarea so the selected
+                     * code is visible.
+                     */
+                    scrollTextareaToSelection();
+
+                }
+
+
+                function scrollTextareaToSelection() {
+
+                    const textBeforeSelection =
+                        editor.value.substring(
+                            0,
+                            editor.selectionStart
+                        );
+
+
+                    const lineNumber =
+                        textBeforeSelection
+                        .split("\n")
+                        .length;
+
+
+                    const lineHeight =
+                        parseFloat(
+                            getComputedStyle(editor)
+                            .lineHeight
+                        );
+
+
+                    editor.scrollTop =
+                        Math.max(
+                            0,
+                            (lineNumber - 4) *
+                            lineHeight
+                        );
+
+                }
+
+
+                function nextMatch() {
+
+                    if (!matches.length) {
+
+                        findAllMatches(
+                            findInput.value.trim()
+                        );
+
+                        return;
+
+                    }
+
+
+                    currentMatch =
+                        (currentMatch + 1) %
+                        matches.length;
+
+
+                    selectCurrentMatch();
+
+                }
+
+
+                function previousMatch() {
+
+                    if (!matches.length) {
+
+                        findAllMatches(
+                            findInput.value.trim()
+                        );
+
+                        if (matches.length) {
+
+                            currentMatch =
+                                matches.length - 1;
+
+                            selectCurrentMatch();
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    currentMatch =
+                        (
+                            currentMatch -
+                            1 +
+                            matches.length
+                        ) %
+                        matches.length;
+
+
+                    selectCurrentMatch();
+
+                }
+
+
+                function openFind() {
+
+                    findBar.classList.add(
+                        "open"
+                    );
+
+
+                    findInput.focus();
+
+
+                    findInput.select();
+
+
+                    findAllMatches(
+                        findInput.value.trim()
+                    );
+
+                }
+
+
+                function closeFind() {
+
+                    findBar.classList.remove(
+                        "open"
+                    );
+
+
+                    findInput.value =
+                        findInput.value;
+
+
+                    editor.focus();
+
+                }
+
+
+                findInput.addEventListener(
+                    "input",
+                    () => {
+
+                        findAllMatches(
+                            findInput.value.trim()
+                        );
+
+                    }
+                );
+
+
+                nextButton.addEventListener(
+                    "click",
+                    nextMatch
+                );
+
+
+                previousButton.addEventListener(
+                    "click",
+                    previousMatch
+                );
+
+
+                closeButton.addEventListener(
+                    "click",
+                    closeFind
+                );
+
+
+                findInput.addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (event.key === "Enter") {
+
+                            event.preventDefault();
+
+
+                            if (event.shiftKey) {
+
+                                previousMatch();
+
+                            } else {
+
+                                nextMatch();
+
+                            }
+
+                        }
+
+
+                        if (event.key === "Escape") {
+
+                            event.preventDefault();
+
+                            closeFind();
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                 * Ctrl + F works when the editor has focus.
+                 */
+                editor.addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (
+                            (event.ctrlKey ||
+                                event.metaKey) &&
+                            event.key.toLowerCase() === "f"
+                        ) {
+
+                            event.preventDefault();
+
+                            openFind();
+
+                        }
+
+
+                        if (
+                            event.key === "Escape" &&
+                            findBar.classList.contains("open")
+                        ) {
+
+                            closeFind();
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                 * Ctrl + F also works anywhere on the
+                 * current template page.
+                 */
+                document.addEventListener(
+                    "keydown",
+                    event => {
+
+                        if (!(
+                                event.ctrlKey ||
+                                event.metaKey
+                            ) ||
+                            event.key.toLowerCase() !== "f"
+                        ) {
+                            return;
+                        }
+
+
+                        const activePage =
+                            document.querySelector(
+                                ".page.active"
+                            );
+
+
+                        if (!activePage ||
+                            activePage.id === "home"
+                        ) {
+                            return;
+                        }
+
+
+                        const activeEditor =
+                            activePage.querySelector(
+                                ".code-editor"
+                            );
+
+
+                        if (activeEditor !== editor) {
+                            return;
+                        }
+
+
+                        event.preventDefault();
+
+                        openFind();
+
+                    }
+                );
+
+
+                /*
+                 * Load this template.
+                 */
+                loadTemplate();
+
+            });
+
+
+        /* =========================================================
+           INITIAL PAGE
+        ========================================================= */
+
+        const initialPage =
+            location.hash.substring(1);
+
+
+        if (
+            initialPage &&
+            document.getElementById(initialPage)
+        ) {
+
+            showPage(
+                initialPage,
+                false
+            );
+
+        }
+    </script>
+
+</body>
+
+</html>
