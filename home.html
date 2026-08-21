@@ -3,13 +3,55 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Template Library</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Email Studio — HTML Template Library</title>
     <style>
         /* =========================================================
-   GLOBAL
-========================================================= */
+     THEME / GLOBAL
+  ========================================================= */
+        
+         :root {
+            --bg: #0f172a;
+            --bg-glow-a: rgba(56, 189, 248, .14);
+            --bg-glow-b: rgba(99, 102, 241, .14);
+            --surface: rgba(255, 255, 255, .06);
+            --surface-strong: rgba(255, 255, 255, .09);
+            --border: rgba(255, 255, 255, .1);
+            --border-strong: rgba(255, 255, 255, .18);
+            --text: #e5e7eb;
+            --text-dim: #94a3b8;
+            --text-bright: #ffffff;
+            --accent: #38bdf8;
+            --accent-strong: #67d3ff;
+            --accent-ink: #082f49;
+            --good: #34d399;
+            --good-ink: #052e16;
+            --warn: #f59e0b;
+            --bad: #ef4444;
+            --code-bg: rgba(2, 6, 23, .75);
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --shadow: 0 20px 50px rgba(0, 0, 0, .25);
+        }
+        
+        html.light {
+            --bg: #f1f5f9;
+            --bg-glow-a: rgba(56, 189, 248, .10);
+            --bg-glow-b: rgba(99, 102, 241, .10);
+            --surface: rgba(15, 23, 42, .045);
+            --surface-strong: rgba(15, 23, 42, .07);
+            --border: rgba(15, 23, 42, .10);
+            --border-strong: rgba(15, 23, 42, .18);
+            --text: #1e293b;
+            --text-dim: #5b6b82;
+            --text-bright: #0f172a;
+            --accent: #0284c7;
+            --accent-strong: #0369a1;
+            --accent-ink: #f0f9ff;
+            --code-bg: #ffffff;
+            --shadow: 0 20px 50px rgba(15, 23, 42, .10);
+        }
         
         * {
             margin: 0;
@@ -24,8 +66,9 @@
         body {
             min-height: 100vh;
             font-family: Inter, "Segoe UI", Arial, sans-serif;
-            color: #e5e7eb;
-            background: radial-gradient(circle at 10% 10%, rgba(56, 189, 248, .14), transparent 30%), radial-gradient(circle at 90% 90%, rgba(99, 102, 241, .14), transparent 30%), #0f172a;
+            color: var(--text);
+            background: radial-gradient(circle at 10% 10%, var(--bg-glow-a), transparent 30%), radial-gradient(circle at 90% 90%, var(--bg-glow-b), transparent 30%), var(--bg);
+            transition: background .3s ease, color .3s ease;
         }
         
         button,
@@ -33,16 +76,34 @@
         textarea {
             font: inherit;
         }
+        
+        a {
+            color: inherit;
+        }
+        
+         ::selection {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
         /* =========================================================
-   NAVIGATION
-========================================================= */
+     NAVBAR
+  ========================================================= */
         
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, .1);
-            background: rgba(15, 23, 42, .82);
+            border-bottom: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 82%, transparent);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
         }
@@ -50,24 +111,102 @@
         .nav-container {
             width: 100%;
             max-width: 1400px;
-            min-height: 70px;
+            min-height: 68px;
             margin: auto;
-            padding: 0 25px;
+            padding: 10px 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 14px;
+        }
+        
+        .logo-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .logo {
-            color: #fff;
-            font-size: 21px;
+            color: var(--text-bright);
+            font-size: 20px;
             font-weight: 800;
             white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            background: none;
+            border: 0;
+            padding: 4px 2px;
         }
         
         .logo span {
-            color: #38bdf8;
+            color: var(--accent);
+        }
+        
+        .logo-popup {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            min-width: 190px;
+            background: #111827;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .5);
+        }
+        
+        .logo-popup.open {
+            display: block;
+        }
+        
+        .logo-popup button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 11px 12px;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        
+        .logo-popup button:hover {
+            background: rgba(255, 255, 255, .08);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .icon-btn {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            transition: .2s ease;
+            flex-shrink: 0;
+        }
+        
+        .icon-btn:hover {
+            background: var(--surface-strong);
+            border-color: var(--border-strong);
+        }
+        
+        .hamburger {
+            display: none;
         }
         
         .nav-links {
@@ -80,47 +219,60 @@
         .nav-button {
             border: 1px solid transparent;
             background: transparent;
-            color: #cbd5e1;
+            color: var(--text-dim);
             padding: 9px 13px;
             border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13.5px;
+            font-weight: 700;
             cursor: pointer;
-            transition: .25s ease;
+            transition: .2s ease;
+            white-space: nowrap;
         }
         
         .nav-button:hover,
         .nav-button.active {
-            color: #fff;
-            background: rgba(255, 255, 255, .08);
-            border-color: rgba(255, 255, 255, .1);
+            color: var(--text-bright);
+            background: var(--surface-strong);
+            border-color: var(--border);
         }
         /* =========================================================
-   PAGE SYSTEM
-========================================================= */
+     PAGES
+  ========================================================= */
         
         .page {
             display: none;
-            min-height: calc(100vh - 70px);
+            min-height: calc(100vh - 68px);
         }
         
         .page.active {
             display: block;
+            animation: fadeIn .35s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         /* =========================================================
-   HOME
-========================================================= */
+     HOME
+  ========================================================= */
         
         .home-container {
             width: 100%;
             max-width: 1300px;
             margin: auto;
-            padding: 70px 25px;
+            padding: clamp(36px, 6vw, 70px) 22px;
         }
         
         .hero {
             max-width: 850px;
-            margin: 0 auto 55px;
+            margin: 0 auto 46px;
             text-align: center;
         }
         
@@ -129,190 +281,293 @@
             padding: 7px 14px;
             margin-bottom: 18px;
             border-radius: 999px;
-            color: #7dd3fc;
+            color: var(--accent);
             background: rgba(56, 189, 248, .1);
-            border: 1px solid rgba(56, 189, 248, .25);
-            font-size: 12px;
+            border: 1px solid rgba(56, 189, 248, .28);
+            font-size: 11.5px;
             font-weight: 800;
-            letter-spacing: .5px;
+            letter-spacing: .6px;
         }
         
         .hero h1 {
-            color: #fff;
-            font-size: clamp(40px, 6vw, 68px);
-            line-height: 1.05;
-            margin-bottom: 20px;
+            color: var(--text-bright);
+            font-size: clamp(32px, 6vw, 60px);
+            line-height: 1.08;
+            margin-bottom: 16px;
         }
         
         .hero h1 span {
-            color: #38bdf8;
+            color: var(--accent);
         }
         
         .hero p {
-            color: #94a3b8;
-            font-size: 17px;
+            color: var(--text-dim);
+            font-size: 16px;
             line-height: 1.75;
         }
-        /* =========================================================
-   HOME TEMPLATE CARDS
-========================================================= */
+        
+        .stat-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 26px;
+        }
+        
+        .stat-chip {
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        
+        .stat-chip b {
+            color: var(--text-bright);
+        }
         
         .template-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 22px;
+            gap: 20px;
         }
         
         .template-card {
-            padding: 26px;
-            border-radius: 22px;
-            border: 1px solid rgba(255, 255, 255, .1);
-            background: rgba(255, 255, 255, .06);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            background: var(--surface);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
-            transition: .3s ease;
+            box-shadow: var(--shadow);
+            transition: .25s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         .template-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, .35);
-            box-shadow: 0 28px 60px rgba(0, 0, 0, .35);
+            border-color: rgba(56, 189, 248, .4);
         }
         
         .template-number {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             display: grid;
             place-items: center;
-            margin-bottom: 18px;
-            border-radius: 13px;
-            color: #7dd3fc;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            color: var(--accent);
             background: rgba(56, 189, 248, .12);
             font-weight: 800;
+            font-size: 14px;
         }
         
         .template-card h2 {
-            color: #fff;
-            font-size: 22px;
-            margin-bottom: 9px;
+            color: var(--text-bright);
+            font-size: 21px;
+            margin-bottom: 8px;
         }
         
         .template-card p {
-            color: #94a3b8;
-            line-height: 1.65;
-            margin-bottom: 22px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
         }
         
         .open-template {
             width: 100%;
             border: 0;
-            padding: 13px 18px;
+            padding: 12px 18px;
             border-radius: 12px;
-            color: #082f49;
-            background: #38bdf8;
+            color: var(--accent-ink);
+            background: var(--accent);
             font-weight: 800;
             cursor: pointer;
-            transition: .25s ease;
+            transition: .2s ease;
+            font-size: 14px;
         }
         
         .open-template:hover {
-            background: #67d3ff;
+            background: var(--accent-strong);
             transform: translateY(-2px);
         }
         /* =========================================================
-   EDITOR PAGE
-========================================================= */
+     EDITOR PAGE
+  ========================================================= */
         
         .editor-container {
             width: 100%;
-            max-width: 1450px;
+            max-width: 1500px;
             margin: auto;
-            padding: 40px 25px;
+            padding: clamp(24px, 4vw, 40px) 22px;
         }
         
         .editor-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 25px;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
         .page-title h1 {
-            color: #fff;
-            font-size: clamp(28px, 4vw, 42px);
-            margin-bottom: 8px;
+            color: var(--text-bright);
+            font-size: clamp(24px, 4vw, 38px);
+            margin-bottom: 6px;
         }
         
         .page-title p {
-            color: #94a3b8;
+            color: var(--text-dim);
             line-height: 1.6;
+            font-size: 14px;
         }
         
         .back-button {
-            border: 1px solid rgba(255, 255, 255, .12);
-            background: rgba(255, 255, 255, .07);
-            color: #e2e8f0;
-            padding: 11px 16px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            padding: 10px 15px;
             border-radius: 11px;
             cursor: pointer;
-            transition: .25s ease;
+            transition: .2s ease;
+            font-size: 13.5px;
+            font-weight: 700;
         }
         
         .back-button:hover {
-            background: rgba(255, 255, 255, .12);
+            background: var(--surface-strong);
             transform: translateX(-2px);
         }
-        /* =========================================================
-   EDITOR CARD
-========================================================= */
         
         .editor-card {
-            width: 100%;
-            padding: 26px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, .12);
-            background: rgba(255, 255, 255, .07);
+            padding: 22px;
+            border-radius: 22px;
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, .3);
+            box-shadow: var(--shadow);
         }
         
-        .note {
-            padding: 15px 17px;
-            margin-bottom: 23px;
-            border-left: 4px solid #38bdf8;
-            border-radius: 12px;
-            color: #cbd5e1;
-            background: rgba(255, 255, 255, .06);
-            line-height: 1.6;
+        .template-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding: 13px 15px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border-strong);
+            border-left: 4px solid var(--accent);
+            border-radius: 15px;
+            background: var(--surface-strong);
         }
-        /* =========================================================
-   EDITOR / PREVIEW
-========================================================= */
+        
+        .template-actions-title {
+            font-size: 13.5px;
+            color: var(--text);
+        }
+        
+        .template-actions-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .template-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-strong);
+            background: var(--surface-strong);
+            color: var(--text);
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 12.5px;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+        
+        .template-action-btn:hover {
+            transform: translateY(-2px);
+            background: var(--surface-strong);
+            border-color: var(--accent);
+        }
+        
+        .template-action-btn.success {
+            background: rgba(52, 211, 153, .15);
+            border-color: rgba(52, 211, 153, .4);
+            color: #34d399;
+        }
+        
+        .editor-status {
+            display: none;
+            padding: 11px 13px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            color: var(--warn);
+            background: rgba(245, 158, 11, .08);
+            border: 1px solid rgba(245, 158, 11, .2);
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
+        
+        .editor-status.show {
+            display: block;
+        }
+        
+        .editor-status.error {
+            color: #fca5a5;
+            background: rgba(239, 68, 68, .08);
+            border-color: rgba(239, 68, 68, .2);
+        }
+        
+        .editor-status.info {
+            color: var(--accent);
+            background: rgba(56, 189, 248, .08);
+            border-color: rgba(56, 189, 248, .2);
+        }
         
         .editor-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 22px;
+            gap: 18px;
         }
         
         .editor-panel {
             display: flex;
             flex-direction: column;
-            gap: 11px;
+            gap: 10px;
             min-width: 0;
         }
         
-        .panel-label {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
+        .panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        /* =========================================================
-   CODE AREA
-========================================================= */
+        
+        .panel-label {
+            color: var(--text-bright);
+            font-size: 13.5px;
+            font-weight: 800;
+        }
+        
+        .panel-meta {
+            color: var(--text-dim);
+            font-size: 11.5px;
+            font-family: "Cascadia Code", Consolas, monospace;
+        }
         
         .code-area {
             position: relative;
@@ -321,46 +576,38 @@
         
         .code-editor {
             width: 100%;
-            height: 520px;
+            height: 480px;
             resize: vertical;
-            padding: 18px;
+            padding: 16px;
             outline: none;
-            border: 1px solid rgba(255, 255, 255, .1);
-            border-radius: 17px;
-            background: rgba(2, 6, 23, .75);
-            color: #e2e8f0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--code-bg);
+            color: var(--text);
             font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-            font-size: 14px;
-            line-height: 1.65;
-            tab-size: 4;
+            font-size: 13.5px;
+            line-height: 1.6;
+            tab-size: 2;
         }
         
         .code-editor:focus {
-            border-color: rgba(56, 189, 248, .5);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, .1);
+            border-color: rgba(56, 189, 248, .55);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, .12);
         }
-        
-        .code-editor::selection {
-            background: #2563eb;
-            color: #fff;
-        }
-        /* =========================================================
-   VSCODE-LIKE FIND BAR
-========================================================= */
         
         .find-bar {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 10px;
+            right: 10px;
             z-index: 20;
-            width: min(470px, calc(100% - 24px));
+            width: min(430px, calc(100% - 20px));
             display: none;
             align-items: center;
             gap: 5px;
-            padding: 7px;
-            border: 1px solid rgba(255, 255, 255, .14);
+            padding: 6px;
+            border: 1px solid var(--border-strong);
             border-radius: 10px;
-            background: rgba(15, 23, 42, .97);
+            background: #0b1120;
             box-shadow: 0 12px 35px rgba(0, 0, 0, .5);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -373,37 +620,33 @@
         .find-input {
             min-width: 0;
             flex: 1;
-            height: 34px;
-            padding: 0 10px;
-            border: 1px solid rgba(255, 255, 255, .1);
+            height: 32px;
+            padding: 0 9px;
+            border: 1px solid var(--border);
             border-radius: 6px;
             outline: none;
             color: #e2e8f0;
             background: #020617;
-            font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
-            font-size: 13px;
+            font-family: Consolas, monospace;
+            font-size: 12.5px;
         }
         
         .find-input:focus {
             border-color: rgba(56, 189, 248, .55);
         }
         
-        .find-input::placeholder {
-            color: #64748b;
-        }
-        
         .find-count {
-            min-width: 65px;
+            min-width: 58px;
             color: #94a3b8;
             font-family: Consolas, monospace;
-            font-size: 12px;
+            font-size: 11.5px;
             text-align: center;
             white-space: nowrap;
         }
         
         .find-button {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             display: grid;
             place-items: center;
             border: 0;
@@ -418,41 +661,116 @@
             color: #fff;
             background: rgba(255, 255, 255, .1);
         }
-        /* =========================================================
-   COPY
-========================================================= */
         
-        .copy-button {
-            align-self: flex-start;
-            border: 0;
-            padding: 13px 22px;
-            border-radius: 12px;
-            color: #082f49;
-            background: #38bdf8;
-            font-weight: 800;
-            cursor: pointer;
-            transition: .25s ease;
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
-        .copy-button:hover {
-            background: #67d3ff;
+        .btn {
+            border: 0;
+            padding: 11px 16px;
+            border-radius: 11px;
+            font-weight: 800;
+            font-size: 12.5px;
+            cursor: pointer;
+            transition: .2s ease;
+            color: var(--accent-ink);
+            background: var(--accent);
+        }
+        
+        .btn:hover {
+            background: var(--accent-strong);
             transform: translateY(-2px);
         }
         
-        .copy-button.copied {
-            color: #052e16;
-            background: #34d399;
+        .btn.copied {
+            color: var(--good-ink);
+            background: var(--good);
         }
-        /* =========================================================
-   PREVIEW
-========================================================= */
+        
+        .btn.ghost {
+            background: var(--surface-strong);
+            color: var(--text);
+            border: 1px solid var(--border-strong);
+        }
+        
+        .btn.ghost:hover {
+            border-color: var(--accent);
+        }
+        
+        .btn.gmail {
+            background: #ea4335;
+            color: #fff;
+        }
+        
+        .btn.outlook {
+            background: #0078d4;
+            color: #fff;
+        }
+        
+        .btn[disabled] {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .device-toggle {
+            display: flex;
+            gap: 4px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 3px;
+            background: var(--surface);
+        }
+        
+        .device-btn {
+            border: 0;
+            background: transparent;
+            color: var(--text-dim);
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+        
+        .device-btn.active {
+            background: var(--accent);
+            color: var(--accent-ink);
+        }
+        
+        .preview-wrap {
+            height: 480px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            overflow: auto;
+            border-radius: 16px;
+            background: #20242c;
+            border: 1px solid var(--border);
+            padding: 12px;
+        }
         
         .preview-container {
-            height: 520px;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
             overflow: hidden;
-            border-radius: 17px;
+            border-radius: 12px;
             background: #fff;
-            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            transition: max-width .25s ease;
+        }
+        
+        .preview-container[data-device="tablet"] {
+            max-width: 520px;
+        }
+        
+        .preview-container[data-device="mobile"] {
+            max-width: 340px;
         }
         
         .preview-frame {
@@ -463,84 +781,157 @@
             background: #fff;
         }
         /* =========================================================
-   LOADING / ERROR
-========================================================= */
+     TOASTS
+  ========================================================= */
         
-        .editor-status {
-            display: none;
+        .toast-stack {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: min(320px, calc(100vw - 32px));
+        }
+        
+        .toast {
             padding: 12px 14px;
-            margin-bottom: 16px;
-            border-radius: 10px;
-            color: #fbbf24;
-            background: rgba(245, 158, 11, .08);
-            border: 1px solid rgba(245, 158, 11, .18);
+            border-radius: 12px;
+            background: #111827;
+            color: #fff;
             font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, .4);
+            border: 1px solid rgba(255, 255, 255, .1);
+            animation: toastIn .25s ease, toastOut .25s ease 2.4s forwards;
         }
         
-        .editor-status.show {
-            display: block;
+        .toast.error {
+            border-color: rgba(239, 68, 68, .4);
+            background: #1f1315;
         }
         
-        .editor-status.error {
-            color: #fca5a5;
-            background: rgba(239, 68, 68, .08);
-            border-color: rgba(239, 68, 68, .2);
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes toastOut {
+            to {
+                opacity: 0;
+                transform: translateY(8px);
+            }
         }
         /* =========================================================
-   RESPONSIVE
-========================================================= */
+     RESPONSIVE
+  ========================================================= */
         
-        @media(max-width:900px) {
-            .template-grid,
+        @media (max-width:1000px) {
             .editor-grid {
                 grid-template-columns: 1fr;
             }
             .code-editor,
-            .preview-container {
-                height: 380px;
+            .preview-wrap {
+                height: 400px;
             }
         }
         
-        @media(max-width:600px) {
-            .nav-container {
-                padding: 10px 16px;
-                align-items: flex-start;
-                flex-direction: column;
+        @media (max-width:900px) {
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width:780px) {
+            .hamburger {
+                display: grid;
             }
             .nav-links {
-                width: 100%;
-                overflow-x: auto;
-                flex-wrap: nowrap;
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                z-index: 900;
+                flex-direction: column;
+                align-items: stretch;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                padding: 10px 14px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height .25s ease, padding .25s ease;
+            }
+            .nav-links.open {
+                max-height: 400px;
+                padding: 10px 14px 16px;
             }
             .nav-button {
-                flex-shrink: 0;
+                width: 100%;
+                text-align: left;
+                padding: 12px 14px;
+            }
+        }
+        
+        @media (max-width:640px) {
+            .nav-container {
+                padding: 10px 16px;
             }
             .home-container,
             .editor-container {
-                padding: 40px 16px;
+                padding: 34px 16px;
             }
             .editor-header {
-                align-items: flex-start;
                 flex-direction: column;
+                align-items: stretch;
+            }
+            .back-button {
+                width: 100%;
+                text-align: center;
             }
             .editor-card {
-                padding: 18px;
-                border-radius: 19px;
+                padding: 16px;
+                border-radius: 18px;
+            }
+            .template-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .template-actions-buttons {
+                justify-content: stretch;
+            }
+            .template-action-btn {
+                flex: 1 1 0;
+                justify-content: center;
             }
             .code-editor,
-            .preview-container {
+            .preview-wrap {
                 height: 320px;
             }
-            .copy-button {
-                width: 100%;
+            .editor-toolbar .btn {
+                flex: 1 1 auto;
             }
             .find-bar {
                 width: calc(100% - 16px);
                 top: 8px;
                 right: 8px;
             }
-            .find-count {
-                min-width: 50px;
+        }
+        
+        @media (max-width:380px) {
+            .template-action-btn {
+                font-size: 11px;
+                padding: 8px 8px;
+            }
+            .btn {
+                font-size: 11px;
+                padding: 10px 10px;
             }
         }
     </style>
@@ -548,1497 +939,760 @@
 
 <body>
 
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
     <!-- =========================================================
      NAVIGATION
 ========================================================= -->
     <nav class="navbar">
-
         <div class="nav-container">
 
-            <div id="emailStudioLogo" class="logo" style="cursor:pointer; position:relative; user-select:none;">
-                Email <span>Studio</span>
-
-                <div id="emailStudioPopup" style="
-        display:none;
-        position:fixed;
-        z-index:999999;
-        background:#1e1e1e;
-        color:white;
-        border:1px solid #555;
-        border-radius:12px;
-        padding:6px;
-        width:210px;
-        box-shadow:0 10px 30px rgba(0,0,0,.5);
-        font-family:Arial,sans-serif;
-    ">
-                    <button type="button" id="copyTempBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
-            Copy
-        </button>
-
-                    <button type="button" id="shareTempBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
-            Share
-        </button>
-
-                    <button type="button" id="sameTabBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
-            Open 
-        </button>
-
-                    <button type="button" id="newTabBtn" style="display:block;width:100%;padding:12px;border:0;background:transparent;color:white;text-align:left;font-size:15px;cursor:pointer;border-radius:8px;">
-            ↗ Open 
-        </button>
+            <div class="logo-wrap">
+                <button type="button" class="logo" id="logoBtn">Email <span>Studio</span></button>
+                <div class="logo-popup" id="logoPopup">
+                    <button type="button" id="copyLinkBtn">Copy link</button>
+                    <button type="button" id="shareBtn">Share</button>
+                    <button type="button" id="newTabBtn">↗ Open in new tab</button>
                 </div>
             </div>
 
-            <script>
-                (function() {
-                    const logo = document.getElementById("emailStudioLogo");
-                    const popup = document.getElementById("emailStudioPopup");
+            <button type="button" class="hamburger icon-btn" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-                    if (!logo || !popup) return;
+            <div class="nav-links" id="navLinks">
+                <button class="nav-button active" data-page="home">Home</button>
+                <button class="nav-button" data-page="template1">Blank</button>
+                <button class="nav-button" data-page="template2">Current</button>
+                <button class="nav-button" data-page="template3">Current + Footer</button>
+                <button class="nav-button" data-page="template4">Full</button>
+            </div>
 
-                    const tempURL = new URL("./Temp.html", window.location.href).href;
-
-                    let lastTap = 0;
-
-                    function showPopup(x, y) {
-                        popup.style.display = "block";
-
-                        let left = x;
-                        let top = y;
-
-                        if (left + 210 > window.innerWidth) {
-                            left = window.innerWidth - 220;
-                        }
-
-                        if (top + 190 > window.innerHeight) {
-                            top = window.innerHeight - 200;
-                        }
-
-                        popup.style.left = Math.max(10, left) + "px";
-                        popup.style.top = Math.max(10, top) + "px";
-                    }
-
-                    function hidePopup() {
-                        popup.style.display = "none";
-                    }
-
-                    function doubleTap(x, y) {
-                        showPopup(x, y);
-                    }
-
-                    /* DESKTOP DOUBLE CLICK */
-                    logo.addEventListener("dblclick", function(event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-
-                        doubleTap(event.clientX, event.clientY);
-                    });
-
-                    /* MOBILE DOUBLE TAP */
-                    logo.addEventListener("touchend", function(event) {
-                        event.preventDefault();
-
-                        const now = Date.now();
-
-                        if (now - lastTap < 500) {
-                            const touch = event.changedTouches[0];
-                            doubleTap(touch.clientX, touch.clientY);
-                            lastTap = 0;
-                        } else {
-                            lastTap = now;
-                        }
-                    }, {
-                        passive: false
-                    });
-
-                    /* COPY */
-                    document.getElementById("copyTempBtn").addEventListener("click", async function() {
-                        try {
-                            await navigator.clipboard.writeText(tempURL);
-                        } catch (e) {
-                            const textarea = document.createElement("textarea");
-                            textarea.value = tempURL;
-                            document.body.appendChild(textarea);
-                            textarea.select();
-                            document.execCommand("copy");
-                            textarea.remove();
-                        }
-
-                        hidePopup();
-                    });
-
-                    /* SHARE */
-                    document.getElementById("shareTempBtn").addEventListener("click", async function() {
-                        if (navigator.share) {
-                            try {
-                                await navigator.share({
-                                    title: "EMAIL Studio",
-                                    url: tempURL
-                                });
-                            } catch (e) {}
-                        } else {
-                            try {
-                                await navigator.clipboard.writeText(tempURL);
-                                alert("Link copied!");
-                            } catch (e) {
-                                alert(tempURL);
-                            }
-                        }
-
-                        hidePopup();
-                    });
-
-                    /* SAME TAB */
-                    document.getElementById("sameTabBtn").addEventListener("click", function() {
-                        window.location.href = tempURL;
-                    });
-
-                    /* NEW TAB */
-                    document.getElementById("newTabBtn").addEventListener("click", function() {
-                        window.open(tempURL, "_blank");
-                        hidePopup();
-                    });
-
-                    /* CLOSE WHEN CLICKING OUTSIDE */
-                    document.addEventListener("click", function(event) {
-                        if (!popup.contains(event.target) && !logo.contains(event.target)) {
-                            hidePopup();
-                        }
-                    });
-
-                    /* CLOSE WITH ESC */
-                    document.addEventListener("keydown", function(event) {
-                        if (event.key === "Escape") {
-                            hidePopup();
-                        }
-                    });
-                })();
-            </script>
-            <div class="nav-links">
-
-                <button class="nav-button active" data-page="home">
-                Home
-            </button>
-
-                <button class="nav-button" data-page="template1">
-               BLANK
-            </button>
-
-                <button class="nav-button" data-page="template2">
-                CURRENT
-            </button>
-
-                <button class="nav-button" data-page="template3">
-                CURRENT WITH FOOTER
-            </button>
-
-                <button class="nav-button" data-page="template4">
-                FULL
-            </button>
-
+            <div class="nav-right">
+                <button type="button" class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark theme">◐</button>
             </div>
 
         </div>
-
     </nav>
-
 
     <!-- =========================================================
      HOME PAGE
 ========================================================= -->
     <section id="home" class="page active">
-
         <main class="home-container">
-
             <div class="hero">
-
-                <div class="hero-badge">
-                    HTML TEMPLATE LIBRARY
+                <div class="hero-badge">HTML TEMPLATE LIBRARY</div>
+                <h1>Your Email Templates,<br><span>Organized.</span></h1>
+                <p>Pick a starter template, edit the HTML on the left, and watch the live preview update on the right. Everything autosaves in your browser — nothing leaves your device.</p>
+                <div class="stat-row">
+                    <div class="stat-chip"><b>4</b> starter templates</div>
+                    <div class="stat-chip"><b>Live</b> preview</div>
+                    <div class="stat-chip"><b>Auto</b>-saved locally</div>
                 </div>
-
-                <h1>
-                    Your HTML Templates,
-                    <span>Organized.</span>
-                </h1>
-
-                <p>
-                    Select a template to open its dedicated editor. Each template is stored as a separate code snippet while the complete application remains in this file.
-                </p>
-
             </div>
-
 
             <div class="template-grid">
-
-                <!-- TEMPLATE 1 -->
                 <article class="template-card">
-
-                    <div class="template-number">
-                        01
-                    </div>
-
-                    <h2>
-                        BLANK
-                    </h2>
-
-                    <p>
-                        Open and edit your BLANK HTML template.
-                    </p>
-
-                    <button class="open-template" data-page="template1">
-                    Open Template
-                </button>
-
+                    <div class="template-number">01</div>
+                    <h2>Blank</h2>
+                    <p>A clean, minimal starting point — a single content block ready for your copy.</p>
+                    <button class="open-template" data-page="template1">Open Template</button>
                 </article>
 
-
-                <!-- TEMPLATE 2 -->
                 <article class="template-card">
-
-                    <div class="template-number">
-                        02
-                    </div>
-
-                    <h2>
-                        CURRENT
-                    </h2>
-
-                    <p>
-                        Open and edit your CURRENT standalone HTML template.
-                    </p>
-
-                    <button class="open-template" data-page="template2">
-                    Open Template
-                </button>
-
+                    <div class="template-number">02</div>
+                    <h2>Current</h2>
+                    <p>A simple promotional layout with a header, hero message, and a call-to-action button.</p>
+                    <button class="open-template" data-page="template2">Open Template</button>
                 </article>
 
-
-                <!-- TEMPLATE 3 -->
                 <article class="template-card">
-
-                    <div class="template-number">
-                        03
-                    </div>
-
-                    <h2>
-                        CURRENT WITH FOOTER
-                    </h2>
-
-                    <p>
-                        Open and edit your CURRENT WITH FOOTER standalone HTML template.
-                    </p>
-
-                    <button class="open-template" data-page="template3">
-                    Open Template
-                </button>
-
+                    <div class="template-number">03</div>
+                    <h2>Current + Footer</h2>
+                    <p>The Current layout plus a footer with contact info and an unsubscribe line.</p>
+                    <button class="open-template" data-page="template3">Open Template</button>
                 </article>
 
-
-                <!-- TEMPLATE 4 -->
                 <article class="template-card">
-
-                    <div class="template-number">
-                        04
-                    </div>
-
-                    <h2>
-                        FULL
-                    </h2>
-
-                    <p>
-                        Open and edit your FULL standalone HTML template.
-                    </p>
-
-                    <button class="open-template" data-page="template4">
-                    Open Template
-                </button>
-
+                    <div class="template-number">04</div>
+                    <h2>Full</h2>
+                    <p>A complete layout — header, hero, feature columns, testimonial, and footer.</p>
+                    <button class="open-template" data-page="template4">Open Template</button>
                 </article>
-
-
             </div>
-
         </main>
-
     </section>
 
-
     <!-- =========================================================
-     TEMPLATE 1 PAGE
-
-     IMPORTANT:
-     The actual code is NOT stored here.
-
-     It is loaded from:
-     codebase/template1.txt
+     EDITOR PAGE TEMPLATE (repeated for 4 templates)
 ========================================================= -->
-    <section id="template1" class="page">
-
+    <section id="template1" class="page" data-title="Blank" data-desc="A minimal single-block starting point.">
         <main class="editor-container">
-
             <div class="editor-header">
-
                 <div class="page-title">
-
-                    <h1>
-                        BLANK
-                    </h1>
-
-                    <p>
-                        Complete standalone HTML/CSS/JavaScript template.
-                    </p>
-
-                </div>
-
-                <button class="back-button" data-page="home">
-                ← Back to Home
-            </button>
-
-            </div>
-
-
+                    <h1>Blank</h1>
+                    <p>A minimal single-block starting point.</p>
+                </div><button class="back-button" data-page="home">← Back to Home</button></div>
             <div class="editor-card">
-
-                <div class="note">
-                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                <div class="template-actions">
+                    <div class="template-actions-title"><strong>Template Actions</strong></div>
+                    <div class="template-actions-buttons">
+                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                        <a href="https://chatgpt.com/c/6a881222-54a8-83e8-8080-e36a914b79d5" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
+                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
+                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    </div>
                 </div>
-
-                <div class="editor-status" data-status="template1">
-                    Loading template...
-                </div>
-
-
+                <div class="editor-status" data-status></div>
                 <div class="editor-grid">
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Input Editor
-                        </div>
-
-
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
-
                             <div class="find-bar">
-
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
-
-                                <span class="find-count">
-                                0/0
-                            </span>
-
-                                <button type="button" class="find-button find-prev" title="Previous match">
-                                ↑
-                            </button>
-
-                                <button type="button" class="find-button find-next" title="Next match">
-                                ↓
-                            </button>
-
-                                <button type="button" class="find-button find-close" title="Close">
-                                ×
-                            </button>
-
+                                <span class="find-count">0/0</span>
+                                <button type="button" class="find-button find-prev" title="Previous match">↑</button>
+                                <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-
-
                             <textarea class="code-editor" data-template="codebase/template1.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-
                         </div>
-
-
-                        <button class="copy-button">
-                        Copy HTML
-                    </button>
-
+                        <div class="editor-toolbar">
+                            <button class="btn copy-button">Copy HTML</button>
+                            <button class="btn ghost download-button">⬇ Download</button>
+                            <button class="btn gmail" disabled>Gmail</button>
+                            <button class="btn outlook" disabled>Outlook</button>
+                        </div>
                     </div>
-
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Output Viewer
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="device-toggle">
+                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            </div>
                         </div>
-
-                        <div class="preview-container">
-
-                            <iframe class="preview-frame" title="Template 1 Preview">
-                        </iframe>
-
+                        <div class="preview-wrap">
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Blank preview"></iframe></div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </main>
-
     </section>
 
-
-    <!-- =========================================================
-     TEMPLATE 2 PAGE
-========================================================= -->
-    <section id="template2" class="page">
-
+    <section id="template2" class="page" data-title="Current" data-desc="A promotional layout with header, hero, and CTA.">
         <main class="editor-container">
-
             <div class="editor-header">
-
                 <div class="page-title">
-
-                    <h1>
-                        CURRENT
-                    </h1>
-
-                    <p>
-                        Complete standalone HTML/CSS/JavaScript template.
-                    </p>
-
-                </div>
-
-                <button class="back-button" data-page="home">
-                ← Back to Home
-            </button>
-
-            </div>
-
-
+                    <h1>Current</h1>
+                    <p>A promotional layout with header, hero, and CTA.</p>
+                </div><button class="back-button" data-page="home">← Back to Home</button></div>
             <div class="editor-card">
-
-                <div class="note">
-                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                <div class="template-actions">
+                    <div class="template-actions-title"><strong>Template Actions</strong></div>
+                    <div class="template-actions-buttons">
+                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                        <a href="https://chatgpt.com/c/6a881222-54a8-83e8-8080-e36a914b79d5" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
+                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
+                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    </div>
                 </div>
-
-                <div class="editor-status" data-status="template2">
-                    Loading template...
-                </div>
-
-
+                <div class="editor-status" data-status></div>
                 <div class="editor-grid">
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Input Editor
-                        </div>
-
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
-
                             <div class="find-bar">
-
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
-
-                                <span class="find-count">
-                                0/0
-                            </span>
-
-                                <button type="button" class="find-button find-prev" title="Previous match">
-                                ↑
-                            </button>
-
-                                <button type="button" class="find-button find-next" title="Next match">
-                                ↓
-                            </button>
-
-                                <button type="button" class="find-button find-close" title="Close">
-                                ×
-                            </button>
-
+                                <span class="find-count">0/0</span>
+                                <button type="button" class="find-button find-prev" title="Previous match">↑</button>
+                                <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-
                             <textarea class="code-editor" data-template=" CURENT.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-
                         </div>
-
-                        <button class="copy-button">
-                        Copy HTML
-                    </button>
-
+                        <div class="editor-toolbar">
+                            <button class="btn copy-button">Copy HTML</button>
+                            <button class="btn ghost download-button">⬇ Download</button>
+                            <button class="btn gmail" disabled>Gmail</button>
+                            <button class="btn outlook" disabled>Outlook</button>
+                        </div>
                     </div>
-
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Output Viewer
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="device-toggle">
+                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            </div>
                         </div>
-
-                        <div class="preview-container">
-
-                            <iframe class="preview-frame" title="Template 2 Preview">
-                        </iframe>
-
+                        <div class="preview-wrap">
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Current preview"></iframe></div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </main>
-
     </section>
 
-
-    <!-- =========================================================
-     TEMPLATE 3 PAGE
-========================================================= -->
-    <section id="template3" class="page">
-
+    <section id="template3" class="page" data-title="Current + Footer" data-desc="The Current layout with a contact footer.">
         <main class="editor-container">
-
             <div class="editor-header">
-
                 <div class="page-title">
-
-                    <h1>
-                        CURRENT WITH FOOTER
-                    </h1>
-
-                    <p>
-                        Complete standalone HTML/CSS/JavaScript template.
-                    </p>
-
-                </div>
-
-                <button class="back-button" data-page="home">
-                ← Back to Home
-            </button>
-
-            </div>
-
-
+                    <h1>Current + Footer</h1>
+                    <p>The Current layout with a contact footer.</p>
+                </div><button class="back-button" data-page="home">← Back to Home</button></div>
             <div class="editor-card">
-
-                <div class="note">
-                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
+                <div class="template-actions">
+                    <div class="template-actions-title"><strong>Template Actions</strong></div>
+                    <div class="template-actions-buttons">
+                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                        <a href="https://chatgpt.com/c/6a881222-54a8-83e8-8080-e36a914b79d5" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
+                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
+                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    </div>
                 </div>
-
-                <div class="editor-status" data-status="template3">
-                    Loading template...
-                </div>
-
-
+                <div class="editor-status" data-status></div>
                 <div class="editor-grid">
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Input Editor
-                        </div>
-
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
-
                             <div class="find-bar">
-
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
-
-                                <span class="find-count">
-                                0/0
-                            </span>
-
-                                <button type="button" class="find-button find-prev" title="Previous match">
-                                ↑
-                            </button>
-
-                                <button type="button" class="find-button find-next" title="Next match">
-                                ↓
-                            </button>
-
-                                <button type="button" class="find-button find-close" title="Close">
-                                ×
-                            </button>
-
+                                <span class="find-count">0/0</span>
+                                <button type="button" class="find-button find-prev" title="Previous match">↑</button>
+                                <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-
                             <textarea class="code-editor" data-template="cur with fot.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-
                         </div>
-
-                        <button class="copy-button">
-                        Copy HTML
-                    </button>
-
+                        <div class="editor-toolbar">
+                            <button class="btn copy-button">Copy HTML</button>
+                            <button class="btn ghost download-button">⬇ Download</button>
+                            <button class="btn gmail" disabled>Gmail</button>
+                            <button class="btn outlook" disabled>Outlook</button>
+                        </div>
                     </div>
-
-
                     <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Output Viewer
-                        </div>
-
-                        <div class="preview-container">
-
-                            <iframe class="preview-frame" title="Template 3 Preview">
-                        </iframe>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </main>
-
-    </section>
-
-
-    <!-- =========================================================
-     TEMPLATE 4 PAGE
-========================================================= -->
-    <section id="template4" class="page">
-
-        <main class="editor-container">
-
-            <div class="editor-header">
-
-                <div class="page-title">
-
-                    <h1>
-                        FULL
-                    </h1>
-
-                    <p>
-                        Complete standalone HTML/CSS/JavaScript template.
-                    </p>
-
-                </div>
-
-                <button class="back-button" data-page="home">
-                ← Back to Home
-            </button>
-
-            </div>
-
-
-            <div class="editor-card">
-
-                <div class="note">
-                    <strong>Note:</strong> Edit the complete HTML template below. Press <strong>Ctrl + F</strong> to search through the entire code.
-                </div>
-
-                <div class="editor-status" data-status="template4">
-                    Loading template...
-                </div>
-
-
-                <div class="editor-grid">
-
-                    <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Input Editor
-                        </div>
-
-                        <div class="code-area">
-
-                            <div class="find-bar">
-
-                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
-
-                                <span class="find-count">
-                                0/0
-                            </span>
-
-                                <button type="button" class="find-button find-prev" title="Previous match">
-                                ↑
-                            </button>
-
-                                <button type="button" class="find-button find-next" title="Next match">
-                                ↓
-                            </button>
-
-                                <button type="button" class="find-button find-close" title="Close">
-                                ×
-                            </button>
-
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="device-toggle">
+                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
                             </div>
-
-                            <textarea class="code-editor" data-template="full.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-
                         </div>
-
-                        <button class="copy-button">
-                        Copy HTML
-                    </button>
-
+                        <div class="preview-wrap">
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Current + Footer preview"></iframe></div>
+                        </div>
                     </div>
-
-
-                    <div class="editor-panel">
-
-                        <div class="panel-label">
-                            HTML Output Viewer
-                        </div>
-
-                        <div class="preview-container">
-
-                            <iframe class="preview-frame" title="Template 4 Preview">
-                        </iframe>
-
-                        </div>
-
-                    </div>
-
                 </div>
-
             </div>
-
         </main>
-
     </section>
 
-
+    <section id="template4" class="page" data-title="Full" data-desc="A complete layout — header, hero, features, testimonial, footer.">
+        <main class="editor-container">
+            <div class="editor-header">
+                <div class="page-title">
+                    <h1>Full</h1>
+                    <p>A complete layout — header, hero, features, testimonial, footer.</p>
+                </div><button class="back-button" data-page="home">← Back to Home</button></div>
+            <div class="editor-card">
+                <div class="template-actions">
+                    <div class="template-actions-title"><strong>Template Actions</strong></div>
+                    <div class="template-actions-buttons">
+                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                        <a href="https://chatgpt.com/c/6a881222-54a8-83e8-8080-e36a914b79d5" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
+                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
+                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    </div>
+                </div>
+                <div class="editor-status" data-status></div>
+                <div class="editor-grid">
+                    <div class="editor-panel">
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
+                        <div class="code-area">
+                            <div class="find-bar">
+                                <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+                                <span class="find-count">0/0</span>
+                                <button type="button" class="find-button find-prev" title="Previous match">↑</button>
+                                <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-close" title="Close">×</button>
+                            </div>
+                            <textarea class="code-editor" data-template="full.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
+                        </div>
+                        <div class="editor-toolbar">
+                            <button class="btn copy-button">Copy HTML</button>
+                            <button class="btn ghost download-button">⬇ Download</button>
+                            <button class="btn gmail" disabled>Gmail</button>
+                            <button class="btn outlook" disabled>Outlook</button>
+                        </div>
+                    </div>
+                    <div class="editor-panel">
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="device-toggle">
+                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            </div>
+                        </div>
+                        <div class="preview-wrap">
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Full preview"></iframe></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
 
     <script>
-        /* =========================================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   PAGE NAVIGATION
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ========================================================= */
+        (function() {
+            "use strict";
 
-        const pages =
-            document.querySelectorAll(".page");
+            /* =========================================================
+               TOASTS
+            ========================================================= */
+            const toastStack = document.getElementById("toastStack");
 
+            function toast(message, isError) {
+                const el = document.createElement("div");
+                el.className = "toast" + (isError ? " error" : "");
+                el.textContent = message;
+                toastStack.appendChild(el);
+                setTimeout(() => el.remove(), 2700);
+            }
 
-        function showPage(pageName, updateHistory = true) {
+            /* =========================================================
+               THEME
+            ========================================================= */
+            const themeToggle = document.getElementById("themeToggle");
 
-            pages.forEach(page => {
-
-                page.classList.toggle(
-                    "active",
-                    page.id === pageName
-                );
-
+            function applyTheme(mode) {
+                document.documentElement.classList.toggle("light", mode === "light");
+                themeToggle.textContent = mode === "light" ? "◐" : "◐";
+                try {
+                    localStorage.setItem("es_theme", mode);
+                } catch (e) {}
+            }
+            let savedTheme = "dark";
+            try {
+                savedTheme = localStorage.getItem("es_theme") || "dark";
+            } catch (e) {}
+            applyTheme(savedTheme);
+            themeToggle.addEventListener("click", () => {
+                applyTheme(document.documentElement.classList.contains("light") ? "dark" : "light");
             });
 
-
-            document
-                .querySelectorAll(".nav-button")
-                .forEach(button => {
-
-                    button.classList.toggle(
-                        "active",
-                        button.dataset.page === pageName
-                    );
-
-                });
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
+            /* =========================================================
+               MOBILE NAV
+            ========================================================= */
+            const hamburgerBtn = document.getElementById("hamburgerBtn");
+            const navLinks = document.getElementById("navLinks");
+            hamburgerBtn.addEventListener("click", () => {
+                const open = navLinks.classList.toggle("open");
+                hamburgerBtn.setAttribute("aria-expanded", String(open));
+                hamburgerBtn.textContent = open ? "✕" : "☰";
             });
 
-
-            if (updateHistory) {
-
-                history.pushState({
-                        page: pageName
-                    },
-                    "",
-                    "#" + pageName
-                );
-
+            function closeMobileNav() {
+                navLinks.classList.remove("open");
+                hamburgerBtn.setAttribute("aria-expanded", "false");
+                hamburgerBtn.textContent = "☰";
             }
 
-        }
+            /* =========================================================
+               LOGO POPUP (copy link / share / open in new tab)
+            ========================================================= */
+            const logoBtn = document.getElementById("logoBtn");
+            const logoPopup = document.getElementById("logoPopup");
 
+            // URL of Temp.html in the same codebase/folder
+            const pageUrl = new URL("Temp.html", window.location.href).href;
 
-        /* =========================================================
-           PAGE BUTTONS
-        ========================================================= */
+            logoBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
 
-        document.addEventListener(
-            "click",
-            event => {
+                const willOpen = !logoPopup.classList.contains("open");
+                logoPopup.classList.toggle("open", willOpen);
 
-                const button =
-                    event.target.closest("[data-page]");
+                if (willOpen) {
+                    const rect = logoBtn.getBoundingClientRect();
+                    let left = rect.left;
+                    let top = rect.bottom + 8;
 
-                if (!button) {
-                    return;
-                }
-
-                showPage(
-                    button.dataset.page
-                );
-
-            }
-        );
-
-
-        /* =========================================================
-           BROWSER BACK / FORWARD
-        ========================================================= */
-
-        window.addEventListener(
-            "popstate",
-            () => {
-
-                const pageName =
-                    location.hash.substring(1) || "home";
-
-                showPage(
-                    document.getElementById(pageName) ?
-                    pageName :
-                    "home",
-                    false
-                );
-
-            }
-        );
-
-
-        /* =========================================================
-           TEMPLATE EDITORS
-        ========================================================= */
-
-        document
-            .querySelectorAll(".code-editor")
-            .forEach(editor => {
-
-                const filePath =
-                    editor.dataset.template;
-
-
-                const editorCard =
-                    editor.closest(".editor-card");
-
-
-                const preview =
-                    editorCard.querySelector(
-                        ".preview-frame"
-                    );
-
-
-                const copyButton =
-                    editorCard.querySelector(
-                        ".copy-button"
-                    );
-
-
-                const status =
-                    editorCard.querySelector(
-                        ".editor-status"
-                    );
-
-
-                /* =====================================================
-                   LOAD EXTERNAL CODE SNIPPET
-
-                   IMPORTANT:
-                   This loads ONLY the template code.
-
-                   The main application remains in index.html.
-                ===================================================== */
-
-                async function loadTemplate() {
-
-                    try {
-
-                        status.classList.add("show");
-
-                        status.classList.remove("error");
-
-                        status.textContent =
-                            "Loading template...";
-
-
-                        const response =
-                            await fetch(filePath);
-
-
-                        if (!response.ok) {
-
-                            throw new Error(
-                                `HTTP ${response.status}`
-                            );
-
-                        }
-
-
-                        const code =
-                            await response.text();
-
-
-                        editor.value =
-                            code;
-
-
-                        status.classList.remove(
-                            "show"
-                        );
-
-
-                        updatePreview();
-
-
-                    } catch (error) {
-
-                        status.classList.add(
-                            "show"
-                        );
-
-                        status.classList.add(
-                            "error"
-                        );
-
-                        status.textContent =
-                            `Unable to load ${filePath}. ` +
-                            `Make sure the file exists and run this project through a local server.`;
-
+                    if (left + 200 > window.innerWidth) {
+                        left = window.innerWidth - 210;
                     }
 
+                    logoPopup.style.left = Math.max(10, left) + "px";
+                    logoPopup.style.top = top + "px";
+                }
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!logoPopup.contains(event.target) && event.target !== logoBtn) {
+                    logoPopup.classList.remove("open");
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    logoPopup.classList.remove("open");
+                }
+            });
+
+            // COPY LINK
+            document.getElementById("copyLinkBtn").addEventListener("click", async() => {
+                try {
+                    await navigator.clipboard.writeText(pageUrl);
+                    toast("Link copied!");
+                } catch (e) {
+                    toast("Could not copy link.", true);
                 }
 
+                logoPopup.classList.remove("open");
+            });
 
-                /* =====================================================
-                   LIVE PREVIEW
-                ===================================================== */
+            // SHARE
+            document.getElementById("shareBtn").addEventListener("click", async() => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: "Email Studio",
+                            url: pageUrl
+                        });
+                    } catch (e) {}
+                } else {
+                    try {
+                        await navigator.clipboard.writeText(pageUrl);
+                        toast("Link copied!");
+                    } catch (e) {
+                        toast(pageUrl);
+                    }
+                }
+
+                logoPopup.classList.remove("open");
+            });
+
+            // OPEN IN NEW TAB
+            document.getElementById("newTabBtn").addEventListener("click", () => {
+                window.open(pageUrl, "_blank");
+                logoPopup.classList.remove("open");
+            });
+
+            /* =========================================================
+               PAGE NAVIGATION
+            ========================================================= */
+            const pages = document.querySelectorAll(".page");
+
+            function showPage(pageName, updateHistory) {
+                if (updateHistory === undefined) updateHistory = true;
+                pages.forEach(page => page.classList.toggle("active", page.id === pageName));
+                document.querySelectorAll(".nav-button").forEach(btn => btn.classList.toggle("active", btn.dataset.page === pageName));
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+                closeMobileNav();
+                if (updateHistory) history.pushState({
+                    page: pageName
+                }, "", "#" + pageName);
+            }
+
+            document.addEventListener("click", (event) => {
+                const button = event.target.closest("[data-page]");
+                if (!button) return;
+                showPage(button.dataset.page);
+            });
+
+            window.addEventListener("popstate", () => {
+                const pageName = location.hash.substring(1) || "home";
+                showPage(document.getElementById(pageName) ? pageName : "home", false);
+            });
+
+            const initialPage = location.hash.substring(1);
+            if (initialPage && document.getElementById(initialPage)) showPage(initialPage, false);
+
+            const AI_PROMPT_TEMPLATE =
+                `Generate ONLY the complete email BODY HTML based on the email content that will be provided in my NEXT response, using the provided email HTML snippets/components.
+
+Rules:
+- Return ONLY one \`\`\`html\`\`\` code block.
+- No <!DOCTYPE>, <html>, <head>, <style>, or <body> tags.
+- Use ONLY the provided snippets/components.
+- Preserve their exact HTML structure, inline CSS, styling, and email compatibility.
+- Select and combine only the components needed for the email.
+- Replace placeholders with the actual email content.
+- Do not invent, redesign, or modify component styles.
+- Return the ENTIRE body code, not partial snippets.
+- No explanations or text outside the code block.
+
+For now, DO NOT generate any HTML.
+Simply reply with: "Please provide the email content to generate."
+The email content will be sent in the NEXT response after this prompt.`;
+
+            /* =========================================================
+               EDITOR SETUP (runs once per template section)
+            ========================================================= */
+            document.querySelectorAll(".editor-card").forEach((card) => {
+                const section = card.closest(".page");
+                const key = section.id;
+                const editor = card.querySelector(".code-editor");
+                const filePath = editor.dataset.template;
+                const preview = card.querySelector(".preview-frame");
+                const previewContainer = card.querySelector(".preview-container");
+                const copyButton = card.querySelector(".copy-button");
+                const downloadButton = card.querySelector(".download-button");
+                const gmailBtn = card.querySelector(".gmail");
+                const outlookBtn = card.querySelector(".outlook");
+                const status = card.querySelector(".editor-status");
+                const linesCount = card.querySelector(".lines-count");
+                const resetBtn = card.querySelector(".reset-btn");
+                const copyPromptBtn = card.querySelector(".copy-prompt-btn");
+                const pasteBodyBtn = card.querySelector(".paste-body-btn");
+                const storageKey = "es_content_" + key;
+
+                function updateMeta() {
+                    const lines = editor.value.split("\n").length;
+                    const chars = editor.value.length;
+                    linesCount.textContent = lines + " lines · " + chars + " chars";
+                }
 
                 function updatePreview() {
-
-                    preview.srcdoc =
-                        editor.value;
-
+                    preview.srcdoc = editor.value;
+                    updateMeta();
+                    try {
+                        localStorage.setItem(storageKey, editor.value);
+                    } catch (e) {}
                 }
 
-
-                editor.addEventListener(
-                    "input",
-                    updatePreview
-                );
-
-
-                /* =====================================================
-                   COPY COMPLETE TEMPLATE
-                ===================================================== */
-
-                copyButton.addEventListener(
-                    "click",
-                    async() => {
-
-                        try {
-
-                            await navigator.clipboard.writeText(
-                                editor.value
-                            );
-
-
-                            copyButton.textContent =
-                                "Copied!";
-
-
-                            copyButton.classList.add(
-                                "copied"
-                            );
-
-
-                            setTimeout(() => {
-
-                                copyButton.textContent =
-                                    "Copy HTML";
-
-                                copyButton.classList.remove(
-                                    "copied"
-                                );
-
-                            }, 2000);
-
-
-                        } catch (error) {
-
-                            copyButton.textContent =
-                                "Copy Failed";
-
-
-                            setTimeout(() => {
-
-                                copyButton.textContent =
-                                    "Copy HTML";
-
-                            }, 2000);
-
-                        }
-
-                    }
-                );
-
-
-                /* =====================================================
-                   VSCODE-LIKE FIND
-
-                   Ctrl + F
-                   Enter       = Next
-                   Shift+Enter = Previous
-                   Escape      = Close
-                ===================================================== */
-
-                const codeArea =
-                    editor.closest(".code-area");
-
-
-                const findBar =
-                    codeArea.querySelector(
-                        ".find-bar"
-                    );
-
-
-                const findInput =
-                    findBar.querySelector(
-                        ".find-input"
-                    );
-
-
-                const findCount =
-                    findBar.querySelector(
-                        ".find-count"
-                    );
-
-
-                const previousButton =
-                    findBar.querySelector(
-                        ".find-prev"
-                    );
-
-
-                const nextButton =
-                    findBar.querySelector(
-                        ".find-next"
-                    );
-
-
-                const closeButton =
-                    findBar.querySelector(
-                        ".find-close"
-                    );
-
-
-                let matches = [];
-
-                let currentMatch = -1;
-
-
-                function findAllMatches(query) {
-
-                    matches = [];
-
-                    currentMatch = -1;
-
-
-                    if (!query) {
-
-                        findCount.textContent =
-                            "0/0";
-
-                        return;
-
-                    }
-
-
-                    const source =
-                        editor.value.toLowerCase();
-
-
-                    const search =
-                        query.toLowerCase();
-
-
-                    let position = 0;
-
-
-                    while (true) {
-
-                        const index =
-                            source.indexOf(
-                                search,
-                                position
-                            );
-
-
-                        if (index === -1) {
-                            break;
-                        }
-
-
-                        matches.push({
-                            start: index,
-                            end: index + search.length
-                        });
-
-
-                        position =
-                            index +
-                            Math.max(search.length, 1);
-
-                    }
-
-
-                    if (matches.length) {
-
-                        currentMatch = 0;
-
-                        selectCurrentMatch();
-
-                    } else {
-
-                        findCount.textContent =
-                            "0/0";
-
-                    }
-
+                let originalCode = "";
+
+                async function fetchTemplate() {
+                    const response = await fetch(filePath);
+                    if (!response.ok) throw new Error("HTTP " + response.status);
+                    return await response.text();
                 }
 
+                async function loadTemplate() {
+                    let saved = null;
+                    try {
+                        saved = localStorage.getItem(storageKey);
+                    } catch (e) {}
 
-                function selectCurrentMatch() {
+                    status.classList.add("show");
+                    status.classList.remove("error", "info");
+                    status.textContent = "Loading template...";
 
-                    if (!matches.length) {
+                    try {
+                        originalCode = await fetchTemplate();
+                        status.classList.remove("show");
 
-                        findCount.textContent =
-                            "0/0";
+                        if (saved !== null && saved !== "") {
+                            editor.value = saved;
+                            status.classList.add("show", "info");
+                            status.textContent = "Restored your saved draft for this template.";
+                            setTimeout(() => status.classList.remove("show", "info"), 2600);
+                        } else {
+                            editor.value = originalCode;
+                        }
+                        updatePreview();
 
-                        return;
+                    } catch (error) {
+                        status.classList.add("show", "error");
+                        status.textContent = "Unable to load " + filePath + ". Make sure the file exists and run this project through a local server.";
 
+                        if (saved !== null && saved !== "") {
+                            editor.value = saved;
+                            updatePreview();
+                        }
                     }
-
-
-                    const match =
-                        matches[currentMatch];
-
-
-                    editor.focus();
-
-
-                    editor.setSelectionRange(
-                        match.start,
-                        match.end
-                    );
-
-
-                    findCount.textContent =
-                        `${currentMatch + 1}/${matches.length}`;
-
-
-                    /*
-                     * Scroll the textarea so the selected
-                     * code is visible.
-                     */
-                    scrollTextareaToSelection();
-
                 }
-
-
-                function scrollTextareaToSelection() {
-
-                    const textBeforeSelection =
-                        editor.value.substring(
-                            0,
-                            editor.selectionStart
-                        );
-
-
-                    const lineNumber =
-                        textBeforeSelection
-                        .split("\n")
-                        .length;
-
-
-                    const lineHeight =
-                        parseFloat(
-                            getComputedStyle(editor)
-                            .lineHeight
-                        );
-
-
-                    editor.scrollTop =
-                        Math.max(
-                            0,
-                            (lineNumber - 4) *
-                            lineHeight
-                        );
-
-                }
-
-
-                function nextMatch() {
-
-                    if (!matches.length) {
-
-                        findAllMatches(
-                            findInput.value.trim()
-                        );
-
-                        return;
-
-                    }
-
-
-                    currentMatch =
-                        (currentMatch + 1) %
-                        matches.length;
-
-
-                    selectCurrentMatch();
-
-                }
-
-
-                function previousMatch() {
-
-                    if (!matches.length) {
-
-                        findAllMatches(
-                            findInput.value.trim()
-                        );
-
-                        if (matches.length) {
-
-                            currentMatch =
-                                matches.length - 1;
-
-                            selectCurrentMatch();
-
-                        }
-
-                        return;
-
-                    }
-
-
-                    currentMatch =
-                        (
-                            currentMatch -
-                            1 +
-                            matches.length
-                        ) %
-                        matches.length;
-
-
-                    selectCurrentMatch();
-
-                }
-
-
-                function openFind() {
-
-                    findBar.classList.add(
-                        "open"
-                    );
-
-
-                    findInput.focus();
-
-
-                    findInput.select();
-
-
-                    findAllMatches(
-                        findInput.value.trim()
-                    );
-
-                }
-
-
-                function closeFind() {
-
-                    findBar.classList.remove(
-                        "open"
-                    );
-
-
-                    findInput.value =
-                        findInput.value;
-
-
-                    editor.focus();
-
-                }
-
-
-                findInput.addEventListener(
-                    "input",
-                    () => {
-
-                        findAllMatches(
-                            findInput.value.trim()
-                        );
-
-                    }
-                );
-
-
-                nextButton.addEventListener(
-                    "click",
-                    nextMatch
-                );
-
-
-                previousButton.addEventListener(
-                    "click",
-                    previousMatch
-                );
-
-
-                closeButton.addEventListener(
-                    "click",
-                    closeFind
-                );
-
-
-                findInput.addEventListener(
-                    "keydown",
-                    event => {
-
-                        if (event.key === "Enter") {
-
-                            event.preventDefault();
-
-
-                            if (event.shiftKey) {
-
-                                previousMatch();
-
-                            } else {
-
-                                nextMatch();
-
-                            }
-
-                        }
-
-
-                        if (event.key === "Escape") {
-
-                            event.preventDefault();
-
-                            closeFind();
-
-                        }
-
-                    }
-                );
-
-
-                /*
-                 * Ctrl + F works when the editor has focus.
-                 */
-                editor.addEventListener(
-                    "keydown",
-                    event => {
-
-                        if (
-                            (event.ctrlKey ||
-                                event.metaKey) &&
-                            event.key.toLowerCase() === "f"
-                        ) {
-
-                            event.preventDefault();
-
-                            openFind();
-
-                        }
-
-
-                        if (
-                            event.key === "Escape" &&
-                            findBar.classList.contains("open")
-                        ) {
-
-                            closeFind();
-
-                        }
-
-                    }
-                );
-
-
-                /*
-                 * Ctrl + F also works anywhere on the
-                 * current template page.
-                 */
-                document.addEventListener(
-                    "keydown",
-                    event => {
-
-                        if (!(
-                                event.ctrlKey ||
-                                event.metaKey
-                            ) ||
-                            event.key.toLowerCase() !== "f"
-                        ) {
-                            return;
-                        }
-
-
-                        const activePage =
-                            document.querySelector(
-                                ".page.active"
-                            );
-
-
-                        if (!activePage ||
-                            activePage.id === "home"
-                        ) {
-                            return;
-                        }
-
-
-                        const activeEditor =
-                            activePage.querySelector(
-                                ".code-editor"
-                            );
-
-
-                        if (activeEditor !== editor) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-                        openFind();
-
-                    }
-                );
-
-
-                /*
-                 * Load this template.
-                 */
                 loadTemplate();
 
+                editor.addEventListener("input", updatePreview);
+
+                resetBtn.addEventListener("click", async() => {
+                    if (!originalCode) {
+                        try {
+                            originalCode = await fetchTemplate();
+                        } catch (e) {
+                            toast("Could not reload " + filePath + ".", true);
+                            return;
+                        }
+                    }
+                    editor.value = originalCode;
+                    updatePreview();
+                    toast("Reset to the default template.");
+                });
+
+                /* ---------- Copy HTML ---------- */
+                copyButton.addEventListener("click", async() => {
+                    try {
+                        await navigator.clipboard.writeText(editor.value);
+                        gmailBtn.disabled = false;
+                        outlookBtn.disabled = false;
+                        copyButton.textContent = "Copied!";
+                        copyButton.classList.add("copied");
+                        toast("HTML copied to clipboard.");
+                        setTimeout(() => {
+                            copyButton.textContent = "Copy HTML";
+                            copyButton.classList.remove("copied");
+                        }, 1800);
+                    } catch (err) {
+                        copyButton.textContent = "Copy failed";
+                        toast("Could not copy — try selecting the text manually.", true);
+                        setTimeout(() => {
+                            copyButton.textContent = "Copy HTML";
+                        }, 1800);
+                    }
+                });
+
+                /* ---------- Download ---------- */
+                downloadButton.addEventListener("click", () => {
+                    const blob = new Blob([editor.value], {
+                        type: "text/html"
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = key + ".html";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                    toast("Download started.");
+                });
+
+                /* ---------- Gmail / Outlook ---------- */
+                gmailBtn.addEventListener("click", () => {
+                    if (gmailBtn.disabled) return;
+                    window.open("https://mail.google.com/mail/u/0/#compose", "_blank");
+                });
+                outlookBtn.addEventListener("click", () => {
+                    if (outlookBtn.disabled) return;
+                    window.open("https://outlook.live.com/mail/0/deeplink/compose", "_blank");
+                });
+
+                /* ---------- Copy AI prompt ---------- */
+                copyPromptBtn.addEventListener("click", async() => {
+                    const prompt = AI_PROMPT_TEMPLATE + section.dataset.title + " email template — " + section.dataset.desc;
+                    try {
+                        await navigator.clipboard.writeText(prompt);
+                        copyPromptBtn.classList.add("success");
+                        toast("Prompt copied — paste it into your AI chat.");
+                        setTimeout(() => copyPromptBtn.classList.remove("success"), 1500);
+                    } catch (e) {
+                        toast("Could not copy the prompt.", true);
+                    }
+                });
+
+                /* ---------- Find the PASTE marker ---------- */
+                pasteBodyBtn.addEventListener("click", () => {
+                    findBar.classList.add("open");
+                    findInput.value = "PASTE";
+                    findInput.focus();
+                    findInput.select();
+                    runFind("PASTE");
+                    if (matches.length) {
+                        goToMatch(0);
+                    } else {
+                        findCount.textContent = "0/0";
+                        toast("No PASTE marker found in this template.", true);
+                    }
+                });
+
+                /* =====================================================
+                   FIND (Ctrl+F, Enter/Shift+Enter, Escape)
+                ===================================================== */
+                const codeArea = editor.closest(".code-area");
+                const findBar = codeArea.querySelector(".find-bar");
+                const findInput = findBar.querySelector(".find-input");
+                const findCount = findBar.querySelector(".find-count");
+                const prevBtn = findBar.querySelector(".find-prev");
+                const nextBtn = findBar.querySelector(".find-next");
+                const closeBtn = findBar.querySelector(".find-close");
+
+                let matches = [];
+                let currentMatch = -1;
+
+                function runFind(query) {
+                    matches = [];
+                    currentMatch = -1;
+                    if (!query) {
+                        findCount.textContent = "0/0";
+                        return;
+                    }
+                    const source = editor.value.toLowerCase();
+                    const q = query.toLowerCase();
+                    let pos = 0;
+                    while (true) {
+                        const idx = source.indexOf(q, pos);
+                        if (idx === -1) break;
+                        matches.push({
+                            start: idx,
+                            end: idx + q.length
+                        });
+                        pos = idx + Math.max(q.length, 1);
+                    }
+                    findCount.textContent = matches.length ? ("0/" + matches.length) : "0/0";
+                }
+
+                function goToMatch(index) {
+                    if (!matches.length) return;
+                    currentMatch = (index + matches.length) % matches.length;
+                    const match = matches[currentMatch];
+                    editor.focus();
+                    editor.setSelectionRange(match.start, match.end);
+                    findCount.textContent = (currentMatch + 1) + "/" + matches.length;
+                    const textBefore = editor.value.substring(0, match.start);
+                    const lineNumber = textBefore.split("\n").length;
+                    const lineHeight = parseFloat(getComputedStyle(editor).lineHeight) || 20;
+                    editor.scrollTop = Math.max(0, (lineNumber - 4) * lineHeight);
+                }
+
+                findInput.addEventListener("input", () => runFind(findInput.value));
+                findInput.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        if (!matches.length) return;
+                        goToMatch(event.shiftKey ? currentMatch - 1 : currentMatch + 1);
+                    } else if (event.key === "Escape") {
+                        findBar.classList.remove("open");
+                        editor.focus();
+                    }
+                });
+                nextBtn.addEventListener("click", () => goToMatch(currentMatch + 1));
+                prevBtn.addEventListener("click", () => goToMatch(currentMatch - 1));
+                closeBtn.addEventListener("click", () => {
+                    findBar.classList.remove("open");
+                    editor.focus();
+                });
+
+                editor.addEventListener("keydown", (event) => {
+                    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
+                        event.preventDefault();
+                        findBar.classList.add("open");
+                        findInput.focus();
+                        findInput.select();
+                    }
+                });
+
+                /* ---------- Device preview toggle ---------- */
+                card.querySelectorAll(".device-btn").forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        card.querySelectorAll(".device-btn").forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                        previewContainer.dataset.device = btn.dataset.device;
+                    });
+                });
             });
 
-
-        /* =========================================================
-           INITIAL PAGE
-        ========================================================= */
-
-        const initialPage =
-            location.hash.substring(1);
-
-
-        if (
-            initialPage &&
-            document.getElementById(initialPage)
-        ) {
-
-            showPage(
-                initialPage,
-                false
-            );
-
-        }
+        })();
     </script>
-
 </body>
 
 </html>

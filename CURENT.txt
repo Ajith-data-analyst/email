@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemjiths-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -149,7 +149,7 @@
     max-width:760px;
     background:#000000;
     border-radius:12px;
-    background-image:linear-gradient(135deg,#000000,#b42222,#000000dc);
+    background-image:linear-gradient(155deg,#000000,#b42222,#000000dc);
     border:2px solid #dc2828;
 ">
 
@@ -161,10 +161,7 @@
                                             <tr>
 
                                                 <!-- Profile Image -->
-                                                <td align="left" valign="middle" width="130">
-
-                                                    <img src="https://cdn.corenexis.com/f/zBU5DCBWk01.png" width="110" alt="Ajith Ramesh" style="display:block;width:100px;height:120px;border:0;">
-                                                </td>
+                                             
 
                                                 <!-- Employee Details -->
                                                 <td align="left" valign="middle" style="padding-left:10px;">
@@ -246,52 +243,37 @@
                     <tr>
                         <td style="padding:20px 32px 28px 32px; background-color:#0c0808;">
 
-
-                            <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
+<!-- ---------- PASTE START ---------- --><!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+      <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
                                 <strong>
         <span style="color:#ffffff;">Dear</span>
-        <span style="color:#ef4444;"> {{recipient_name}}</span>,
+        <span style="color:#ef4444;"> recipient_name</span>,
     </strong>
                             </p>
 
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE HERE ---------- -->                        
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE HERE ---------- --> 
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE ---------- -->
+<!-- ---------- PASTE END ---------- -->
 
 
-                            <!-- Paragraph -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="padding:4px 0 0 0;">
-                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
-                                            [Paragraph text. Standard body copy for explanations, context, or narrative content goes here. Keep it concise and scannable.]
-                                        </p>
-                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
-                                            [Paragraph text. Standard body copy for explanations, context, or narrative content goes here. Keep it concise and scannable.]
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Rich Text (mixed inline formatting) -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="padding:16px 0 0 0;">
-                                        <p style="font-size:14.5px; line-height:1.65; color:#a39d9d;">
-                                            [Rich text example: this line has a <strong style="color:#e5e0e0;">bold phrase</strong>, an
-                                            <em style="color:#e5e0e0;">italic phrase</em>, a
-                                            <span style="color:#ef4444; font-weight:600;">highlighted phrase</span>, and an
-                                            <a href="[link URL]" style="color:#f87171; border-bottom:1px dotted #f87171;">inline link</a> mixed into one paragraph.]
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Small Text -->
-                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="padding:12px 0 0 0;">
-                                        <p style="font-size:11.5px; line-height:1.5; color:#726c6c;">[Small text — fine print, disclaimers, or secondary detail.]</p>
-                                    </td>
-                                </tr>
-                            </table>
 
 
 
