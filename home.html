@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Email Studio — HTML Template Library</title>
+    <title>Email Studio</title>
     <style>
         /* =========================================================
      THEME / GLOBAL
@@ -507,6 +507,109 @@
             border-color: rgba(52, 211, 153, .4);
             color: #34d399;
         }
+        /* =========================================================
+     ACTIONS DROPDOWN
+  ========================================================= */
+        
+        .actions-dropdown {
+            position: relative;
+        }
+        
+        .actions-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-strong);
+            background: var(--accent);
+            color: var(--accent-ink);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 12.5px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+        
+        .actions-trigger:hover,
+        .actions-trigger.open {
+            background: var(--accent-strong);
+            transform: translateY(-2px);
+        }
+        
+        .actions-trigger .caret {
+            transition: transform .2s ease;
+        }
+        
+        .actions-trigger.open .caret {
+            transform: rotate(180deg);
+        }
+        
+        .actions-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            position: absolute;
+            top: 100%;
+            padding-top: 8px;
+            right: 0;
+            z-index: 50;
+            min-width: 220px;
+            padding: 8px;
+            border: 1px solid var(--border-strong);
+            border-radius: 14px;
+            background: #0b1120;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .5);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        
+        .actions-menu::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            height: 10px;
+        }
+        
+        .actions-menu.open {
+            display: flex;
+        }
+        /* Actions dropdown */
+        
+        .actions-dropdown {
+            position: relative;
+        }
+        
+        .actions-menu {
+            display: none;
+        }
+        
+        .actions-dropdown.open .actions-menu {
+            display: flex;
+        }
+        
+        .actions-dropdown.open .actions-trigger .caret {
+            transform: rotate(180deg);
+        }
+        
+        .actions-menu .template-action-btn {
+            width: 100%;
+            justify-content: flex-start;
+            background: transparent;
+            border-color: transparent;
+        }
+        
+        .actions-menu .template-action-btn:hover {
+            background: var(--surface-strong);
+            border-color: var(--border-strong);
+            transform: none;
+        }
+        
+        .actions-menu .template-action-btn[disabled] {
+            opacity: .4;
+            cursor: not-allowed;
+        }
         
         .editor-status {
             display: none;
@@ -574,15 +677,51 @@
             width: 100%;
         }
         
-        .code-editor {
+        .editor-flex {
+            display: flex;
             width: 100%;
             height: 480px;
-            resize: vertical;
-            padding: 16px;
-            outline: none;
             border: 1px solid var(--border);
             border-radius: 16px;
+            overflow: hidden;
             background: var(--code-bg);
+        }
+        
+        .editor-flex:focus-within {
+            border-color: rgba(56, 189, 248, .55);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, .12);
+        }
+        
+        .line-numbers {
+            flex: 0 0 auto;
+            width: 44px;
+            overflow: hidden;
+            padding: 16px 8px 16px 0;
+            text-align: right;
+            color: var(--text-dim);
+            background: rgba(0, 0, 0, .12);
+            border-right: 1px solid var(--border);
+            font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+            font-size: 13.5px;
+            line-height: 1.6;
+            user-select: none;
+            white-space: pre;
+        }
+        
+        html.light .line-numbers {
+            background: rgba(15, 23, 42, .04);
+        }
+        
+        .code-editor {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            resize: none;
+            padding: 16px;
+            outline: none;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
             color: var(--text);
             font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
             font-size: 13.5px;
@@ -590,17 +729,12 @@
             tab-size: 2;
         }
         
-        .code-editor:focus {
-            border-color: rgba(56, 189, 248, .55);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, .12);
-        }
-        
         .find-bar {
             position: absolute;
             top: 10px;
             right: 10px;
             z-index: 20;
-            width: min(430px, calc(100% - 20px));
+            width: min(470px, calc(100% - 20px));
             display: none;
             align-items: center;
             gap: 5px;
@@ -636,7 +770,7 @@
         }
         
         .find-count {
-            min-width: 58px;
+            min-width: 50px;
             color: #94a3b8;
             font-family: Consolas, monospace;
             font-size: 11.5px;
@@ -647,6 +781,7 @@
         .find-button {
             width: 28px;
             height: 28px;
+            flex: 0 0 auto;
             display: grid;
             place-items: center;
             border: 0;
@@ -655,11 +790,63 @@
             background: transparent;
             cursor: pointer;
             transition: .2s;
+            font-size: 11.5px;
+            font-weight: 700;
         }
         
         .find-button:hover {
             color: #fff;
             background: rgba(255, 255, 255, .1);
+        }
+        
+        .find-button.active {
+            color: var(--accent-strong);
+            background: rgba(56, 189, 248, .18);
+        }
+        
+        .replace-bar {
+            position: absolute;
+            top: 54px;
+            right: 10px;
+            z-index: 19;
+            width: min(470px, calc(100% - 20px));
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 6px;
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            background: #0b1120;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .5);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        
+        .replace-bar.open {
+            display: flex;
+        }
+        
+        .replace-input {
+            min-width: 0;
+            flex: 1;
+            height: 32px;
+            padding: 0 9px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            outline: none;
+            color: #e2e8f0;
+            background: #020617;
+            font-family: Consolas, monospace;
+            font-size: 12.5px;
+        }
+        
+        .replace-input:focus {
+            border-color: rgba(56, 189, 248, .55);
+        }
+        
+        .replace-bar .find-button {
+            width: auto;
+            padding: 0 10px;
         }
         
         .editor-toolbar {
@@ -740,6 +927,46 @@
         .device-btn.active {
             background: var(--accent);
             color: var(--accent-ink);
+        }
+        
+        .preview-tools {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+        
+        .zoom-select {
+            height: 34px;
+            padding: 0 8px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .preview-tool-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 14px;
+            transition: .2s ease;
+        }
+        
+        .preview-tool-btn:hover {
+            background: var(--surface-strong);
+            border-color: var(--accent);
         }
         
         .preview-wrap {
@@ -837,7 +1064,7 @@
             .editor-grid {
                 grid-template-columns: 1fr;
             }
-            .code-editor,
+            .editor-flex,
             .preview-wrap {
                 height: 400px;
             }
@@ -903,24 +1130,70 @@
                 flex-direction: column;
                 align-items: stretch;
             }
-            .template-actions-buttons {
-                justify-content: stretch;
+            .actions-dropdown {
+                width: 100%;
             }
-            .template-action-btn {
-                flex: 1 1 0;
+            .actions-trigger {
+                width: 100%;
                 justify-content: center;
             }
-            .code-editor,
+            .actions-menu {
+                left: 0;
+                right: 0;
+                min-width: 0;
+            }
+            .editor-flex,
             .preview-wrap {
                 height: 320px;
             }
             .editor-toolbar .btn {
                 flex: 1 1 auto;
             }
-            .find-bar {
+            .find-bar,
+            .replace-bar {
                 width: calc(100% - 16px);
-                top: 8px;
                 right: 8px;
+            }
+            .find-bar {
+                top: 8px;
+            }
+            .replace-bar {
+                top: 52px;
+            }
+            /* Mobile */
+            @media (max-width: 640px) {
+                .preview-tools {
+                    width: 100%;
+                    margin-left: 0;
+                    justify-content: flex-end;
+                    gap: 6px;
+                }
+                .device-toggle {
+                    flex: 1 1 auto;
+                    justify-content: center;
+                }
+                .zoom-select {
+                    flex: 0 0 auto;
+                }
+                .preview-tool-btn {
+                    flex: 0 0 34px;
+                }
+            }
+            /* Very small phones */
+            @media (max-width: 380px) {
+                .preview-tools {
+                    justify-content: space-between;
+                }
+                .device-toggle {
+                    width: 100%;
+                    order: 1;
+                }
+                .zoom-select {
+                    order: 2;
+                }
+                .preview-tool-btn {
+                    order: 2;
+                }
             }
         }
         
@@ -1026,54 +1299,134 @@
 ========================================================= -->
     <section id="template1" class="page" data-title="Blank" data-desc="A minimal single-block starting point.">
         <main class="editor-container">
-            <div class="editor-header">
-                <div class="page-title">
-                    <h1>Blank</h1>
-                    <p>A minimal single-block starting point.</p>
-                </div><button class="back-button" data-page="home">← Back to Home</button></div>
+
             <div class="editor-card">
                 <div class="template-actions">
-                    <div class="template-actions-title"><strong>Template Actions</strong></div>
-                    <div class="template-actions-buttons">
-                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
-                        <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
-                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
-                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    <h1>Current</h1>
+                    <div class="actions-dropdown">
+                        <button type="button" class="actions-trigger">Actions <span class="caret">▾</span></button>
+
+                        <div class="actions-menu">
+
+                            <!-- Reset -->
+                            <div class="action-section">
+                                <div class="action-section-header">Reset Template</div>
+                                <button type="button" class="template-action-btn reset-btn">↺ Restore Original</button>
+                            </div>
+
+                            <!-- Copy / Download / Email -->
+                            <div class="action-section">
+                                <div class="action-section-header">Export & Email</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-button">Copy HTML</button>
+                                    <button type="button" class="template-action-btn download-button">Download HTML</button>
+                                    <div class="action-groupp">
+                                        <button type="button" class="template-action-btn gmail-btn" disabled>Open in Gmail</button>
+                                        <button type="button" class="template-action-btn outlook-btn" disabled>Open in Outlook</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Prompt / Generate -->
+                            <div class="action-section">
+                                <div class="action-section-header">AI Content</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Content</a>
+                                    <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate HTML</a>
+                                </div>
+                            </div>
+
+                            <!-- Find PASTE / SUBJECT -->
+                            <div class="action-section">
+                                <div class="action-section-header">Find & Navigate</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn paste-body-btn">Find Subject</button>
+                                    <button type="button" class="template-action-btn subject-body-btn">Find To</button>
+                                    <button type="button" class="template-action-btn n-body-btn">Find Body</button>
+                                    <button type="button" class="template-action-btn m-body-btn">Find From</button>
+                                </div>
+                            </div>
+
+                            <!-- Back to Home -->
+                            <button class="back-button" data-page="home">← Back to Home</button>
+
+                        </div>
+
+                        <style>
+                            .action-group {
+                                border: 1px solid #38bdf8;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-groupp {
+                                border: 1px solid #c1cfd5;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-section-header {
+                                font-size: 11px;
+                                font-weight: 600;
+                                opacity: 0.7;
+                                margin: 2px 0 4px 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="editor-status" data-status></div>
                 <div class="editor-grid">
                     <div class="editor-panel">
-                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
                             <div class="find-bar">
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button find-matchcase" title="Match case">Aa</button>
                                 <span class="find-count">0/0</span>
                                 <button type="button" class="find-button find-prev" title="Previous match">↑</button>
                                 <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-toggle-replace" title="Toggle replace">⇄</button>
                                 <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-                            <textarea class="code-editor" data-template="codebase/template1.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-                        </div>
-                        <div class="editor-toolbar">
-                            <button class="btn copy-button">Copy HTML</button>
-                            <button class="btn ghost download-button">⬇ Download</button>
-                            <button class="btn gmail" disabled>Gmail</button>
-                            <button class="btn outlook" disabled>Outlook</button>
-                        </div>
-                    </div>
-                    <div class="editor-panel">
-                        <div class="panel-head">
-                            <span class="panel-label">Live Preview</span>
-                            <div class="device-toggle">
-                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
-                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
-                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            <div class="replace-bar">
+                                <input type="text" class="replace-input" placeholder="Replace with..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button replace-one" title="Replace">Replace</button>
+                                <button type="button" class="find-button replace-all" title="Replace all">Replace All</button>
+                            </div>
+                            <div class="editor-flex">
+                                <div class="line-numbers">1</div>
+                                <textarea class="code-editor" data-template="template1.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
                             </div>
                         </div>
+                        <div style="border-top: 1px solid transparent;"></div>
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
+
+                    </div>
+                    <div class="editor-panel">
                         <div class="preview-wrap">
                             <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Blank preview"></iframe></div>
                         </div>
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="preview-tools">
+
+                                <div class="device-toggle">
+                                    <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                    <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                    <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                                </div>
+                                <select class="zoom-select" title="Zoom preview">
+                                    <option value="100">100%</option>
+                                    <option value="75">75%</option>
+                                    <option value="50">50%</option>
+                                </select>
+                                <button type="button" class="preview-tool-btn refresh-preview-btn" title="Refresh preview">⟳</button>
+                                <button type="button" class="preview-tool-btn open-preview-btn" title="Open in new tab">↗</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1082,54 +1435,134 @@
 
     <section id="template2" class="page" data-title="Current" data-desc="A promotional layout with header, hero, and CTA.">
         <main class="editor-container">
-            <div class="editor-header">
-                <div class="page-title">
-                    <h1>Current</h1>
-                    <p>A promotional layout with header, hero, and CTA.</p>
-                </div><button class="back-button" data-page="home">← Back to Home</button></div>
+
             <div class="editor-card">
                 <div class="template-actions">
-                    <div class="template-actions-title"><strong>Template Actions</strong></div>
-                    <div class="template-actions-buttons">
-                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
-                        <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
-                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
-                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    <h1>Current</h1>
+                    <div class="actions-dropdown">
+                        <button type="button" class="actions-trigger">Actions <span class="caret">▾</span></button>
+
+                        <div class="actions-menu">
+
+                            <!-- Reset -->
+                            <div class="action-section">
+                                <div class="action-section-header">Reset Template</div>
+                                <button type="button" class="template-action-btn reset-btn">↺ Restore Original</button>
+                            </div>
+
+                            <!-- Copy / Download / Email -->
+                            <div class="action-section">
+                                <div class="action-section-header">Export & Email</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-button">Copy HTML</button>
+                                    <button type="button" class="template-action-btn download-button">Download HTML</button>
+                                    <div class="action-groupp">
+                                        <button type="button" class="template-action-btn gmail-btn" disabled>Open in Gmail</button>
+                                        <button type="button" class="template-action-btn outlook-btn" disabled>Open in Outlook</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Prompt / Generate -->
+                            <div class="action-section">
+                                <div class="action-section-header">AI Content</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Content</a>
+                                    <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate HTML</a>
+                                </div>
+                            </div>
+
+                            <!-- Find PASTE / SUBJECT -->
+                            <div class="action-section">
+                                <div class="action-section-header">Find & Navigate</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn paste-body-btn">Find Subject</button>
+                                    <button type="button" class="template-action-btn subject-body-btn">Find To</button>
+                                    <button type="button" class="template-action-btn n-body-btn">Find Body</button>
+                                    <button type="button" class="template-action-btn m-body-btn">Find From</button>
+                                </div>
+                            </div>
+
+                            <!-- Back to Home -->
+                            <button class="back-button" data-page="home">← Back to Home</button>
+
+                        </div>
+
+                        <style>
+                            .action-group {
+                                border: 1px solid #38bdf8;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-groupp {
+                                border: 1px solid #c1cfd5;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-section-header {
+                                font-size: 11px;
+                                font-weight: 600;
+                                opacity: 0.7;
+                                margin: 2px 0 4px 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="editor-status" data-status></div>
                 <div class="editor-grid">
                     <div class="editor-panel">
-                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
                             <div class="find-bar">
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button find-matchcase" title="Match case">Aa</button>
                                 <span class="find-count">0/0</span>
                                 <button type="button" class="find-button find-prev" title="Previous match">↑</button>
                                 <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-toggle-replace" title="Toggle replace">⇄</button>
                                 <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-                            <textarea class="code-editor" data-template=" CURENT.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-                        </div>
-                        <div class="editor-toolbar">
-                            <button class="btn copy-button">Copy HTML</button>
-                            <button class="btn ghost download-button">⬇ Download</button>
-                            <button class="btn gmail" disabled>Gmail</button>
-                            <button class="btn outlook" disabled>Outlook</button>
-                        </div>
-                    </div>
-                    <div class="editor-panel">
-                        <div class="panel-head">
-                            <span class="panel-label">Live Preview</span>
-                            <div class="device-toggle">
-                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
-                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
-                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            <div class="replace-bar">
+                                <input type="text" class="replace-input" placeholder="Replace with..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button replace-one" title="Replace">Replace</button>
+                                <button type="button" class="find-button replace-all" title="Replace all">Replace All</button>
+                            </div>
+                            <div class="editor-flex">
+                                <div class="line-numbers">1</div>
+                                <textarea class="code-editor" data-template=" CURENT.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
                             </div>
                         </div>
+                        <div style="border-top: 1px solid transparent;"></div>
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
+
+                    </div>
+                    <div class="editor-panel">
                         <div class="preview-wrap">
-                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Current preview"></iframe></div>
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Blank preview"></iframe></div>
                         </div>
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="preview-tools">
+
+                                <div class="device-toggle">
+                                    <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                    <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                    <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                                </div>
+                                <select class="zoom-select" title="Zoom preview">
+                                    <option value="100">100%</option>
+                                    <option value="75">75%</option>
+                                    <option value="50">50%</option>
+                                </select>
+                                <button type="button" class="preview-tool-btn refresh-preview-btn" title="Refresh preview">⟳</button>
+                                <button type="button" class="preview-tool-btn open-preview-btn" title="Open in new tab">↗</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1138,54 +1571,135 @@
 
     <section id="template3" class="page" data-title="Current + Footer" data-desc="The Current layout with a contact footer.">
         <main class="editor-container">
-            <div class="editor-header">
-                <div class="page-title">
-                    <h1>Current + Footer</h1>
-                    <p>The Current layout with a contact footer.</p>
-                </div><button class="back-button" data-page="home">← Back to Home</button></div>
+
             <div class="editor-card">
+
                 <div class="template-actions">
-                    <div class="template-actions-title"><strong>Template Actions</strong></div>
-                    <div class="template-actions-buttons">
-                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
-                        <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
-                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
-                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    <h1>Current</h1>
+                    <div class="actions-dropdown">
+                        <button type="button" class="actions-trigger">Actions <span class="caret">▾</span></button>
+
+                        <div class="actions-menu">
+
+                            <!-- Reset -->
+                            <div class="action-section">
+                                <div class="action-section-header">Reset Template</div>
+                                <button type="button" class="template-action-btn reset-btn">↺ Restore Original</button>
+                            </div>
+
+                            <!-- Copy / Download / Email -->
+                            <div class="action-section">
+                                <div class="action-section-header">Export & Email</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-button">Copy HTML</button>
+                                    <button type="button" class="template-action-btn download-button">Download HTML</button>
+                                    <div class="action-groupp">
+                                        <button type="button" class="template-action-btn gmail-btn" disabled>Open in Gmail</button>
+                                        <button type="button" class="template-action-btn outlook-btn" disabled>Open in Outlook</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Prompt / Generate -->
+                            <div class="action-section">
+                                <div class="action-section-header">AI Content</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Content</a>
+                                    <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate HTML</a>
+                                </div>
+                            </div>
+
+                            <!-- Find PASTE / SUBJECT -->
+                            <div class="action-section">
+                                <div class="action-section-header">Find & Navigate</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn paste-body-btn">Find Subject</button>
+                                    <button type="button" class="template-action-btn subject-body-btn">Find To</button>
+                                    <button type="button" class="template-action-btn n-body-btn">Find Body</button>
+                                    <button type="button" class="template-action-btn m-body-btn">Find From</button>
+                                </div>
+                            </div>
+
+                            <!-- Back to Home -->
+                            <button class="back-button" data-page="home">← Back to Home</button>
+
+                        </div>
+
+                        <style>
+                            .action-group {
+                                border: 1px solid #38bdf8;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-groupp {
+                                border: 1px solid #c1cfd5;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-section-header {
+                                font-size: 11px;
+                                font-weight: 600;
+                                opacity: 0.7;
+                                margin: 2px 0 4px 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="editor-status" data-status></div>
                 <div class="editor-grid">
                     <div class="editor-panel">
-                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
                             <div class="find-bar">
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button find-matchcase" title="Match case">Aa</button>
                                 <span class="find-count">0/0</span>
                                 <button type="button" class="find-button find-prev" title="Previous match">↑</button>
                                 <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-toggle-replace" title="Toggle replace">⇄</button>
                                 <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-                            <textarea class="code-editor" data-template="cur with fot.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-                        </div>
-                        <div class="editor-toolbar">
-                            <button class="btn copy-button">Copy HTML</button>
-                            <button class="btn ghost download-button">⬇ Download</button>
-                            <button class="btn gmail" disabled>Gmail</button>
-                            <button class="btn outlook" disabled>Outlook</button>
-                        </div>
-                    </div>
-                    <div class="editor-panel">
-                        <div class="panel-head">
-                            <span class="panel-label">Live Preview</span>
-                            <div class="device-toggle">
-                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
-                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
-                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            <div class="replace-bar">
+                                <input type="text" class="replace-input" placeholder="Replace with..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button replace-one" title="Replace">Replace</button>
+                                <button type="button" class="find-button replace-all" title="Replace all">Replace All</button>
+                            </div>
+                            <div class="editor-flex">
+                                <div class="line-numbers">1</div>
+                                <textarea class="code-editor" data-template="cur with fot.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
                             </div>
                         </div>
+                        <div style="border-top: 1px solid transparent;"></div>
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
+
+                    </div>
+                    <div class="editor-panel">
                         <div class="preview-wrap">
-                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Current + Footer preview"></iframe></div>
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Blank preview"></iframe></div>
                         </div>
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="preview-tools">
+
+                                <div class="device-toggle">
+                                    <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                    <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                    <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                                </div>
+                                <select class="zoom-select" title="Zoom preview">
+                                    <option value="100">100%</option>
+                                    <option value="75">75%</option>
+                                    <option value="50">50%</option>
+                                </select>
+                                <button type="button" class="preview-tool-btn refresh-preview-btn" title="Refresh preview">⟳</button>
+                                <button type="button" class="preview-tool-btn open-preview-btn" title="Open in new tab">↗</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1194,54 +1708,134 @@
 
     <section id="template4" class="page" data-title="Full" data-desc="A complete layout — header, hero, features, testimonial, footer.">
         <main class="editor-container">
-            <div class="editor-header">
-                <div class="page-title">
-                    <h1>Full</h1>
-                    <p>A complete layout — header, hero, features, testimonial, footer.</p>
-                </div><button class="back-button" data-page="home">← Back to Home</button></div>
+
             <div class="editor-card">
                 <div class="template-actions">
-                    <div class="template-actions-title"><strong>Template Actions</strong></div>
-                    <div class="template-actions-buttons">
-                        <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
-                        <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Body</a>
-                        <button type="button" class="template-action-btn paste-body-btn">Find PASTE spot</button>
-                        <button type="button" class="template-action-btn reset-btn">↺ Reset</button>
+                    <h1>Current</h1>
+                    <div class="actions-dropdown">
+                        <button type="button" class="actions-trigger">Actions <span class="caret">▾</span></button>
+
+                        <div class="actions-menu">
+
+                            <!-- Reset -->
+                            <div class="action-section">
+                                <div class="action-section-header">Reset Template</div>
+                                <button type="button" class="template-action-btn reset-btn">↺ Restore Original</button>
+                            </div>
+
+                            <!-- Copy / Download / Email -->
+                            <div class="action-section">
+                                <div class="action-section-header">Export & Email</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-button">Copy HTML</button>
+                                    <button type="button" class="template-action-btn download-button">Download HTML</button>
+                                    <div class="action-groupp">
+                                        <button type="button" class="template-action-btn gmail-btn" disabled>Open in Gmail</button>
+                                        <button type="button" class="template-action-btn outlook-btn" disabled>Open in Outlook</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Prompt / Generate -->
+                            <div class="action-section">
+                                <div class="action-section-header">AI Content</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn copy-prompt-btn">Copy AI Prompt</button>
+                                    <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate Content</a>
+                                    <a href="https://chatgpt.com/c/6a884591-83c4-83ee-8758-1b9becdb1e1d" target="_blank" rel="noopener noreferrer" class="template-action-btn">Generate HTML</a>
+                                </div>
+                            </div>
+
+                            <!-- Find PASTE / SUBJECT -->
+                            <div class="action-section">
+                                <div class="action-section-header">Find & Navigate</div>
+                                <div class="action-group">
+                                    <button type="button" class="template-action-btn paste-body-btn">Find Subject</button>
+                                    <button type="button" class="template-action-btn subject-body-btn">Find To</button>
+                                    <button type="button" class="template-action-btn n-body-btn">Find Body</button>
+                                    <button type="button" class="template-action-btn m-body-btn">Find From</button>
+                                </div>
+                            </div>
+
+                            <!-- Back to Home -->
+                            <button class="back-button" data-page="home">← Back to Home</button>
+
+                        </div>
+
+                        <style>
+                            .action-group {
+                                border: 1px solid #38bdf8;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-groupp {
+                                border: 1px solid #c1cfd5;
+                                border-radius: 8px;
+                                padding: 4px;
+                            }
+                            
+                            .action-section-header {
+                                font-size: 11px;
+                                font-weight: 600;
+                                opacity: 0.7;
+                                margin: 2px 0 4px 4px;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="editor-status" data-status></div>
                 <div class="editor-grid">
                     <div class="editor-panel">
-                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
                         <div class="code-area">
                             <div class="find-bar">
                                 <input type="search" class="find-input" placeholder="Find in code..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button find-matchcase" title="Match case">Aa</button>
                                 <span class="find-count">0/0</span>
                                 <button type="button" class="find-button find-prev" title="Previous match">↑</button>
                                 <button type="button" class="find-button find-next" title="Next match">↓</button>
+                                <button type="button" class="find-button find-toggle-replace" title="Toggle replace">⇄</button>
                                 <button type="button" class="find-button find-close" title="Close">×</button>
                             </div>
-                            <textarea class="code-editor" data-template="full.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
-                        </div>
-                        <div class="editor-toolbar">
-                            <button class="btn copy-button">Copy HTML</button>
-                            <button class="btn ghost download-button">⬇ Download</button>
-                            <button class="btn gmail" disabled>Gmail</button>
-                            <button class="btn outlook" disabled>Outlook</button>
-                        </div>
-                    </div>
-                    <div class="editor-panel">
-                        <div class="panel-head">
-                            <span class="panel-label">Live Preview</span>
-                            <div class="device-toggle">
-                                <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
-                                <button type="button" class="device-btn" data-device="tablet">Tablet</button>
-                                <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                            <div class="replace-bar">
+                                <input type="text" class="replace-input" placeholder="Replace with..." autocomplete="off" spellcheck="false">
+                                <button type="button" class="find-button replace-one" title="Replace">Replace</button>
+                                <button type="button" class="find-button replace-all" title="Replace all">Replace All</button>
+                            </div>
+                            <div class="editor-flex">
+                                <div class="line-numbers">1</div>
+                                <textarea class="code-editor" data-template="full.txt" placeholder="Paste your HTML code here..." spellcheck="false"></textarea>
                             </div>
                         </div>
+                        <div style="border-top: 1px solid transparent;"></div>
+                        <div class="panel-head"><span class="panel-label">HTML Input Editor</span><span class="panel-meta lines-count">0 lines · 0 chars</span></div>
+
+                    </div>
+                    <div class="editor-panel">
                         <div class="preview-wrap">
-                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Full preview"></iframe></div>
+                            <div class="preview-container" data-device="desktop"><iframe class="preview-frame" title="Blank preview"></iframe></div>
                         </div>
+                        <div class="panel-head">
+                            <span class="panel-label">Live Preview</span>
+                            <div class="preview-tools">
+
+                                <div class="device-toggle">
+                                    <button type="button" class="device-btn active" data-device="desktop">Desktop</button>
+                                    <button type="button" class="device-btn" data-device="tablet">Tablet</button>
+                                    <button type="button" class="device-btn" data-device="mobile">Mobile</button>
+                                </div>
+                                <select class="zoom-select" title="Zoom preview">
+                                    <option value="100">100%</option>
+                                    <option value="75">75%</option>
+                                    <option value="50">50%</option>
+                                </select>
+                                <button type="button" class="preview-tool-btn refresh-preview-btn" title="Refresh preview">⟳</button>
+                                <button type="button" class="preview-tool-btn open-preview-btn" title="Open in new tab">↗</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1446,19 +2040,34 @@ The email content will be sent in the NEXT response after this prompt.`;
                 const previewContainer = card.querySelector(".preview-container");
                 const copyButton = card.querySelector(".copy-button");
                 const downloadButton = card.querySelector(".download-button");
-                const gmailBtn = card.querySelector(".gmail");
-                const outlookBtn = card.querySelector(".outlook");
+                const gmailBtn = card.querySelector(".gmail-btn");
+                const outlookBtn = card.querySelector(".outlook-btn");
                 const status = card.querySelector(".editor-status");
                 const linesCount = card.querySelector(".lines-count");
                 const resetBtn = card.querySelector(".reset-btn");
                 const copyPromptBtn = card.querySelector(".copy-prompt-btn");
+
                 const pasteBodyBtn = card.querySelector(".paste-body-btn");
+                const subjectBodyBtn = card.querySelector(".subject-body-btn");
+
+                const nBodyBtn = card.querySelector(".n-body-btn");
+
+                const mBodyBtn = card.querySelector(".m-body-btn");
+                const lineNumbers = card.querySelector(".line-numbers");
                 const storageKey = "es_content_" + key;
+
+                function updateLineNumbers() {
+                    const lines = editor.value.split("\n").length;
+                    let out = "";
+                    for (let i = 1; i <= lines; i++) out += i + "\n";
+                    lineNumbers.textContent = out;
+                }
 
                 function updateMeta() {
                     const lines = editor.value.split("\n").length;
                     const chars = editor.value.length;
                     linesCount.textContent = lines + " lines · " + chars + " chars";
+                    updateLineNumbers();
                 }
 
                 function updatePreview() {
@@ -1468,6 +2077,10 @@ The email content will be sent in the NEXT response after this prompt.`;
                         localStorage.setItem(storageKey, editor.value);
                     } catch (e) {}
                 }
+
+                editor.addEventListener("scroll", () => {
+                    lineNumbers.scrollTop = editor.scrollTop;
+                });
 
                 let originalCode = "";
 
@@ -1574,7 +2187,34 @@ The email content will be sent in the NEXT response after this prompt.`;
                 });
                 outlookBtn.addEventListener("click", () => {
                     if (outlookBtn.disabled) return;
-                    window.open("https://outlook.live.com/mail/0/deeplink/compose", "_blank");
+                    window.open("https://outlook.live.com/mail", "_blank");
+                });
+
+                // Gmail / Outlook re-lock themselves 5 seconds after being
+                // enabled by a copy, so they stay disabled unless HTML was
+                // just copied.
+                setInterval(() => {
+                    gmailBtn.disabled = true;
+                    outlookBtn.disabled = true;
+                }, 10000);
+
+                /* ---------- Actions dropdown (click + hover) ---------- */
+                const actionsDropdown = card.querySelector(".actions-dropdown");
+                const actionsTrigger = card.querySelector(".actions-trigger");
+                const actionsMenu = card.querySelector(".actions-menu");
+
+                actionsTrigger.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    const willOpen = !actionsMenu.classList.contains("open");
+                    actionsMenu.classList.toggle("open", willOpen);
+                    actionsTrigger.classList.toggle("open", willOpen);
+                });
+
+                document.addEventListener("click", (event) => {
+                    if (!actionsDropdown.contains(event.target)) {
+                        actionsMenu.classList.remove("open");
+                        actionsTrigger.classList.remove("open");
+                    }
                 });
 
                 /* ---------- Copy AI prompt ---------- */
@@ -1590,23 +2230,8 @@ The email content will be sent in the NEXT response after this prompt.`;
                     }
                 });
 
-                /* ---------- Find the PASTE marker ---------- */
-                pasteBodyBtn.addEventListener("click", () => {
-                    findBar.classList.add("open");
-                    findInput.value = "PASTE";
-                    findInput.focus();
-                    findInput.select();
-                    runFind("PASTE");
-                    if (matches.length) {
-                        goToMatch(0);
-                    } else {
-                        findCount.textContent = "0/0";
-                        toast("No PASTE marker found in this template.", true);
-                    }
-                });
-
                 /* =====================================================
-                   FIND (Ctrl+F, Enter/Shift+Enter, Escape)
+                   FIND (Ctrl+F, Enter/Shift+Enter, Escape) + REPLACE
                 ===================================================== */
                 const codeArea = editor.closest(".code-area");
                 const findBar = codeArea.querySelector(".find-bar");
@@ -1615,9 +2240,16 @@ The email content will be sent in the NEXT response after this prompt.`;
                 const prevBtn = findBar.querySelector(".find-prev");
                 const nextBtn = findBar.querySelector(".find-next");
                 const closeBtn = findBar.querySelector(".find-close");
+                const matchCaseBtn = findBar.querySelector(".find-matchcase");
+                const toggleReplaceBtn = findBar.querySelector(".find-toggle-replace");
+                const replaceBar = codeArea.querySelector(".replace-bar");
+                const replaceInput = replaceBar.querySelector(".replace-input");
+                const replaceOneBtn = replaceBar.querySelector(".replace-one");
+                const replaceAllBtn = replaceBar.querySelector(".replace-all");
 
                 let matches = [];
                 let currentMatch = -1;
+                let matchCase = false;
 
                 function runFind(query) {
                     matches = [];
@@ -1626,8 +2258,8 @@ The email content will be sent in the NEXT response after this prompt.`;
                         findCount.textContent = "0/0";
                         return;
                     }
-                    const source = editor.value.toLowerCase();
-                    const q = query.toLowerCase();
+                    const source = matchCase ? editor.value : editor.value.toLowerCase();
+                    const q = matchCase ? query : query.toLowerCase();
                     let pos = 0;
                     while (true) {
                         const idx = source.indexOf(q, pos);
@@ -1654,6 +2286,21 @@ The email content will be sent in the NEXT response after this prompt.`;
                     editor.scrollTop = Math.max(0, (lineNumber - 4) * lineHeight);
                 }
 
+                function openFindBar(prefill) {
+                    findBar.classList.add("open");
+                    if (prefill !== undefined) {
+                        findInput.value = prefill;
+                    }
+                    findInput.focus();
+                    findInput.select();
+                    runFind(findInput.value);
+                    if (matches.length) {
+                        goToMatch(0);
+                    } else {
+                        findCount.textContent = "0/0";
+                    }
+                }
+
                 findInput.addEventListener("input", () => runFind(findInput.value));
                 findInput.addEventListener("keydown", (event) => {
                     if (event.key === "Enter") {
@@ -1662,6 +2309,7 @@ The email content will be sent in the NEXT response after this prompt.`;
                         goToMatch(event.shiftKey ? currentMatch - 1 : currentMatch + 1);
                     } else if (event.key === "Escape") {
                         findBar.classList.remove("open");
+                        replaceBar.classList.remove("open");
                         editor.focus();
                     }
                 });
@@ -1669,18 +2317,101 @@ The email content will be sent in the NEXT response after this prompt.`;
                 prevBtn.addEventListener("click", () => goToMatch(currentMatch - 1));
                 closeBtn.addEventListener("click", () => {
                     findBar.classList.remove("open");
+                    replaceBar.classList.remove("open");
                     editor.focus();
                 });
 
-                editor.addEventListener("keydown", (event) => {
-                    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
-                        event.preventDefault();
-                        findBar.classList.add("open");
-                        findInput.focus();
-                        findInput.select();
+                // Match case toggle
+                matchCaseBtn.addEventListener("click", () => {
+                    matchCase = !matchCase;
+                    matchCaseBtn.classList.toggle("active", matchCase);
+                    runFind(findInput.value);
+                    if (matches.length) goToMatch(0);
+                });
+
+                // Toggle the replace row
+                toggleReplaceBtn.addEventListener("click", () => {
+                    const willOpen = !replaceBar.classList.contains("open");
+                    replaceBar.classList.toggle("open", willOpen);
+                    if (willOpen) replaceInput.focus();
+                });
+
+                // Replace the currently-selected match
+                replaceOneBtn.addEventListener("click", () => {
+                    if (!matches.length || currentMatch === -1) return;
+                    const match = matches[currentMatch];
+                    const value = editor.value;
+                    editor.value = value.slice(0, match.start) + replaceInput.value + value.slice(match.end);
+                    updatePreview();
+                    runFind(findInput.value);
+                    if (matches.length) {
+                        goToMatch(Math.min(currentMatch, matches.length - 1));
+                    } else {
+                        toast("No more matches.");
                     }
                 });
 
+                // Replace every match at once
+                replaceAllBtn.addEventListener("click", () => {
+                    runFind(findInput.value);
+                    if (!matches.length) {
+                        toast("Nothing to replace.", true);
+                        return;
+                    }
+                    let value = editor.value;
+                    let result = "";
+                    let lastEnd = 0;
+                    matches.forEach((m) => {
+                        result += value.slice(lastEnd, m.start) + replaceInput.value;
+                        lastEnd = m.end;
+                    });
+                    result += value.slice(lastEnd);
+                    const count = matches.length;
+                    editor.value = result;
+                    updatePreview();
+                    runFind(findInput.value);
+                    toast("Replaced " + count + " match" + (count === 1 ? "" : "es") + ".");
+                });
+
+                // Keep matches/count in sync while typing in the editor
+                editor.addEventListener("input", () => {
+                    if (findBar.classList.contains("open") && findInput.value) {
+                        runFind(findInput.value);
+                    }
+                });
+
+                // Ctrl+F opens the find bar from anywhere within this card,
+                // not only while the textarea itself has focus.
+                card.addEventListener("keydown", (event) => {
+                    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
+                        event.preventDefault();
+                        openFindBar();
+                    }
+                });
+
+                /* ---------- Find the SUBJECT marker ---------- */
+                pasteBodyBtn.addEventListener("click", () => {
+                    openFindBar("https://www.ltm.com/");
+                    if (!matches.length) toast("No SUBJECT marker found in this template.", true);
+                });
+
+                /* ---------- Find the TO marker ---------- */
+                subjectBodyBtn.addEventListener("click", () => {
+                    openFindBar("Confidentiality Notice");
+                    if (!matches.length) toast("No TO marker found in this template.", true);
+                });
+
+                /* ---------- Find the BODY marker ---------- */
+                nBodyBtn.addEventListener("click", () => {
+                    openFindBar("Copyright");
+                    if (!matches.length) toast("No name marker found in this template.", true);
+                });
+
+                /* ---------- Find the FROM marker ---------- */
+                mBodyBtn.addEventListener("click", () => {
+                    openFindBar("PASTE START 1");
+                    if (!matches.length) toast("No FROM marker found in this template.", true);
+                });
                 /* ---------- Device preview toggle ---------- */
                 card.querySelectorAll(".device-btn").forEach((btn) => {
                     btn.addEventListener("click", () => {
@@ -1689,9 +2420,94 @@ The email content will be sent in the NEXT response after this prompt.`;
                         previewContainer.dataset.device = btn.dataset.device;
                     });
                 });
+
+                /* ---------- Live preview: refresh / open in new tab / zoom ---------- */
+                const refreshPreviewBtn = card.querySelector(".refresh-preview-btn");
+                const openPreviewBtn = card.querySelector(".open-preview-btn");
+                const zoomSelect = card.querySelector(".zoom-select");
+
+                refreshPreviewBtn.addEventListener("click", () => {
+                    updatePreview();
+                    toast("Preview refreshed.");
+                });
+
+                openPreviewBtn.addEventListener("click", () => {
+                    const blob = new Blob([editor.value], {
+                        type: "text/html"
+                    });
+                    const url = URL.createObjectURL(blob);
+                    window.open(url, "_blank");
+                    setTimeout(() => URL.revokeObjectURL(url), 30000);
+                });
+
+                zoomSelect.addEventListener("change", () => {
+                    const pct = zoomSelect.value;
+                    preview.style.transformOrigin = "top left";
+                    preview.style.transform = "scale(" + (pct / 100) + ")";
+                    preview.style.width = (10000 / pct) + "%";
+                    preview.style.height = (10000 / pct) + "%";
+                });
             });
 
         })();
+        document.querySelectorAll('.actions-dropdown').forEach(dropdown => {
+            const trigger = dropdown.querySelector('.actions-trigger');
+            const menu = dropdown.querySelector('.actions-menu');
+
+            let closeTimer;
+
+            function openActions() {
+                clearTimeout(closeTimer);
+                dropdown.classList.add('open');
+                trigger.classList.add('open');
+            }
+
+            function closeActions() {
+                clearTimeout(closeTimer);
+                closeTimer = setTimeout(() => {
+                    dropdown.classList.remove('open');
+                    trigger.classList.remove('open');
+                }, 120);
+            }
+
+            // Entering the button/dropdown area opens it
+            dropdown.addEventListener('mouseenter', openActions);
+
+            // Leaving the entire dropdown closes it
+            dropdown.addEventListener('mouseleave', closeActions);
+
+            // Clicking the Actions button toggles it
+            trigger.addEventListener('click', (event) => {
+                event.stopPropagation();
+                clearTimeout(closeTimer);
+
+                dropdown.classList.toggle('open');
+                trigger.classList.toggle(
+                    'open',
+                    dropdown.classList.contains('open')
+                );
+            });
+
+            // Clicking an action closes the menu
+            menu.addEventListener('click', (event) => {
+                if (event.target.closest('.template-action-btn, .back-button')) {
+                    dropdown.classList.remove('open');
+                    trigger.classList.remove('open');
+                }
+            });
+        });
+
+        // Clicking anywhere outside an Actions dropdown closes it
+        document.addEventListener('click', (event) => {
+            document.querySelectorAll('.actions-dropdown.open').forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('open');
+
+                    const trigger = dropdown.querySelector('.actions-trigger');
+                    if (trigger) trigger.classList.remove('open');
+                }
+            });
+        });
     </script>
 </body>
 
