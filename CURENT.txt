@@ -185,9 +185,31 @@
                                     font-weight:800;
                                     color:#ffffff;
                                     font-family:Arial,Helvetica,sans-serif;">
-
+<!-- FIND CONTENT 1 -->    
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT HERE -->
                                                         Project Status Update
-
+<!-- CONTENT HERE -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- FIND CONTENT 1 --> 
                                                     </div>
 
                                                     <div style="margin-top:8px; color:#f2b4b4; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
@@ -243,12 +265,18 @@
                     <tr>
                         <td style="padding:20px 32px 28px 32px; background-color:#0c0808;">
 
-<!-- ---------- PASTE START ---------- --><!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
+<!-- FIND CONTENT 2 -->    
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT HERE -->
       <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
                                 <strong>
         <span style="color:#ffffff;">Dear</span>
@@ -256,27 +284,60 @@
     </strong>
                             </p>
 
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE HERE ---------- -->                        
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE HERE ---------- --> 
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE END ---------- -->
+<!-- CONTENT HERE -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- FIND CONTENT 2 -->    
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<!-- FIND CONTENT 3 -->    
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT HERE -->
+
+
+<!-- CONTENT HERE -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- FIND CONTENT 3 -->    
 
 
                             <!-- ---------- DIVIDER ---------- -->
@@ -290,7 +351,35 @@
                                 <tr>
                                     <td width="55%" valign="top" style="padding-right:18px;">
                                         <div style="font-size:14px;color:#b8b1b1;">Warm regards,</div>
-                                        <div style="margin-top:6px;font-size:20px;font-weight:bold;color:#fff;">Ajith R</div>
+                                        <div style="margin-top:6px;font-size:20px;font-weight:bold;color:#fff;">
+
+
+<!-- FIND CONTENT 4 -->    
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT HERE -->
+                                        Ajith R
+<!-- CONTENT HERE -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- CONTENT  -->
+<!-- FIND CONTENT 4 -->                                            
+                                        </div>
                                         <img src="https://cdn.corenexis.com/f/9fVc1nuTCwI.png" width="140" style="display:block;border:0;margin-top:8px;">
                                         <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
                                             Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
