@@ -380,7 +380,7 @@
 <!-- CONTENT  -->
 <!-- FIND CONTENT 4 -->                                            
                                         </div>
-                                        <img src="https://cdn.corenexis.com/f/9fVc1nuTCwI.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                        <img src="https://3q6zdll8lz.ucarecd.net/f7a69bb8-ad3c-401e-a41a-8204e32c39b8/1000213675removebgpreview.png" width="140" style="display:block;border:0;margin-top:8px;">
                                         <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
                                             Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
                                             <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer" style="color:red;text-decoration:none;">LTM</a> •
