@@ -1221,7 +1221,15 @@
         <div class="nav-container">
 
             <div class="logo-wrap">
-                <button type="button" class="logo" id="logoBtn">Email <span>Studio</span></button>
+                <button type="button" class="logo" id="logoBtn">
+    Email <span>Studio</span>
+</button>
+
+                <script>
+                    document.getElementById("logoBtn").addEventListener("dblclick", () => {
+                        window.location.href = "./email.html";
+                    });
+                </script>
                 <div class="logo-popup" id="logoPopup">
                     <button type="button" id="copyLinkBtn">Copy link</button>
                     <button type="button" id="shareBtn">Share</button>

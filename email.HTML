@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Studio</title>
+    <style>
+        /* === BASE & RESET === */
+        
+         :root {
+            --bg-dark: #000000;
+            --card-bg: #0c0808;
+            --input-bg: #1a1111;
+            --border-red: #7f1d1d;
+            --accent-red: #ef4444;
+            --accent-glow: rgba(239, 68, 68, 0.4);
+            --text-main: #ffffff;
+            --text-sub: #f2b4b4;
+            --success: #4ade80;
+        }
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            align-items: center;
+        }
+        /* === CONTAINER & ANIMATIONS === */
+        
+        .container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-red);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            position: relative;
+            transition: max-width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        h2 {
+            color: var(--accent-red);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        /* === PROGRESS BAR === */
+        
+        .progress-container {
+            width: 100%;
+            background: #2a1616;
+            border-radius: 10px;
+            height: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #7f1d1d, #ef4444, #f87171);
+            width: 20%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+        /* === WIZARD STEPS === */
+        
+        .step {
+            display: none;
+            animation: slideUp 0.4s ease forwards;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-align: center;
+        }
+        
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--input-bg);
+            border: 2px solid var(--border-red);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"] {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+        
+        textarea {
+            height: 160px;
+            resize: vertical;
+            line-height: 1.5;
+            font-family: inherit;
+        }
+        
+        textarea.code-mode {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            color: #4ade80;
+        }
+        /* === HTML TOGGLE === */
+        
+        .html-toggle-container {
+            display: flex;
+            justify-content: flex-left;
+            margin-bottom: 8px;
+            margin-top: -5px;
+        }
+        
+        .html-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #888;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .html-toggle input {
+            cursor: pointer;
+            accent-color: var(--accent-red);
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+        /* === BUTTONS === */
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 120px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button:active {
+            transform: scale(0.96);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #dc2828, #ef4444);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+        }
+        
+        .btn-secondary {
+            background-color: #2a1616;
+            color: var(--text-sub);
+            border: 1px solid var(--border-red);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3f2222;
+            color: white;
+        }
+        
+        .btn-icon {
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        /* === STEP 4: ACTION LINKS & COUNTER === */
+        
+        .action-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .action-link {
+            background: rgba(220, 40, 40, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+            transition: all 0.3s;
+        }
+        
+        .action-link:hover {
+            background: var(--accent-red);
+            color: #fff;
+            box-shadow: 0 0 10px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        
+        .counter {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            padding-right: 5px;
+        }
+        /* === STEP 5: SUMMARY & EDIT === */
+        
+        .summary-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #444;
+            padding: 12px 0;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-details {
+            width: 80%;
+        }
+        
+        .summary-label {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .summary-value {
+            color: var(--text-main);
+            font-size: 15px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .edit-jump {
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .edit-jump:hover {
+            background: var(--success);
+            color: #000;
+        }
+        /* === STEP 5: WORKSPACE (EDITOR/VIEWER) === */
+        
+        .workspace {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            height: 450px;
+            opacity: 0;
+            animation: fadeIn 0.5s 0.3s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            border: 1px solid var(--border-red);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            background: #1a1111;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-sub);
+            border-bottom: 1px solid var(--border-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toggle-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            font-size: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .toggle-btn.active {
+            background: var(--accent-red);
+        }
+        
+        #code-editor {
+            flex: 1;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 12px;
+            background: transparent;
+            color: #e2e8f0;
+            padding: 15px;
+            border: none;
+            resize: none;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            outline: none;
+        }
+        
+        #code-viewer-container {
+            flex: 1;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        #code-viewer {
+            border: none;
+            background: #fff;
+            width: 100%;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        #code-viewer.mobile-mode {
+            width: 375px;
+            height: 100%;
+            border-left: 1px solid #333;
+            border-right: 1px solid #333;
+        }
+        /* === TOOLS & TOAST === */
+        
+        .header-tools {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .tool-icon {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: 0.2s;
+            min-width: auto;
+        }
+        
+        .tool-icon:hover {
+            color: var(--accent-red);
+            transform: rotate(15deg);
+        }
+        
+        #toast {
+            position: fixed;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+            transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        @media screen and (max-width: 900px) {
+            .workspace {
+                flex-direction: column;
+                height: 800px;
+            }
+            .panel {
+                height: 400px;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 25px 15px;
+            }
+            button {
+                width: 100%;
+            }
+            .summary-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .edit-jump {
+                align-self: flex-end;
+                margin-top: -30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="toast">✅ HTML Code Copied to Clipboard!</div>
+
+    <div class="container" id="main-container">
+
+        <div class="header-tools">
+            <button class="tool-icon" onclick="clearData()" title="Reset All Fields">↺</button>
+        </div>
+
+        <h2>Email Studio</h2>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="prog-bar"></div>
+        </div>
+
+        <!-- STEP 1: Subject -->
+        <div id="step-1" class="step active">
+            <label for="fill1">What is the Subject ?</label>
+            <input type="text" id="fill1" value="Project Status Update" oninput="saveData()">
+            <div class="btn-group">
+                <button class="btn-primary" onclick="goToStep(2)">Next Step ➔</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: Recipient Name -->
+        <div id="step-2" class="step">
+            <label for="fill2">Who is the Recipient ?</label>
+            <input type="text" id="fill2" placeholder="e.g., Reporting Manager" oninput="saveData()">
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+                <button class="btn-primary" onclick="goToStep(3)">Next Step ➔</button>
+            </div>
+        </div>
+
+        <!-- STEP 3: Sender Name -->
+        <div id="step-3" class="step">
+            <label for="fill4">Who is the Sender ?</label>
+            <input type="text" id="fill4" value="Ajith R" oninput="saveData()">
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+                <button class="btn-primary" onclick="goToStep(4)">Next Step ➔</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Body Content -->
+        <div id="step-4" class="step">
+            <label for="fill3">Enter the Body Content</label>
+
+            <div class="action-links">
+                <a href="https://gemini.google.com/app" class="action-link" target="_blank" title="Open Mail Generator">GENERATE MAIL</a>
+                <a href="https://gemini.google.com/app/67805154c3552eb8" class="action-link" target="_blank" title="Generate Body Content">GENERATE HTML</a>
+            </div>
+
+
+
+            <textarea id="fill3" placeholder="Type or paste your professional update here..." oninput="updateCounter(); saveData()"></textarea>
+
+            <div class="html-toggle-container">
+                <label class="html-toggle">
+                <input type="checkbox" id="raw-html-toggle" onchange="toggleRawHtml()"> Paste as Raw HTML
+            </label>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="goToStep(3)">← Back</button>
+                <button class="btn-primary" onclick="goToStep(5)">Get Final Check ✓</button>
+            </div>
+        </div>
+
+        <!-- STEP 5: Final Check Summary & Code Workspace -->
+        <div id="step-5" class="step">
+            <label>Preview</label>
+
+            <div class="summary-box">
+                <div class="summary-row">
+                    <div class="summary-details"><span class="summary-label">Subject</span><span class="summary-value" id="sum-subject"></span></div>
+                    <button class="edit-jump" onclick="goToStep(1)">✎ Edit</button>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-details"><span class="summary-label">Recipient</span><span class="summary-value" id="sum-recipient"></span></div>
+                    <button class="edit-jump" onclick="goToStep(2)">✎ Edit</button>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-details"><span class="summary-label">Sender</span><span class="summary-value" id="sum-sender"></span></div>
+                    <button class="edit-jump" onclick="goToStep(3)">✎ Edit</button>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-details"><span class="summary-label">Body Snippet</span><span class="summary-value" id="sum-body"></span></div>
+                    <button class="edit-jump" onclick="goToStep(4)">✎ Edit</button>
+                </div>
+            </div>
+
+            <div class="workspace">
+                <div class="panel">
+                    <div class="panel-header">
+                        <span></> SOURCE CODE</span>
+                    </div>
+                    <textarea id="code-editor" oninput="updateViewer()" spellcheck="false"></textarea>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>LIVE PREVIEW</span>
+
+                    </div>
+                    <div id="code-viewer-container">
+                        <iframe id="code-viewer"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-primary btn-icon" style="max-width:100%; font-size:18px;" onclick="copyFinalCode()">COPY HTML CODE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Base Template -->
+    <textarea id="template-source" style="display: none;">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajith Ramesh | Project Status Update</title>
+    <style>
+        html, body { margin: 0 !important; padding: 0 !important; height: 100% !important; width: 100% !important; background: #000000 !important; }
+        body, table, td, p, a { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        @media screen and (max-width: 600px) {
+            .responsive-container { width: 100% !important; max-width: 100% !important; border-radius: 0 !important; }
+        }
+    </style>
+</head>
+<body style="margin:0; padding:0; background:#000000;">
+    <div style="display:none; max-height:0; overflow:hidden; font-size:1px; line-height:1px; color:#000000; opacity:0;">
+        Project status update: your Power BI analytics submission is under review.
+    </div>
+    <table role="presentation" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding:40px 16px;">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px; border:1px solid #241111;" width="600">
+                    <tr><td style="height:4px; line-height:4px; font-size:0; background-color:#ef4444; background-image:linear-gradient(90deg,#7f1d1d,#ef4444,#f87171); border-radius:28px 28px 0 0;">&nbsp;</td></tr>
+                    <tr>
+                        <td align="center" bgcolor="#000000" style="padding:20px;">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:760px; background:#000000; border-radius:12px; background-image:linear-gradient(155deg,#000000,#b42222,#000000dc); border:2px solid #dc2828;">
+                                <tr>
+                                    <td align="center" style="padding:36px 32px 28px 32px;">
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td align="left" valign="middle">
+                                                    <div style="font-size:11px; letter-spacing:2px; color:#ef4444; text-transform:uppercase; font-weight:700;">Ajith's</div>
+                                                    <div style="margin-top:8px; font-size:26px; line-height:30px; font-weight:800; color:#ffffff;">
+<!-- FILL 1 -->
+                                                    </div>
+                                                    <div style="margin-top:8px; color:#f2b4b4; font-size:14px; font-weight:600;">Cloud Infrastructure Services</div>
+                                                    <div style="margin-top:4px; color:#b7b0b0; font-size:13px;">Associate Trainee</div>
+                                                </td>
+                                                <td align="right" valign="top" width="170">
+                                                    <a href="https://www.larsentoubro.com/" target="_blank"><img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" alt="L&T Group" width="140" style="display:block;width:140px;height:auto;border:0;"></a>
+                                                    <div style="height:10px;"></div>
+                                                    <a href="https://www.ltm.com/" target="_blank"><img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTM" width="90" style="display:block;width:90px;height:auto;border:0; float:right;"></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:20px 32px 28px 32px;">
+                            <p style="font-size:17px; margin:0; color:#ffffff;">
+                                <strong>Dear <span style="color:#ef4444;"><!-- FILL 2 --></span>,</strong>
+                            </p>
+<!-- FILL 3 -->
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:26px;">
+                                <tr><td style="border-top:1px solid #221010; font-size:0; line-height:0;">&nbsp;</td></tr>
+                            </table>
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+                                <tr>
+                                    <td width="55%" valign="top" style="padding-right:18px;">
+                                        <div style="font-size:14px;color:#b8b1b1;">Warm regards,</div>
+                                        <div style="margin-top:6px;font-size:20px;font-weight:bold;color:#fff;">
+<!-- FILL 4 -->
+                                        </div>
+                                        <img src="https://3q6zdll8lz.ucarecd.net/f7a69bb8-ad3c-401e-a41a-8204e32c39b8/1000213675removebgpreview.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                        <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
+                                            Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
+                                            <a href="https://www.ltm.com/" target="_blank" style="color:red;text-decoration:none;">LTM</a> • <a href="https://www.larsentoubro.com/" target="_blank" style="color:white;text-decoration:none;">L&amp;T Group Company</a>
+                                        </div>
+                                    </td>
+                                    <td width="45%" valign="top" style="border-left:1px solid #221717;padding-left:18px;">
+                                        <div style="font-size:10px;color:#8d8484;text-transform:uppercase;margin:10px 0 6px;text-align:center;">Confidentiality Notice</div>
+                                        <div style="font-size:10px;line-height:16px;color:#666060;text-align:justify;">
+                                          The contents of this e-mail and any attachment(s) may contain confidential or privileged information for the intended recipient(s). Unintended recipients are prohibited from taking action on the basis of information in this e-mail and using or disseminating the information, and must notify the sender and delete it from their system. LTM will not accept responsibility or liability for the accuracy or completeness of, or the presence of any virus or disabling code in this e-mail. </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+</textarea>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadData();
+            updateCounter();
+            toggleRawHtml();
+        });
+
+        function toggleRawHtml() {
+            const isRaw = document.getElementById('raw-html-toggle').checked;
+            const textarea = document.getElementById('fill3');
+            if (isRaw) {
+                textarea.classList.add('code-mode');
+                textarea.placeholder = "Paste your raw <div> or <table> HTML code here...";
+            } else {
+                textarea.classList.remove('code-mode');
+                textarea.placeholder = "Type or paste your professional update here...";
+            }
+            saveData();
+        }
+
+        function goToStep(stepNumber) {
+            const container = document.getElementById('main-container');
+            if (stepNumber === 5) {
+                container.style.maxWidth = '1100px';
+                generateWorkspaceCode();
+            } else {
+                container.style.maxWidth = '600px';
+            }
+
+            document.getElementById('prog-bar').style.width = (stepNumber * 20) + '%';
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-' + stepNumber).classList.add('active');
+
+            if (stepNumber < 5) {
+                const inputs = ['fill1', 'fill2', 'fill4', 'fill3'];
+                setTimeout(() => document.getElementById(inputs[stepNumber - 1]).focus(), 100);
+            }
+        }
+
+        function generateWorkspaceCode() {
+            const fill1 = document.getElementById('fill1').value || ' ';
+            const fill2 = document.getElementById('fill2').value || ' ';
+            const fill3 = document.getElementById('fill3').value || ' ';
+            const fill4 = document.getElementById('fill4').value || ' ';
+            const isRawHtml = document.getElementById('raw-html-toggle').checked;
+
+            // Populate Summaries cleanly
+            const strippedBody = fill3 ? fill3.replace(/<[^>]*>?/gm, '') : '';
+            document.getElementById('sum-subject').innerText = fill1;
+            document.getElementById('sum-recipient').innerText = fill2;
+            document.getElementById('sum-sender').innerText = fill4;
+            document.getElementById('sum-body').innerText = strippedBody ? (strippedBody.length > 50 ? strippedBody.substring(0, 50) + '...' : strippedBody) : '[Blank]';
+
+            let formattedFill3 = "";
+            if (isRawHtml) {
+                formattedFill3 = fill3;
+            } else {
+                formattedFill3 = '<div style="margin-top:20px; font-size:15px; line-height:24px; color:#cccccc;">' + fill3.replace(/\n/g, '<br><br>') + '</div>';
+            }
+
+            let finalHtml = document.getElementById('template-source').value;
+            finalHtml = finalHtml.split('<!-- FILL 1 -->').join(fill1);
+            finalHtml = finalHtml.split('<!-- FILL 2 -->').join(fill2);
+            finalHtml = finalHtml.split('<!-- FILL 3 -->').join(formattedFill3);
+            finalHtml = finalHtml.split('<!-- FILL 4 -->').join(fill4);
+
+            document.getElementById('code-editor').value = finalHtml;
+            updateViewer();
+        }
+
+        function updateViewer() {
+            document.getElementById('code-viewer').srcdoc = document.getElementById('code-editor').value;
+        }
+
+        function updateCounter() {
+            const text = document.getElementById('fill3').value;
+            const chars = text.length;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            document.getElementById('word-count').innerText = `${chars} characters | ${words} words`;
+        }
+
+        function toggleView(mode) {
+            const viewer = document.getElementById('code-viewer');
+            const btnDesktop = document.getElementById('btn-desktop');
+            const btnMobile = document.getElementById('btn-mobile');
+
+            if (mode === 'mobile') {
+                viewer.classList.add('mobile-mode');
+                btnMobile.classList.add('active');
+                btnDesktop.classList.remove('active');
+            } else {
+                viewer.classList.remove('mobile-mode');
+                btnDesktop.classList.add('active');
+                btnMobile.classList.remove('active');
+            }
+        }
+
+        function copyFinalCode() {
+            const finalHtml = document.getElementById('code-editor').value;
+            navigator.clipboard.writeText(finalHtml).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.bottom = '20px';
+                setTimeout(() => {
+                    toast.style.bottom = '-60px';
+                }, 3000);
+            }).catch(err => {
+                alert("Clipboard access denied. Please copy manually.");
+            });
+        }
+
+        function saveData() {
+            const data = {
+                f1: document.getElementById('fill1').value,
+                f2: document.getElementById('fill2').value,
+                f3: document.getElementById('fill3').value,
+                f4: document.getElementById('fill4').value,
+                isRaw: document.getElementById('raw-html-toggle').checked
+            };
+            localStorage.setItem('emailWizardData', JSON.stringify(data));
+        }
+
+        function loadData() {
+            const saved = JSON.parse(localStorage.getItem('emailWizardData'));
+            if (saved) {
+                if (saved.f1) document.getElementById('fill1').value = saved.f1;
+                if (saved.f2) document.getElementById('fill2').value = saved.f2;
+                if (saved.f3) document.getElementById('fill3').value = saved.f3;
+                if (saved.f4) document.getElementById('fill4').value = saved.f4;
+                if (saved.isRaw !== undefined) document.getElementById('raw-html-toggle').checked = saved.isRaw;
+            }
+        }
+
+        function clearData() {
+            if (confirm("Are you sure you want to clear all fields?")) {
+                localStorage.removeItem('emailWizardData');
+                document.getElementById('fill1').value = 'Project Status Update';
+                document.getElementById('fill2').value = '';
+                document.getElementById('fill3').value = '';
+                document.getElementById('fill4').value = 'Ajith R';
+                document.getElementById('raw-html-toggle').checked = false;
+                toggleRawHtml();
+                updateCounter();
+                goToStep(1);
+            }
+        }
+
+        ['fill1', 'fill2', 'fill4'].forEach((id, index) => {
+            document.getElementById(id).addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    goToStep(index + 2);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
