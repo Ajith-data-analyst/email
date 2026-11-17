@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Line Calculator & Code Snippets</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #667eea;
+        }
+        /* Highlighted Responsive Result Box */
+        
+        .result-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result-box p {
+            margin: 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        
+        .result-box span {
+            font-size: 2.2rem;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .card {
+            border: 1px solid #edf2f7;
+            padding: 16px;
+            border-radius: 8px;
+            background: #fafbfc;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card h3 {
+            margin: 0 0 8px 0;
+            color: #2d3748;
+            font-size: 1.1rem;
+        }
+        
+        .card p {
+            color: #718096;
+            font-size: 0.9rem;
+            margin: 0 0 12px 0;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #5a67d8;
+        }
+        
+        .copy-status {
+            color: #38a169;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* Mobile Adjustments */
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 16px;
+            }
+            .result-box span {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Line Number Calculator</h2>
+
+        <!-- Step 1: Input Total Line Number -->
+        <div class="form-group">
+            <label for="lineInput">Enter Total Line Number:</label>
+            <input type="number" id="lineInput" placeholder="e.g. 150" oninput="calculateLines()">
+        </div>
+
+        <!-- Step 2: Highlighted Result Box -->
+        <div class="result-box">
+            <p>Calculated Result (Total - 80)</p>
+            <span id="resultOutput">0</span>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #edf2f7; margin: 20px 0;">
+
+        <!-- 4 Titles Section -->
+        <div class="cards-grid">
+            <!-- Title 1 -->
+            <div class="card">
+                <h3>1. Navigation Bar Component</h3>
+                <p>A responsive top header navigation layout with standard links.</p>
+                <div class="card-footer">
+                    <button onclick="copyCode(1)">Copy HTML</button>
+                    <span id="copyStatus1" class="copy-status"></span>
+                </div>
+            </div>
+
+            <!-- Title 2 -->
+            <div class="card">
+                <h3>2. Hero Banner Section</h3>
+                <p>An eye-catching main heading section with a call-to-action button.</p>
+                <div class="card-footer">
+                    <button onclick="copyCode(2)">Copy HTML</button>
+                    <span id="copyStatus2" class="copy-status"></span>
+                </div>
+            </div>
+
+            <!-- Title 3 -->
+            <div class="card">
+                <h3>3. Feature Grid Layout</h3>
+                <p>A multi-column grid layout designed to showcase product or service features.</p>
+                <div class="card-footer">
+                    <button onclick="copyCode(3)">Copy HTML</button>
+                    <span id="copyStatus3" class="copy-status"></span>
+                </div>
+            </div>
+
+            <!-- Title 4 -->
+            <div class="card">
+                <h3>4. Footer Section</h3>
+                <p>A clean bottom footer layout with copyright info and links.</p>
+                <div class="card-footer">
+                    <button onclick="copyCode(4)">Copy HTML</button>
+                    <span id="copyStatus4" class="copy-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const codes = {
+            1: `<nav>\n  <a href=\"#\">Home</a> | <a href=\"#\">About</a> | <a href=\"#\">Contact</a>\n</nav>`,
+            2: `<header class=\"hero\">\n  <h1>Welcome to Our Website</h1>\n  <p>Discover amazing features and solutions.</p>\n</header>`,
+            3: `<div class=\"features-grid\">\n  <div class=\"feature\">Feature One</div>\n  <div class=\"feature\">Feature Two</div>\n</div>`,
+            4: `<footer>\n  <p>&copy; 2026 My Website. All rights reserved.</p>\n</footer>`
+        };
+
+        function calculateLines() {
+            const inputVal = document.getElementById('lineInput').value;
+            const totalLines = inputVal === "" ? 0 : parseInt(inputVal, 10);
+            const result = totalLines - 80;
+            document.getElementById('resultOutput').innerText = result;
+        }
+
+        function copyCode(id) {
+            const textToCopy = codes[id];
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const statusEl = document.getElementById('copyStatus' + id);
+                statusEl.innerText = "Copied!";
+                setTimeout(() => {
+                    statusEl.innerText = "";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
