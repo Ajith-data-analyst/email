@@ -142,26 +142,50 @@
 
                     <!-- =============== HEADER CONTAINER =============== -->
                     <tr>
-                        <td align="center" bgcolor="#000000" style="padding:20px;">
+                        <td align="center" bgcolor="#000000" style="padding:20px 0 0 0;">
 
+                            <!-- LOGOS BAR (OUTSIDE & ABOVE THE HEADER IMAGE) -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="760" style="width:760px; max-width:760px; margin-bottom:12px;">
+                                <tr>
+                                    <!-- LTM Logo on Left with href -->
+                                    <td align="left" valign="middle" style="padding-left:32px;">
+                                        <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
+                                            <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" width="180" alt="LTM Logo" style="display:block; border:0;" />
+                                        </a>
+                                    </td>
+                                    <!-- L&T Logo on Right with href -->
+                                    <td align="right" valign="middle" style="padding-right:10px;">
+                                        <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
+                                            <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" width="100" alt="L&T Logo" style="display:block; border:0; margin-left:auto;" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- MAIN HEADER IMAGE CONTAINER -->
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="760" style="
     width:760px;
     max-width:760px;
-    background:#000000;
-    border-radius:12px;
-    background-image:linear-gradient(155deg,#000000,#b42222,#000000dc);
-    border:2px solid #dc2828;
+    height:180px;
+    min-height:100px;
+    background-color:transparent;
+    background-image:url('https://cdn.corenexis.com/f/xrTkct9V.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    border-radius:0px;
+    border:none;
 ">
 
                                 <!-- HEADER -->
                                 <tr>
+
                                     <td align="center" style="padding:36px 32px 28px 32px;">
 
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
 
                                                 <!-- Profile Image -->
-                                             
+
 
                                                 <!-- Employee Details -->
                                                 <td align="left" valign="middle" style="padding-left:10px;">
@@ -185,34 +209,34 @@
                                     font-weight:800;
                                     color:#ffffff;
                                     font-family:Arial,Helvetica,sans-serif;">
-<!-- FIND CONTENT 1 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
+                                                        <!-- FIND CONTENT 1 -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT HERE -->
                                                         Project Status Update
-<!-- CONTENT HERE -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- FIND CONTENT 1 --> 
+                                                        <!-- CONTENT HERE -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- FIND CONTENT 1 -->
                                                     </div>
 
-                                                    <div style="margin-top:8px; color:#f2b4b4; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
+                                                    <div style="margin-top:8px; color:#ef4444; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
                                                         Cloud Infrastructure Services
                                                     </div>
                                                     <div style="margin-top:4px; color:#b7b0b0; font-size:13px; font-family:Arial,Helvetica,sans-serif;">
@@ -226,27 +250,15 @@
 
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="170" height="150">
 
-                                                        <tr>
-                                                            <td align="right" valign="top">
-                                                                <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
-                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" alt="L&T Group" width="140" style="display:block;width:160px;height:auto;border:0;">
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+
 
                                                         <tr>
-                                                            <td height="10" style="font-size:0;line-height:30px;">
+                                                            <td height="20" style="font-size:0;line-height:30px;">
                                                                 &nbsp;
                                                             </td>
                                                         </tr>
 
-                                                        <tr>
-                                                            <td align="right" valign="bottom">
-                                                                <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
-                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTM" width="90" style="display:block;width:111px;height:auto;border:0;">
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+
 
                                                     </table>
 
@@ -265,37 +277,37 @@
                     <tr>
                         <td style="padding:20px 32px 28px 32px; background-color:#0c0808;">
 
-<!-- FIND CONTENT 2 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
-      <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
+                            <!-- FIND CONTENT 2 -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT HERE -->
+                            <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
                                 <strong>
         <span style="color:#ffffff;">Dear</span>
         <span style="color:#ef4444;"> recipient_name</span>,
     </strong>
                             </p>
 
-<!-- CONTENT HERE -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- FIND CONTENT 2 -->    
+                            <!-- CONTENT HERE -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- FIND CONTENT 2 -->
 
 
 
@@ -312,32 +324,32 @@
 
 
 
-<!-- FIND CONTENT 3 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
+                            <!-- FIND CONTENT 3 -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT HERE -->
 
 
-<!-- CONTENT HERE -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- FIND CONTENT 3 -->    
+                            <!-- CONTENT HERE -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- FIND CONTENT 3 -->
 
 
                             <!-- ---------- DIVIDER ---------- -->
@@ -354,31 +366,31 @@
                                         <div style="margin-top:6px;font-size:20px;font-weight:bold;color:#fff;">
 
 
-<!-- FIND CONTENT 4 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
-                                        Ajith R
-<!-- CONTENT HERE -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- FIND CONTENT 4 -->                                            
+                                            <!-- FIND CONTENT 4 -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT HERE -->
+                                            Ajith R
+                                            <!-- CONTENT HERE -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- CONTENT  -->
+                                            <!-- FIND CONTENT 4 -->
                                         </div>
                                         <img src="https://3q6zdll8lz.ucarecd.net/f7a69bb8-ad3c-401e-a41a-8204e32c39b8/1000213675removebgpreview.png" width="140" style="display:block;border:0;margin-top:8px;">
                                         <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
@@ -429,9 +441,9 @@
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE HERE PASTE START 1 ---------- -->                        
+<!-- ---------- PASTE HERE PASTE START 1 ---------- -->
 <!-- ---------- PASTE ---------- -->
-<!-- ---------- PASTE HERE ---------- --> 
+<!-- ---------- PASTE HERE ---------- -->
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE ---------- -->
@@ -439,4 +451,5 @@
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE ---------- -->
 <!-- ---------- PASTE END ---------- -->
+
 </html>

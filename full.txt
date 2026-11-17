@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemjiths-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -142,22 +142,46 @@
 
                     <!-- =============== HEADER CONTAINER =============== -->
                     <tr>
-                        <td align="center" bgcolor="#000000" style="padding:20px;">
+                        <td align="center" bgcolor="#000000" style="padding:20px 0 0 0;">
 
+                            <!-- LOGOS BAR (OUTSIDE & ABOVE THE HEADER IMAGE) -->
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="760" style="width:760px; max-width:760px; margin-bottom:12px;">
+                                <tr>
+                                    <!-- LTM Logo on Left with href -->
+                                    <td align="left" valign="middle" style="padding-left:32px;">
+                                        <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
+                                            <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" width="180" alt="LTM Logo" style="display:block; border:0;" />
+                                        </a>
+                                    </td>
+                                    <!-- L&T Logo on Right with href -->
+                                    <td align="right" valign="middle" style="padding-right:10px;">
+                                        <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
+                                            <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" width="100" alt="L&T Logo" style="display:block; border:0; margin-left:auto;" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- MAIN HEADER IMAGE CONTAINER -->
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="760" style="
     width:760px;
     max-width:760px;
-    background:#000000;
-    border-radius:12px;
-    background-image:linear-gradient(155deg,#000000,#b42222,#000000dc);
-    border:2px solid #dc2828;
+    height:180px;
+    min-height:100px;
+    background-color:transparent;
+    background-image:url('https://cdn.corenexis.com/f/xrTkct9V.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    border-radius:0px;
+    border:none;
 ">
 
                                 <!-- HEADER -->
                                 <tr>
+
                                     <td align="center" style="padding:36px 32px 28px 32px;">
 
-                                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
 
                                                 <!-- Profile Image -->
@@ -185,54 +209,34 @@
                                     font-weight:800;
                                     color:#ffffff;
                                     font-family:Arial,Helvetica,sans-serif;">
-<!-- FIND CONTENT 1 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
-
+                                                        <!-- FIND CONTENT 1 -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT HERE -->
                                                         Project Status Update
-<!-- CONTENT HERE -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- FIND CONTENT 1 -->    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+                                                        <!-- CONTENT HERE -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- CONTENT  -->
+                                                        <!-- FIND CONTENT 1 -->
                                                     </div>
 
-                                                    <div style="margin-top:8px; color:#f2b4b4; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
+                                                    <div style="margin-top:8px; color:#ef4444; font-size:14px; font-weight:600; font-family:Arial,Helvetica,sans-serif;">
                                                         Cloud Infrastructure Services
                                                     </div>
                                                     <div style="margin-top:4px; color:#b7b0b0; font-size:13px; font-family:Arial,Helvetica,sans-serif;">
@@ -246,27 +250,15 @@
 
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="170" height="150">
 
-                                                        <tr>
-                                                            <td align="right" valign="top">
-                                                                <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
-                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/logo_lntgroup_company.png" alt="L&T Group" width="140" style="display:block;width:160px;height:auto;border:0;">
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+
 
                                                         <tr>
-                                                            <td height="10" style="font-size:0;line-height:30px;">
+                                                            <td height="20" style="font-size:0;line-height:30px;">
                                                                 &nbsp;
                                                             </td>
                                                         </tr>
 
-                                                        <tr>
-                                                            <td align="right" valign="bottom">
-                                                                <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
-                                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" alt="LTM" width="90" style="display:block;width:111px;height:auto;border:0;">
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+
 
                                                     </table>
 
@@ -284,23 +276,26 @@
                     </tr>
                     <tr>
                         <td style="padding:20px 32px 28px 32px; background-color:#0c0808;">
-<!-- FIND CONTENT 2 -->    
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT  -->
-<!-- CONTENT HERE -->
-                            <p style="font-size:17px; color:#ffffff; margin:0;">
+
+                            <!-- FIND CONTENT 2 -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT  -->
+                            <!-- CONTENT HERE -->
+                            <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
                                 <strong>
         <span style="color:#ffffff;">Dear</span>
-        <span style="color:#f87171;"> Name</span>,
+        <span style="color:#ef4444;"> recipient_name</span>,
     </strong>
+                            </p>
+
                                 <p style="font-size:17px; margin:0; font-family:Arial,Helvetica,sans-serif;">
                                     <strong>
         <span style="color:#ffffff;">Dear</span>
