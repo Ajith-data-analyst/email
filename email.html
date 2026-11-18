@@ -842,6 +842,214 @@
                 opacity: 1;
             }
         }
+        /* === STEP 4: RICH TEXT EDITOR TOOLBAR === */
+        
+        .rte-toolbar {
+            background: rgba(0, 0, 0, 0.35);
+            border: 2px solid var(--border-red);
+            border-bottom: 0;
+            border-radius: 10px 10px 0 0;
+            padding: 6px 8px 8px;
+        }
+        
+        .rte-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(127, 29, 29, 0.6);
+            transition: opacity 0.2s;
+        }
+        
+        .rte-toolbar.is-raw .rte-row {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        
+        .rte-btn {
+            flex: none;
+            min-width: 0;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            color: var(--text-sub);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        
+        .rte-btn svg {
+            width: 17px;
+            height: 17px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            pointer-events: none;
+        }
+        
+        .rte-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fff;
+        }
+        
+        .rte-btn.is-on {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: #fff;
+        }
+        
+        .rte-btn:disabled,
+        .rte-color.is-disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            background: transparent;
+        }
+        
+        .rte-sep {
+            width: 1px;
+            height: 20px;
+            margin: 0 4px;
+            background: var(--border-red);
+        }
+        
+        .rte-color {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+        
+        .rte-color:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fff;
+        }
+        
+        .rte-glyph {
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1;
+            padding: 0 3px;
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        
+        .rte-glyph.is-bg {
+            background: var(--c);
+            color: #000;
+        }
+        
+        .rte-swatch {
+            width: 16px;
+            height: 3px;
+            margin-top: 3px;
+            border-radius: 2px;
+            background: var(--c);
+            pointer-events: none;
+        }
+        
+        .rte-color input[type="color"] {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .rte-toolbar .html-toggle-container {
+            margin: 0;
+            padding-top: 8px;
+        }
+        
+        .rte-editor {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            padding: 14px 16px;
+            overflow: auto;
+            resize: vertical;
+            background-color: var(--input-bg);
+            border: 2px solid var(--border-red);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+        }
+        
+        #step-4 .rte-toolbar~.rte-editor,
+        #step-4 .rte-toolbar~#fill3 {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        
+        .rte-toolbar.is-src~#fill3 {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            color: #4ade80;
+        }
+        
+        .rte-editor:focus {
+            outline: none;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+        
+        .rte-editor:focus-visible {
+            outline: 2px solid var(--accent-red);
+            outline-offset: 2px;
+        }
+        
+        .rte-editor.is-empty::before {
+            content: attr(data-placeholder);
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            right: 16px;
+            color: #888;
+            pointer-events: none;
+        }
+        
+        .rte-editor p {
+            margin: 0 0 0.6em;
+        }
+        
+        .rte-editor ul,
+        .rte-editor ol {
+            margin: 0 0 0.6em;
+            padding-left: 1.4em;
+        }
+        
+        .rte-editor a {
+            color: var(--accent-red);
+        }
+        
+        .rte-editor img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -918,14 +1126,293 @@
                     <a href="https://gemini.google.com/app/67805154c3552eb8" class="action-link" target="_blank" rel="noopener noreferrer" title="Generate Body Content">GENERATE HTML</a>
                 </div>
 
+                <div class="rte-toolbar" id="rte-toolbar" role="toolbar" aria-label="Text editor toolbar">
+                    <div class="rte-row">
+                        <button type="button" class="rte-btn" data-cmd="bold" title="Bold (Ctrl+B)" aria-label="Bold" aria-pressed="false"><b>B</b></button>
+                        <button type="button" class="rte-btn" data-cmd="italic" title="Italic (Ctrl+I)" aria-label="Italic" aria-pressed="false"><i>I</i></button>
+                        <button type="button" class="rte-btn" data-cmd="underline" title="Underline (Ctrl+U)" aria-label="Underline" aria-pressed="false"><u>U</u></button>
+                        <button type="button" class="rte-btn" data-cmd="strikeThrough" title="Strikethrough" aria-label="Strikethrough" aria-pressed="false"><s>S</s></button>
+                        <span class="rte-sep"></span>
+                        <button type="button" class="rte-btn" data-cmd="insertUnorderedList" title="Bulleted list" aria-label="Bulleted list" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="4" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.2" fill="currentColor" stroke="none"/><path d="M9 6h12M9 12h12M9 18h12"/></svg></button>
+                        <button type="button" class="rte-btn" data-cmd="insertOrderedList" title="Numbered list" aria-label="Numbered list" aria-pressed="false"><svg viewBox="0 0 24 24"><text x="1.5" y="8" font-size="7" font-weight="700" fill="currentColor" stroke="none">1</text><text x="1.5" y="14" font-size="7" font-weight="700" fill="currentColor" stroke="none">2</text><text x="1.5" y="20" font-size="7" font-weight="700" fill="currentColor" stroke="none">3</text><path d="M10 6h11M10 12h11M10 18h11"/></svg></button>
+                        <span class="rte-sep"></span>
+                        <span class="rte-color" title="Text color" style="--c:#ef4444"><span class="rte-glyph">A</span><i class="rte-swatch"></i><input type="color" id="rte-fg" value="#ef4444" aria-label="Text color"></span>
+                        <span class="rte-color" title="Background color" style="--c:#facc15"><span class="rte-glyph is-bg">A</span><i class="rte-swatch"></i><input type="color" id="rte-bg" value="#facc15" aria-label="Background color"></span>
+                        <span class="rte-sep"></span>
+                        <button type="button" class="rte-btn" data-act="link" title="Insert link" aria-label="Insert link"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button>
+                        <button type="button" class="rte-btn" data-act="image" title="Insert image" aria-label="Insert image"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg></button>
+                        <button type="button" class="rte-btn" data-act="clear" title="Clear formatting" aria-label="Clear formatting"><svg viewBox="0 0 24 24"><path d="M4 6V4h12v2M10 4v12M7 16h6"/><path d="M15 13l6 6M21 13l-6 6"/></svg></button>
+                        <span class="rte-sep"></span>
+                        <button type="button" class="rte-btn" data-act="src" title="HTML source" aria-label="Toggle HTML source" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></button>
+                    </div>
+
+                </div>
+
+                <div id="rte-editor" class="rte-editor is-empty" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Body content" data-placeholder="Type or paste your professional update here..."></div>
                 <textarea id="fill3" placeholder="Type or paste your professional update here..." oninput="updateCounter(); saveData()"></textarea>
                 <div class="counter" id="word-count">0 characters | 0 words</div>
 
-                <div class="html-toggle-container">
-                    <label class="html-toggle">
-                <input type="checkbox" id="raw-html-toggle" onchange="toggleRawHtml()"> Paste as Raw HTML
-            </label>
-                </div>
+                <script>
+                    /* Step 4 rich text editor: #fill3 stays the single source of truth for the rest of the page. */
+                    (() => {
+                        const $id = id => document.getElementById(id);
+                        const ta = $id('fill3'),
+                            ed = $id('rte-editor'),
+                            tb = $id('rte-toolbar'),
+                            chk = {
+                                checked: false
+                            },
+                            step = $id('step-4');
+                        const nativeValue = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+                        let viewSource = false,
+                            wasRaw = chk.checked,
+                            saved = null;
+
+                        const escText = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                        const escAttr = s => escText(s).replace(/"/g, '&quot;');
+                        const toast = m => typeof showToast === 'function' && showToast(m, {
+                            type: 'err'
+                        });
+                        const richShown = () => ed.style.display !== 'none';
+
+                        // Strip scripts, handlers and script URLs (same rules as the preview sanitiser)
+                        const scrub = root => {
+                            root.querySelectorAll('script,style,iframe,object,embed,link,meta,base').forEach(n => n.remove());
+                            root.querySelectorAll('*').forEach(n => [...n.attributes].forEach(a => {
+                                if (/^on/i.test(a.name) || /^(javascript|vbscript|data:text\/html)/i.test(a.value.replace(/[\u0000-\u0020\u007f-\u009f]+/g, ''))) n.removeAttribute(a.name);
+                            }));
+                        };
+
+                        const mark = () => ed.classList.toggle('is-empty', !ed.textContent.trim() && !ed.querySelector('img,hr,table'));
+
+                        // Editor -> textarea. Unformatted text is kept as plain text so the default flow behaves as before.
+                        const serialize = () => {
+                            const t = document.createElement('template');
+                            t.innerHTML = ed.innerHTML;
+                            scrub(t.content);
+                            if (!t.content.textContent.trim() && !t.content.querySelector('img,hr,table')) return '';
+                            const plain = [...t.content.querySelectorAll('*')].every(n => /^(P|DIV|BR)$/.test(n.tagName) && !n.attributes.length);
+                            const text = ed.innerText.replace(/\u00a0/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
+                            return plain && !/<\/?[a-z][^>]*>/i.test(text) ? text : t.innerHTML.replace(/<(\/?)strike\b/gi, '<$1s');
+                        };
+
+                        const sync = () => {
+                            mark();
+                            const v = serialize();
+                            if (v === nativeValue.get.call(ta)) return;
+                            nativeValue.set.call(ta, v);
+                            ta.dispatchEvent(new Event('input', {
+                                bubbles: true
+                            }));
+                        };
+
+                        // Textarea -> editor (never writes back to the textarea)
+                        const loadEditor = () => {
+                            const v = nativeValue.get.call(ta);
+                            saved = null;
+                            if (!v.trim()) ed.innerHTML = '';
+                            else if (/<\/?[a-z][^>]*>/i.test(v)) {
+                                const t = document.createElement('template');
+                                t.innerHTML = v;
+                                scrub(t.content);
+                                ed.innerHTML = t.innerHTML;
+                            } else ed.innerHTML = v.split(/\n+/).map(l => l.trim()).filter(Boolean).map(l => '<p>' + escText(l) + '</p>').join('');
+                            mark();
+                        };
+
+                        // Programmatic writes to #fill3.value (draft restore, versions, clear) refresh the editor too
+                        Object.defineProperty(ta, 'value', {
+                            configurable: true,
+                            get() {
+                                return nativeValue.get.call(this);
+                            },
+                            set(v) {
+                                nativeValue.set.call(this, v);
+                                loadEditor();
+                            }
+                        });
+
+                        const inEd = () => {
+                            const s = getSelection();
+                            return s.rangeCount > 0 && ed.contains(s.anchorNode);
+                        };
+
+                        const updateState = () => {
+                            const live = !chk.checked && !viewSource && inEd();
+                            tb.querySelectorAll('[data-cmd]').forEach(b => {
+                                let on = false;
+                                if (live) try {
+                                    on = document.queryCommandState(b.dataset.cmd);
+                                } catch (e) {}
+                                b.classList.toggle('is-on', on);
+                                b.setAttribute('aria-pressed', on);
+                            });
+                            const src = viewSource && !chk.checked;
+                            tb.querySelector('[data-act="src"]').classList.toggle('is-on', src);
+                            tb.querySelector('[data-act="src"]').setAttribute('aria-pressed', src);
+                        };
+
+                        // Raw mode / source view: show the textarea and lock the rich formatting controls
+                        const render = () => {
+                            const raw = chk.checked,
+                                rich = !raw && !viewSource;
+                            ed.style.display = rich ? '' : 'none';
+                            ta.style.display = rich ? 'none' : '';
+                            tb.classList.toggle('is-raw', raw);
+                            tb.classList.toggle('is-src', viewSource && !raw);
+                            tb.querySelectorAll('.rte-btn, .rte-color input').forEach(c => {
+                                c.disabled = raw || (viewSource && c.dataset.act !== 'src');
+                                if (c.parentNode.classList.contains('rte-color')) c.parentNode.classList.toggle('is-disabled', c.disabled);
+                            });
+                            updateState();
+                        };
+
+                        const onMode = () => {
+                            const raw = chk.checked;
+                            if (wasRaw && !raw && !viewSource) loadEditor();
+                            wasRaw = raw;
+                            render();
+                        };
+
+                        const focusEditor = () => {
+                            if (!ed.innerHTML) ed.innerHTML = '<p><br></p>';
+                            ed.focus();
+                            if (!inEd()) {
+                                const r = document.createRange();
+                                r.selectNodeContents(ed.lastElementChild || ed);
+                                r.collapse(false);
+                                const s = getSelection();
+                                s.removeAllRanges();
+                                s.addRange(r);
+                            }
+                        };
+
+                        const restore = () => {
+                            if (inEd()) saved = getSelection().getRangeAt(0).cloneRange();
+                            ed.focus();
+                            if (saved) {
+                                const s = getSelection();
+                                s.removeAllRanges();
+                                s.addRange(saved);
+                            }
+                        };
+
+                        const exec = (cmd, val, css) => {
+                            if (!richShown()) return;
+                            restore();
+                            document.execCommand('styleWithCSS', false, !!css);
+                            document.execCommand(cmd, false, val);
+                            sync();
+                            updateState();
+                        };
+
+                        const mkUrl = (u, isImg) => {
+                            u = (u || '').trim();
+                            if (/^https?:\/\//i.test(u) || (isImg ? /^data:image\//i : /^(mailto|tel):/i).test(u)) return u;
+                            return /^[\w-]+(\.[\w-]+)+([\/?#].*)?$/.test(u) ? 'https://' + u : '';
+                        };
+
+                        const addLink = () => {
+                            const had = saved && !saved.collapsed;
+                            const raw = prompt('Link URL', 'https://');
+                            if (raw === null || !raw.trim() || raw.trim() === 'https://') return;
+                            const url = mkUrl(raw, false);
+                            if (!url) return toast('Enter a valid link starting with http://, https://, mailto: or tel:');
+                            if (had) exec('createLink', url);
+                            else exec('insertHTML', '<a href="' + escAttr(url) + '">' + escText(url) + '</a>');
+                        };
+
+                        const addImage = () => {
+                            const raw = prompt('Image URL', 'https://');
+                            if (raw === null || !raw.trim() || raw.trim() === 'https://') return;
+                            const url = mkUrl(raw, true);
+                            if (!url) return toast('Enter a valid image URL starting with http:// or https://');
+                            exec('insertHTML', '<img src="' + escAttr(url) + '" alt="" style="max-width:100%;height:auto;">');
+                            ed.querySelectorAll('img:not([style])').forEach(im => {
+                                im.style.maxWidth = '100%';
+                                im.style.height = 'auto';
+                            });
+                            sync();
+                        };
+
+                        const toggleSource = () => {
+                            viewSource = !viewSource;
+                            if (!viewSource) loadEditor();
+                            render();
+                            if (viewSource) ta.focus();
+                            else focusEditor();
+                        };
+
+                        // Toolbar wiring
+                        tb.addEventListener('mousedown', e => {
+                            if (e.target.closest('.rte-btn')) e.preventDefault();
+                        });
+                        tb.addEventListener('click', e => {
+                            const b = e.target.closest('.rte-btn');
+                            if (!b || b.disabled) return;
+                            const act = b.dataset.act;
+                            if (b.dataset.cmd) exec(b.dataset.cmd);
+                            else if (act === 'link') addLink();
+                            else if (act === 'image') addImage();
+                            else if (act === 'clear') {
+                                exec('removeFormat');
+                                exec('unlink');
+                            } else if (act === 'src') toggleSource();
+                        });
+                        [
+                            ['rte-fg', 'foreColor'],
+                            ['rte-bg', 'hiliteColor']
+                        ].forEach(([id, cmd]) => {
+                            const inp = $id(id);
+                            inp.addEventListener('change', () => {
+                                inp.parentNode.style.setProperty('--c', inp.value);
+                                exec(cmd === 'hiliteColor' && !document.queryCommandSupported('hiliteColor') ? 'backColor' : cmd, inp.value, true);
+                            });
+                        });
+
+                        // Editor wiring
+                        ed.addEventListener('input', sync);
+                        document.addEventListener('selectionchange', () => {
+                            if (inEd()) {
+                                saved = getSelection().getRangeAt(0).cloneRange();
+                                updateState();
+                            }
+                        });
+                        const lbl = document.querySelector('label[for="fill3"]');
+                        if (lbl) lbl.addEventListener('click', e => {
+                            if (richShown()) {
+                                e.preventDefault();
+                                focusEditor();
+                            }
+                        });
+
+                        // React to the existing "Paste as Raw HTML" logic and the page's validation flag without touching it
+
+                        new MutationObserver(() => {
+                            onMode();
+                            const bad = ta.classList.contains('invalid') && richShown();
+                            ed.classList.toggle('invalid', bad);
+                            if (bad) focusEditor();
+                        }).observe(ta, {
+                            attributes: true,
+                            attributeFilter: ['class']
+                        });
+                        new MutationObserver(() => {
+                            if (step.classList.contains('active') && richShown()) setTimeout(focusEditor, 120);
+                        }).observe(step, {
+                            attributes: true,
+                            attributeFilter: ['class']
+                        });
+
+                        document.execCommand('defaultParagraphSeparator', false, 'p');
+                        loadEditor();
+                        onMode();
+                        document.addEventListener('DOMContentLoaded', () => {
+                            loadEditor();
+                            onMode();
+                        });
+                    })();
+                </script>
 
                 <div class="btn-group">
                     <button class="btn-secondary" onclick="goToStep(3)">← Back</button>
@@ -985,7 +1472,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn-secondary" onclick="VM.create()">💾 Save Version</button>
+                    <button class="btn-secondary" onclick="VM.create()">Save Version</button>
                     <button class="btn-secondary" onclick="downloadHtml()">⬇ Download .html</button>
                     <button class="btn-primary" onclick="copyFinalCode()">Copy HTML Code</button>
                 </div>
@@ -1161,7 +1648,7 @@
                 <tr><td>
                 <![endif]-->
 
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px; border:1px solid #241111;" width="600">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px;" width="600">
 
                             <!-- TOP ACCENT BAR -->
                             <tr>
@@ -1421,7 +1908,7 @@
                                                 </div>
                                                 <!-- FIND CONTENT 4 -->
 
-                                                <img src="https://3q6zdll8lz.ucarecd.net/f7a69bb8-ad3c-401e-a41a-8204e32c39b8/1000213675removebgpreview.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                                <img src="https://cdn.droptocdn.com/files/cb9bc82e-f8e6-4f2a-9f18-aa3379668fd7/1000233367.png" width="140" style="display:block;border:0;margin-top:8px;">
                                                 <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
                                                     Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
                                                     <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer" style="color:red;text-decoration:none;">LTM</a> •
@@ -1559,7 +2046,7 @@
             f4: $('fill4').value,
             senderMode: $('sender-mode-select').value,
             customSender: $('custom-sender-input').value,
-            isRaw: $('raw-html-toggle').checked
+            isRaw: false
         });
 
         function senderName(d) {
@@ -1574,9 +2061,9 @@
             $('fill4').value = d.f4 || DEFAULTS.f4;
             $('sender-mode-select').value = d.senderMode === 'custom' ? 'custom' : 'default';
             $('custom-sender-input').value = d.customSender || '';
-            $('raw-html-toggle').checked = Boolean(d.isRaw);
+
             toggleSenderMode();
-            toggleRawHtml();
+
             updateCounter();
         }
         const saveData = () => store.set(KEY_DRAFT, state());
@@ -1594,13 +2081,7 @@
             goToStep(1, true);
         }
 
-        function toggleRawHtml() {
-            const raw = $('raw-html-toggle').checked,
-                ta = $('fill3');
-            ta.classList.toggle('code-mode', raw);
-            ta.placeholder = raw ? 'Paste your raw <div> or <table> HTML code here...' : 'Type or paste your professional update here...';
-            saveData();
-        }
+
 
         function toggleSenderMode() {
             const custom = $('sender-mode-select').value === 'custom';
@@ -1669,8 +2150,48 @@
         }
 
         /* ---------- Email builder ---------- */
+        const TAGLIKE = /<\/?[a-z][^>]*>/i;
+        const decodeEntities = s => {
+            const t = document.createElement('textarea');
+            t.innerHTML = s;
+            return t.value;
+        };
+
+        // Body written in the Step 4 rich editor: render its formatting (links, lists, colours...) instead of escaping it
+        function renderRichBody(html) {
+            const t = document.createElement('template');
+            t.innerHTML = html;
+            const root = t.content;
+            root.querySelectorAll('script,style,iframe,object,embed,link,meta,base').forEach(n => n.remove());
+            root.querySelectorAll('*').forEach(n => [...n.attributes].forEach(a => {
+                if (/^on/i.test(a.name) || /^(javascript|vbscript|data:text\/html)/i.test(a.value.replace(/[\u0000-\u0020\u007f-\u009f]+/g, ''))) n.removeAttribute(a.name);
+            }));
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT),
+                texts = [];
+            while (walker.nextNode()) texts.push(walker.currentNode);
+            texts.forEach(n => { // same URL auto-linking as the plain-text path
+                if ((n.parentElement && n.parentElement.closest('a')) || !/https?:\/\//i.test(n.nodeValue)) return;
+                const holder = document.createElement('span');
+                holder.innerHTML = esc(n.nodeValue).replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)])/g, '<a href="$1" style="color:#ef4444;">$1</a>');
+                n.replaceWith(...holder.childNodes);
+            });
+            root.querySelectorAll('p').forEach(p => {
+                if (!p.firstChild) p.remove();
+                else if (!p.hasAttribute('style')) p.setAttribute('style', 'margin:0 0 14px;');
+            });
+            root.querySelectorAll('ul,ol').forEach(l => {
+                if (!l.hasAttribute('style')) l.setAttribute('style', 'margin:0 0 14px; padding-left:24px;');
+            });
+            root.querySelectorAll('a').forEach(a => {
+                const st = a.getAttribute('style') || '';
+                if (!/(^|;)\s*color\s*:/i.test(st)) a.setAttribute('style', 'color:#ef4444;' + st);
+            });
+            return `<div style="margin-top:20px; font-size:15px; line-height:24px; color:#cccccc;">${t.innerHTML}</div>`;
+        }
+
         function renderBody(text, isRaw) {
             if (isRaw) return text;
+            if (TAGLIKE.test(text)) return renderRichBody(text);
             const link = s => s.replace(/(https?:\/\/[^\s<]*[^\s<.,;:!?)])/g, '<a href="$1" style="color:#ef4444;">$1</a>');
             const paras = esc(text).split(/\n+/).map(l => l.trim()).filter(Boolean)
                 .map(l => `<p style="margin:0 0 14px;">${link(l)}</p>`).join('');
@@ -1694,7 +2215,7 @@
 
         function generateWorkspaceCode() {
             const d = state();
-            const snip = (d.isRaw ? d.f3.replace(/<[^>]*>/g, ' ') : d.f3).replace(/\s+/g, ' ').trim();
+            const snip = (d.isRaw ? d.f3.replace(/<[^>]*>/g, ' ') : TAGLIKE.test(d.f3) ? decodeEntities(d.f3.replace(/<[^>]*>/g, ' ')) : d.f3).replace(/\s+/g, ' ').trim();
             $('sum-sender').textContent = senderName(d);
             $('sum-subject').textContent = d.f1 || '[Blank]';
             $('sum-recipient').textContent = d.f2 || '[Blank]';
@@ -1988,7 +2509,7 @@
                 },
                 card(v) {
                     const d = v.data,
-                        snip = String(d.f3 || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 110);
+                        snip = (b => TAGLIKE.test(b) ? decodeEntities(b.replace(/<[^>]*>/g, ' ')) : b.replace(/<[^>]*>/g, ' '))(String(d.f3 || '')).replace(/\s+/g, ' ').trim().slice(0, 110);
                     const b = (act, label, cls = '') => `<button class="vm-btn ${cls}" data-act="${act}" data-id="${esc(v.id)}">${label}</button>`;
                     return `<article class="vm-card${v.pinned ? ' pinned' : ''}">
             <div class="vm-head"><h4 title="${esc(v.name)}">${v.pinned ? '📌 ' : ''}${esc(v.name)}</h4><span class="vm-date">${new Date(v.updated).toLocaleDateString()}</span></div>

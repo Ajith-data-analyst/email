@@ -133,7 +133,7 @@
                 <tr><td>
                 <![endif]-->
 
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px; border:1px solid #241111;" width="600">
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" bgcolor="#0c0808" class="responsive-container" style="background:#0c0808; border-radius:28px;" width="600">
 
                     <!-- TOP ACCENT BAR -->
                     <tr>
@@ -392,7 +392,7 @@
                                             <!-- CONTENT  -->
                                             <!-- FIND CONTENT 4 -->
                                         </div>
-                                        <img src="https://3q6zdll8lz.ucarecd.net/f7a69bb8-ad3c-401e-a41a-8204e32c39b8/1000213675removebgpreview.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                        <img src="https://cdn.droptocdn.com/files/cb9bc82e-f8e6-4f2a-9f18-aa3379668fd7/1000233367.png" width="140" style="display:block;border:0;margin-top:8px;">
                                         <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
                                             Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
                                             <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer" style="color:red;text-decoration:none;">LTM</a> •
