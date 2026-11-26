@@ -636,6 +636,37 @@
         .vm-bar button {
             flex: none;
         }
+        /* SHARED PROJECT ACTIONS TOOLBAR */
+        
+        .vm-actions-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-red);
+            border-radius: 10px;
+        }
+        
+        .vm-actions-toolbar .vm-btn {
+            flex: none;
+        }
+        
+        .vm-actions-toolbar .vm-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .vm-card {
+            cursor: pointer;
+        }
+        
+        .vm-card.selected {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
         
         .vm-usage {
             color: #888;
@@ -1466,15 +1497,17 @@
                             </div>
                         </div>
                         <div id="code-viewer-container">
-                            <iframe id="code-viewer" title="Live email preview" sandbox="allow-popups allow-popups-to-escape-sandbox"></iframe>
-                        </div>
+                            <iframe id="code-viewer" title="Live email preview" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe> </div>
                     </div>
                 </div>
 
                 <div class="btn-group">
                     <button class="btn-secondary" onclick="VM.create()">Save Version</button>
-                    <button class="btn-secondary" onclick="downloadHtml()">⬇ Download .html</button>
-                    <button class="btn-primary" onclick="copyFinalCode()">Copy HTML Code</button>
+
+                    <button class="btn-secondary" onclick="copyRenderedEmail()">
+    Copy Email
+</button>
+                    <button class="btn-primary" onclick="copyFinalCode()">Copy HTML </button>
                 </div>
             </div>
             <!-- /step-5 -->
@@ -1487,7 +1520,24 @@
                 <input type="text" id="vm-name" placeholder="Version name (defaults to the subject)" maxlength="80" aria-label="Version name" onkeydown="if(event.key==='Enter')VM.saveFromBar()">
                 <button class="btn-primary" onclick="VM.saveFromBar()">💾 Save current draft</button>
             </div>
+            <!-- SHARED PROJECT ACTIONS TOOLBAR -->
+            <div class="vm-actions-toolbar" id="vm-actions-toolbar">
+
+                <button class="vm-btn ok" data-vm-action="load" disabled>Load</button>
+                <button class="vm-btn" data-vm-action="preview" disabled>Preview</button>
+                <button class="vm-btn" data-vm-action="share" disabled>Share</button>
+                <button class="vm-btn" data-vm-action="download" disabled>Download HTML</button>
+                <button class="vm-btn" data-vm-action="downloadJson" disabled>Download JSON</button>
+                <button class="vm-btn" data-vm-action="rename" disabled>Rename</button>
+                <button class="vm-btn" data-vm-action="note" disabled>Note</button>
+                <button class="vm-btn" data-vm-action="overwrite" disabled>Update</button>
+                <button class="vm-btn" data-vm-action="dup" disabled>Duplicate</button>
+                <button class="vm-btn" data-vm-action="pin" disabled>Pin / Unpin</button>
+                <button class="vm-btn del" data-vm-action="remove" disabled>Delete</button>
+
+            </div>
             <div class="vm-bar">
+
                 <input type="text" id="vm-search" placeholder="Search name, note, recipient…" aria-label="Search versions" oninput="VM.q=this.value;VM.render()">
                 <select id="vm-sort" aria-label="Sort versions" onchange="VM.sort=this.value;VM.render()">
                     <option value="updated">Recently updated</option>
@@ -1495,6 +1545,7 @@
                     <option value="name">Name A–Z</option>
                 </select>
                 <span class="vm-usage" id="vm-usage"></span>
+
             </div>
             <div class="vm-list" id="vm-list"></div>
             <div class="vm-foot">
@@ -1665,12 +1716,13 @@
                                             <!-- LTM Logo on Left with href -->
                                             <td align="left" valign="middle" style="padding-left:32px;">
                                                 <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer">
-                                                    <img src="logo_lntgroup_company.png" width="180" alt="LTM Logo" style="display:block; border:0;" /></a>
+                                                    <img src="https://ajith-data-analyst.github.io/email/logo_lntgroup_company.png" width="180" alt="LTM Logo" style="display:block; border:0;" />
+                                                </a>
                                             </td>
                                             <!-- L&T Logo on Right with href -->
                                             <td align="right" valign="middle" style="padding-right:10px;">
                                                 <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer">
-                                                    <img src="https://www.ltm.com/content/dam/ltimcorporatewebsite/refresh-images/LTM-Logo.svg" width="100" alt="L&T Logo" style="display:block; border:0; margin-left:auto;" />
+                                                    <img src="https://ajith-data-analyst.github.io/email/LTM-Logo.svg" width="100" alt="L&T Logo" style="display:block; border:0; margin-left:auto;" />
                                                 </a>
                                             </td>
                                         </tr>
@@ -1682,7 +1734,7 @@
     height:180px;
     min-height:100px;
     background-color:transparent;
-    background-image:url('https://cdn.corenexis.com/f/xrTkct9V.png');
+    background-image:url('https://ajith-data-analyst.github.io/email/Screenshot%202026-11-17%20135828.png');
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -1907,21 +1959,22 @@
                                                 </div>
                                                 <!-- FIND CONTENT 4 -->
 
-                                                <img src="https://cdn.droptocdn.com/files/cb9bc82e-f8e6-4f2a-9f18-aa3379668fd7/1000233367.png" width="140" style="display:block;border:0;margin-top:8px;">
+                                                <img src="https://ajith-data-analyst.github.io/email/1000233367.png" width="140" style="display:block;border:0;margin-top:8px;">
                                                 <div style="margin-top:10px;font-size:12px;color:#8e8888;line-height:18px;">
-                                                    Associate Trainee – Cloud Infrastructure Services<br> Campbuzz ID: <strong style="color:#fff;">2026Mar@000378</strong><br>
+                                                    Associate Trainee – Cloud Infrastructure Services<br> Employee ID: <strong style="color:#fff;">T0083118</strong><br>
                                                     <a href="https://www.ltm.com/" target="_blank" rel="noopener noreferrer" style="color:red;text-decoration:none;">LTM</a> •
-                                                    <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">L&amp;T Group Company</a>
+                                                    <a href="https://www.larsentoubro.com/" target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">A L&amp;T Group Company</a>
                                                 </div>
 
                                             </td>
                                             <td width="45%" valign="top" style="border-left:1px solid #221717;padding-left:18px;">
 
-                                                <div style="font-size:10px;color:#8d8484;text-transform:uppercase;margin:10px 0 6px;text-align:center;">
+
+                                                <div style="font-size:10px;color:#A09696;text-transform:uppercase;margin:10px 0 6px;text-align:center;">
                                                     Confidentiality Notice
                                                 </div>
 
-                                                <div style="font-size:10px;line-height:16px;color:#666060;text-align:justify;">
+                                                <div style="font-size:10px;line-height:15px;color:#817979;text-align:justify;">
                                                     The contents of this e-mail and any attachment(s) may contain confidential or privileged information for the intended recipient(s). Unintended recipients are prohibited from taking action on the basis of information in this e-mail and using or disseminating
                                                     the information, and must notify the sender and delete it from their system. LTM will not accept responsibility or liability for the accuracy or completeness of, or the presence of any virus or disabling
                                                     code in this e-mail.
@@ -2295,6 +2348,51 @@
             ta.remove();
             return ok;
         }
+
+        async function copyRenderedEmail() {
+            const html = $('code-editor').value;
+
+            // Extract the rendered email content
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+
+            const htmlContent = doc.body.innerHTML;
+            const plainText = doc.body.innerText || doc.body.textContent;
+
+            try {
+                // Check browser clipboard support
+                if (!navigator.clipboard || !window.ClipboardItem) {
+                    throw new Error('HTML clipboard is not supported');
+                }
+
+                // Prepare formatted HTML and plain text
+                const clipboardItem = new ClipboardItem({
+                    'text/html': new Blob(
+                        [htmlContent], {
+                            type: 'text/html'
+                        }
+                    ),
+                    'text/plain': new Blob(
+                        [plainText], {
+                            type: 'text/plain'
+                        }
+                    )
+                });
+
+                // Copy formatted email
+                await navigator.clipboard.write([clipboardItem]);
+
+                showToast('✅ Formatted email copied! Paste into Gmail.');
+
+            } catch (error) {
+                console.error('Clipboard error:', error);
+
+                showToast(
+                    'HTML copying is not supported here. Use Open New Tab.', {
+                        type: 'err'
+                    }
+                );
+            }
+        }
         async function copyFinalCode() {
             (await copyText($('code-editor').value)) ? showToast('✅ HTML code copied to clipboard!'): showToast('Copy blocked by the browser — select the code and copy it manually', {
                 type: 'err'
@@ -2323,6 +2421,7 @@
         const VM = {
                 q: '',
                 sort: 'updated',
+                selectedId: null,
                 all() {
                     const raw = store.get(KEY_VERS, []);
                     return (Array.isArray(raw) ? raw : []).filter(v => v && v.data)
@@ -2463,6 +2562,90 @@
                     renderFrame('vm-frame', v.data.code || buildHtml(v.data));
                     $('vm-dialog').showModal();
                 },
+                preview(id) {
+                    const v = this.find(this.all(), id);
+                    if (!v) return;
+                    $('vm-title').textContent = v.name;
+                    renderFrame('vm-frame', v.data.code || buildHtml(v.data));
+                    $('vm-dialog').showModal();
+                },
+
+                // DOWNLOAD INDIVIDUAL PROJECT
+                download(id) {
+                    const v = this.find(this.all(), id);
+                    if (!v) return;
+
+                    const html = v.data.code || buildHtml(v.data);
+
+                    const slug = v.name
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '') || 'email';
+
+                    download(slug + '.html', html, 'text/html');
+
+                    showToast('✅ HTML downloaded successfully');
+                },
+                // DOWNLOAD INDIVIDUAL PROJECT AS JSON
+                downloadJson(id) {
+                    const v = this.find(this.all(), id);
+                    if (!v) return;
+
+                    const json = JSON.stringify([v], null, 2);
+
+                    const slug = v.name
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '') || 'email';
+
+                    download(
+                        slug + '.json',
+                        json,
+                        'application/json'
+                    );
+
+                    showToast('✅ Project JSON downloaded successfully');
+                },
+                // SHARE INDIVIDUAL PROJECT
+                async share(id) {
+                    const v = this.find(this.all(), id);
+                    if (!v) return;
+
+                    const html = v.data.code || buildHtml(v.data);
+
+                    const slug = v.name
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '') || 'email';
+
+                    const file = new File(
+                        [html],
+                        slug + '.html', {
+                            type: 'text/html'
+                        }
+                    );
+
+                    try {
+                        if (navigator.canShare && navigator.canShare({
+                                files: [file]
+                            })) {
+                            await navigator.share({
+                                title: v.name,
+                                text: 'Sharing my email project',
+                                files: [file]
+                            });
+                        } else {
+                            await copyText(html);
+                            showToast('HTML copied! Share it manually.');
+                        }
+                    } catch (error) {
+                        if (error.name !== 'AbortError') {
+                            showToast('Sharing failed. Try downloading instead.', {
+                                type: 'err'
+                            });
+                        }
+                    }
+                },
                 export () {
                     const list = this.all();
                     if (!list.length) return showToast('Nothing to export yet', {
@@ -2507,17 +2690,52 @@
                     r.readAsText(file);
                 },
                 card(v) {
-                    const d = v.data,
-                        snip = (b => TAGLIKE.test(b) ? decodeEntities(b.replace(/<[^>]*>/g, ' ')) : b.replace(/<[^>]*>/g, ' '))(String(d.f3 || '')).replace(/\s+/g, ' ').trim().slice(0, 110);
-                    const b = (act, label, cls = '') => `<button class="vm-btn ${cls}" data-act="${act}" data-id="${esc(v.id)}">${label}</button>`;
-                    return `<article class="vm-card${v.pinned ? ' pinned' : ''}">
-            <div class="vm-head"><h4 title="${esc(v.name)}">${v.pinned ? '📌 ' : ''}${esc(v.name)}</h4><span class="vm-date">${new Date(v.updated).toLocaleDateString()}</span></div>
-            <div class="vm-meta">To: ${esc(d.f2 || '—')} · From: ${esc(senderName(d))}<br>Subject: ${esc(d.f1 || '—')}</div>
+                    const d = v.data;
+
+                    const snip = (b =>
+                            TAGLIKE.test(b) ?
+                            decodeEntities(b.replace(/<[^>]*>/g, ' ')) :
+                            b.replace(/<[^>]*>/g, ' ')
+                        )(String(d.f3 || ''))
+                        .replace(/\s+/g, ' ')
+                        .trim()
+                        .slice(0, 110);
+
+                    const selected = String(v.id) === String(this.selectedId);
+
+                    return `
+        <article
+            class="vm-card${v.pinned ? ' pinned' : ''}${selected ? ' selected' : ''}"
+            data-vm-id="${esc(v.id)}"
+            tabindex="0"
+            role="button"
+            aria-pressed="${selected}"
+        >
+
+            <div class="vm-head">
+                <h4 title="${esc(v.name)}">
+                    ${v.pinned ? '📌 ' : ''}${esc(v.name)}
+                </h4>
+                <span class="vm-date">
+                    ${new Date(v.updated).toLocaleDateString()}
+                </span>
+            </div>
+
+            <div class="vm-meta">
+                To: ${esc(d.f2 || '—')} · From: ${esc(senderName(d))}
+                <br>
+                Subject: ${esc(d.f1 || '—')}
+            </div>
+
             ${v.note ? `<div class="vm-note">📝 ${esc(v.note)}</div>` : ''}
-            <div class="vm-snip">${esc(snip) || '[Blank body]'}</div>
-            <div class="vm-actions">${b('load', 'Load', 'ok')}${b('preview', 'Preview')}${b('rename', 'Rename')}${b('note', 'Note')}${b('overwrite', 'Update')}${b('dup', 'Duplicate')}${b('pin', v.pinned ? 'Unpin' : 'Pin')}${b('remove', 'Delete', 'del')}</div>
-        </article>`;
-                },
+
+            <div class="vm-snip">
+                ${esc(snip) || '[Blank body]'}
+            </div>
+
+        </article>
+    `;
+},
                 render() {
                     const all = this.all(), q = this.q.trim().toLowerCase();
                     $('vm-count').textContent = all.length;
@@ -2525,19 +2743,66 @@
                     const by = { updated: (a, b) => b.updated - a.updated, created: (a, b) => b.created - a.created, name: (a, b) => a.name.localeCompare(b.name) };
                     const list = all.filter(v => !q || [v.name, v.note, v.data.f1, v.data.f2].join(' ').toLowerCase().includes(q))
                         .sort((a, b) => (b.pinned - a.pinned) || by[this.sort](a, b));
+                    // Clear selection if the selected project is no longer visible
+if (
+    this.selectedId &&
+    !list.some(v => String(v.id) === String(this.selectedId))
+) {
+    this.selectedId = null;
+}
+
+// Enable actions only when a project is selected
+document.querySelectorAll('#vm-actions-toolbar [data-vm-action]')
+    .forEach(button => {
+        button.disabled = !this.selectedId;
+    });
                     $('vm-list').innerHTML = list.length ? list.map(v => this.card(v)).join('')
                         : `<div class="vm-empty">${all.length ? 'No versions match your search.' : 'No saved versions yet. Write an email, then choose “Save current draft”.'}</div>`;
                 }
         };
-        const VM_ACTIONS = ['load', 'preview', 'rename', 'note', 'overwrite', 'dup', 'pin', 'remove'];
-
-        /* ---------- Init ---------- */
+     const VM_ACTIONS = [
+    'load',
+    'preview',
+    'share',
+    'download',
+    'downloadJson',
+    'rename',
+    'note',
+    'overwrite',
+    'dup',
+    'pin',
+    'remove'
+];  /* ---------- Init ---------- */
         document.addEventListener('DOMContentLoaded', () => {
             loadData(); VM.render(); layout();
-            $('vm-list').addEventListener('click', e => {
-                const b = e.target.closest('[data-act]');
-                if (b && VM_ACTIONS.includes(b.dataset.act)) VM[b.dataset.act](b.dataset.id);
-            });
+           // PROJECT CARD SELECTION
+$('vm-list').addEventListener('click', e => {
+
+    const card = e.target.closest('[data-vm-id]');
+
+    if (!card) return;
+
+    VM.selectedId = card.dataset.vmId;
+
+    VM.render();
+
+});
+
+
+// SHARED TOOLBAR ACTIONS
+$('vm-actions-toolbar').addEventListener('click', e => {
+
+    const button = e.target.closest('[data-vm-action]');
+
+    if (!button || button.disabled || !VM.selectedId) return;
+
+    const action = button.dataset.vmAction;
+
+    if (VM_ACTIONS.includes(action)) {
+        VM[action](VM.selectedId);
+    }
+
+});
             [['custom-sender-input', 2], ['fill4', 2], ['fill1', 3], ['fill2', 4]].forEach(([id, n]) =>
                 $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); goToStep(n); } }));
             document.addEventListener('input', e => e.target.classList && e.target.classList.remove('invalid'));
